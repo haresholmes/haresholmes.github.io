@@ -6,68 +6,81 @@ body, h1, h2, p, ul, li, a {
 }
 
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
-    background: #f9f9f9;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    background: #f4f4f4;
     color: #333;
+    line-height: 1.8;
 }
 
 /* Header */
 header {
-    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    background: linear-gradient(90deg, #283593, #3f51b5);
     color: white;
     text-align: center;
-    padding: 40px 0;
+    padding: 50px 0;
+}
+
+header .logo {
+    width: 100px;
+    margin-bottom: 20px;
 }
 
 header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+    font-size: 2.8rem;
+    font-weight: 700;
+}
+
+header p {
+    font-size: 1.2rem;
+    font-weight: 300;
 }
 
 /* Navigation */
 nav {
+    background: #ffffff;
+    border-bottom: 1px solid #ddd;
     position: sticky;
     top: 0;
-    background: white;
-    border-bottom: 1px solid #ddd;
     z-index: 1000;
 }
 
 .nav-links {
     display: flex;
     justify-content: center;
-    padding: 10px 0;
     list-style: none;
+    padding: 10px 0;
 }
 
 .nav-links li {
-    margin: 0 15px;
+    margin: 0 20px;
 }
 
 .nav-links a {
+    color: #283593;
+    font-weight: 500;
     text-decoration: none;
-    color: #333;
-    font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: #4CAF50;
+    color: #3f51b5;
 }
 
-/* Main Sections */
+/* Main Content */
 main {
     max-width: 900px;
-    margin: 40px auto;
+    margin: 50px auto;
     padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 section {
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.5s ease-in-out;
+    transition: all 0.6s ease-in-out;
 }
 
 section.reveal {
@@ -77,14 +90,38 @@ section.reveal {
 
 h2 {
     font-size: 1.8rem;
-    color: #4CAF50;
+    color: #283593;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Footer */
-footer {
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
+/* List Styling */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+ul li i {
+    color: #3f51b5;
+    font-size: 1.2rem;
+}
+
+/* Links */
+a {
+    color: #3f51b5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #283593;
 }
