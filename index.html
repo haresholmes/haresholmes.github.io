@@ -4,67 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ziad Hares - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="logo.png" type="image/png">
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
         <div class="container">
-            <img src="logo.png" alt="Ziad Hares Logo" class="logo">
-            <h1>Ziad Hares</h1>
-            <p>Computer Science Student | Web Developer</p>
+            <a class="navbar-brand" href="#"><img src="logo.png" alt="Logo" class="logo"> Ziad Hares</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#profile">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center text-white">
+        <div class="container">
+            <img src="logo.png" alt="Logo" class="hero-logo">
+            <h1 class="display-4">Ziad Hares</h1>
+            <p class="lead">Computer Science Student | Web Developer</p>
+            <a href="#contact" class="btn btn-primary btn-lg mt-3">Hire Me</a>
         </div>
     </header>
-    <nav>
-        <ul class="nav-links">
-            <li><a href="#profile">Profile</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section id="profile" class="reveal">
-            <h2><i class="fas fa-user-circle"></i> Profile</h2>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <!-- Profile -->
+        <section id="profile" class="mb-5">
+            <h2 class="section-title"><i class="fas fa-user-circle"></i> Profile</h2>
             <p>First-year Computer Science student with experience in Web Development. Highly organised and resourceful, and keen to take on new challenges.</p>
         </section>
-        <section id="education" class="reveal">
-            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-            <ul>
-                <li><strong>University Of Wollongong</strong> - BSc. in Computer Science (Minor in Cyber Security) | Expected 2026</li>
-                <li><strong>Pioneers International School</strong> - American High School Diploma | Graduated 2022</li>
-                <li>ACT: 23 | GPA: 3.8</li>
+
+        <!-- Education -->
+        <section id="education" class="mb-5">
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>University Of Wollongong</strong> - BSc. in Computer Science (Minor in Cyber Security) | Expected 2026
+                </li>
+                <li class="list-group-item">
+                    <strong>Pioneers International School</strong> - American High School Diploma | Graduated 2022
+                </li>
+                <li class="list-group-item">
+                    ACT: 23 | GPA: 3.8
+                </li>
             </ul>
         </section>
-        <section id="experience" class="reveal">
-            <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
-            <h3>Intern | Armada Holding</h3>
-            <p>Dec 2022 - Apr 2023</p>
-            <ul>
-                <li>Contributed to Yalla Bazzar e-commerce project as a front-end web developer and inventory manager.</li>
-                <li>Enhanced product visuals using Adobe Photoshop and collaborated on improving user interfaces.</li>
-                <li>Maintained an organized and updated database to ensure the platform's successful launch.</li>
-            </ul>
+
+        <!-- Experience -->
+        <section id="experience" class="mb-5">
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Work Experience</h2>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Intern | Armada Holding</h5>
+                    <p class="card-text"><small>Dec 2022 - Apr 2023</small></p>
+                    <ul>
+                        <li>Contributed to Yalla Bazzar e-commerce project as a front-end web developer.</li>
+                        <li>Enhanced product visuals using Adobe Photoshop and collaborated on improving user interfaces.</li>
+                        <li>Maintained an organized and updated database to ensure the platform's successful launch.</li>
+                    </ul>
+                </div>
+            </div>
         </section>
-        <section id="skills" class="reveal">
-            <h2><i class="fas fa-laptop-code"></i> Key Skills</h2>
-            <ul>
-                <li>Presentation: Delivered an investment-focused presentation in school.</li>
-                <li>Collaboration: Worked effectively with the IT team at Armada Holding.</li>
-                <li>Technical: Proficient in HTML, CSS, JavaScript, Linux, WordPress, and Microsoft 365.</li>
-            </ul>
+
+        <!-- Skills -->
+        <section id="skills" class="mb-5">
+            <h2 class="section-title"><i class="fas fa-laptop-code"></i> Key Skills</h2>
+            <div class="row">
+                <div class="col-md-4">HTML, CSS, JavaScript</div>
+                <div class="col-md-4">WordPress, Linux</div>
+                <div class="col-md-4">Adobe Photoshop, MS365</div>
+            </div>
         </section>
-        <section id="contact" class="reveal">
-            <h2><i class="fas fa-envelope"></i> Contact</h2>
-            <ul>
+
+        <!-- Contact -->
+        <section id="contact">
+            <h2 class="section-title"><i class="fas fa-envelope"></i> Contact</h2>
+            <ul class="list-unstyled">
                 <li><i class="fas fa-phone"></i> 0588997129</li>
                 <li><i class="fas fa-envelope"></i> <a href="mailto:ziyadhares@yahoo.com">ziyadhares@yahoo.com</a></li>
                 <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/ziyadhares/" target="_blank">LinkedIn</a></li>
             </ul>
         </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        &copy; 2024 Ziad Hares. All Rights Reserved.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
