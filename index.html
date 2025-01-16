@@ -3,112 +3,645 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ziad Hares - Computer Science Student and Full Stack Developer Portfolio">
     <title>Ziad Hares - Portfolio</title>
-    <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --accent: #f97316;
+            --background: #f8fafc;
+            --text: #1e293b;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand img {
+            width: 40px;
+            border-radius: 8px;
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--text) !important;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            padding: 120px 0;
+        }
+
+        .hero-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .btn-glow {
+            position: relative;
+            background: var(--accent);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-glow::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: glow 2s linear infinite;
+        }
+
+        @keyframes glow {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60%;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-card {
+            padding: 1.5rem;
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-card .project-content {
+            padding: 1.5rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 1rem;
+        }
+
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-right: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                text-align: center;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+
+            .timeline::before {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#" style="color: black;">
-                <img src="logo.png" alt="Logo" class="logo"> Ziad Hares
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="logo.png" alt="ZH" class="me-2">
+                <span class="fw-bold">Ziad Hares</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#profile">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#education">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#experience">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#contact">Contact</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
 
     <!-- Hero Section -->
-    <header class="hero-section text-center text-white">
+    <section class="hero-section d-flex align-items-center">
         <div class="container">
-            <img src="logo.png" alt="Logo" class="hero-logo">
-            <h1 class="display-4">Ziad Hares</h1>
-            <p class="lead">Computer Science Student | Web Developer</p>
-            <a href="#contact" class="btn btn-primary btn-lg mt-3">Hire Me</a>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container py-5">
-        <!-- Profile -->
-        <section id="profile" class="mb-5">
-            <h2 class="section-title"><i class="fas fa-user-circle"></i> Profile</h2>
-            <p>First-year Computer Science student with experience in Web Development. Highly organised and resourceful, and keen to take on new challenges.</p>
-        </section>
-
-        <!-- Education -->
-        <section id="education" class="mb-5">
-            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <strong>University Of Wollongong</strong> - BSc. in Computer Science (Minor in Cyber Security) | Expected 2026
-                </li>
-                <li class="list-group-item">
-                    <strong>Pioneers International School</strong> - American High School Diploma | Graduated 2022
-                </li>
-                <li class="list-group-item">
-                    ACT: 23 | GPA: 3.8
-                </li>
-            </ul>
-        </section>
-
-        <!-- Experience -->
-        <section id="experience" class="mb-5">
-            <h2 class="section-title"><i class="fas fa-briefcase"></i> Work Experience</h2>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Full Stack Intern | Armada Holding</h5>
-                    <p class="card-text"><small>Dec 2022 - Apr 2023</small></p>
-                    <ul>
-                        <li>Contributed to Yalla Bazzar e-commerce project as a front-end web developer.</li>
-                        <li>Enhanced product visuals using Adobe Photoshop and collaborated on improving user interfaces.</li>
-                        <li>Maintained an organized and updated database to ensure the platform's successful launch.</li>
-                    </ul>
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-lg-start text-center mb-5 mb-lg-0">
+                    <h1 class="display-4 fw-bold mb-4">Hey, I'm Ziad Hares</h1>
+                    <p class="lead mb-4">Crafting digital experiences through code and creativity</p>
+                    <div class="d-flex gap-3 justify-content-lg-start justify-content-center">
+                        <a href="#projects" class="btn btn-glow">View My Work</a>
+                        <a href="#contact" class="btn btn-outline-light px-4">Contact Me</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="logo.png" alt="Ziad Hares" class="hero-image">
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Skills -->
-        <section id="skills" class="mb-5">
-            <h2 class="section-title"><i class="fas fa-laptop-code"></i> Key Skills</h2>
-            <div class="row">
-                <div class="col-md-4">HTML, CSS, JavaScript</div>
-                <div class="col-md-4">WordPress, Linux</div>
-                <div class="col-md-4">Adobe Photoshop, MS365</div>
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card h-100 p-4">
+                        <p class="lead mb-4">First-year Computer Science student at University of Wollongong, specializing in Web Development with a focus on creating intuitive and impactful digital experiences.</p>
+                        <div class="row g-4 mt-2">
+                            <div class="col-6">
+                                <div class="text-center p-3 rounded bg-light">
+                                    <h3 class="fw-bold text-primary mb-0">1+</h3>
+                                    <p class="mb-0">Years Experience</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-center p-3 rounded bg-light">
+                                    <h3 class="fw-bold text-primary mb-0">10+</h3>
+                                    <p class="mb-0">Projects</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card h-100 p-4">
+                        <h3 class="mb-4">Skills & Expertise</h3>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="skill-card">
+                                    <i class="fab fa-html5"></i>
+                                    <h4>HTML/CSS</h4>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="skill-card">
+                                    <i class="fab fa-js"></i>
+                                    <h4>JavaScript</h4>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="skill-card">
+                                    <i class="fab fa-wordpress"></i>
+                                    <h4>WordPress</h4>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="skill-card">
+                                    <i class="fab fa-linux"></i>
+                                    <h4>Linux</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Contact -->
-        <section id="contact">
-            <h2 class="section-title"><i class="fas fa-envelope"></i> Contact</h2>
-            <ul class="list-unstyled">
-                <li><i class="fas fa-phone"></i> 0588997129</li>
-                <li><i class="fas fa-envelope"></i> <a href="mailto:ziad@haresholmes.eu.org">ziad@haresholmes.eu.org</a></li>
-                <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/ziyadhares/" target="_blank">LinkedIn</a></li>
-            </ul>
-        </section>
-    </main>
+    <!-- Education Section -->
+    <section id="education" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>University of Wollongong</h3>
+                        <p class="text-muted">2022 - 2026 (Expected)</p>
+                        <p>BSc. in Computer Science</p>
+                        <p>Minor in Cyber Security</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Pioneers International School</h3>
+                        <p class="text-muted">Graduated 2022</p>
+                        <p>American High School Diploma</p>
+                        <p>ACT: 23 | GPA: 3.8</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Intern | Armada Holding</h3>
+                            <p>Dec 2022 to Apr 2023</p>
+                            <p>Contributed to the e-commerce project Yalla Bazzar, managing inventory and enhancing user interfaces as a front-end developer.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Web Developer</h3>
+                            <p>Freelance Projects</p>
+                            <p>Created dynamic and responsive websites using modern frameworks, ensuring exceptional user experience and accessibility.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Content Manager</h3>
+                            <p>Record Label</p>
+                            <p>Managed and developed content strategies for online platforms, ensuring consistent branding and effective audience engagement.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <img src="/api/placeholder/400/300" alt="Yalla Bazzar">
+                        <div class="project-content">
+                            <h3>Yalla Bazzar</h3>
+                            <p>E-commerce platform with modern UI/UX design</p>
+                            <div class="d-flex gap-2 flex-wrap mt-3">
+                                <span class="badge bg-primary">HTML</span>
+                                <span class="badge bg-primary">CSS</span>
+                                <span class="badge bg-primary">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <img src="/api/placeholder/400/300" alt="Portfolio Website">
+                        <div class="project-content">
+                            <h3>Portfolio Website</h3>
+                            <p>Personal portfolio with modern design</p>
+                            <div class="d-flex gap-2 flex-wrap mt-3">
+                                <span class="badge bg-primary">React</span>
+                                <span class="badge bg-primary">Bootstrap</span>
+                                <span class="badge bg-primary">Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <img src="/api/placeholder/400/300" alt="Task Manager">
+                        <div class="project-content">
+                            <h3>Task Manager</h3>
+                            <p>Web-based task management application</p>
+                            <div class="d-flex gap-2 flex-wrap mt-3">
+                                <span class="badge bg-primary">Vue.js</span>
+                                <span class="badge bg-primary">Firebase</span>
+                                <span class="badge bg-primary">CSS3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4 class="mb-1">Phone</h4>
+                                <p class="mb-0">0588997129</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4 class="mb-1">Email</h4>
+                                <p class="mb-0">
+                                    <a href="mailto:ziad@haresholmes.eu.org" class="text-decoration-none">ziad@haresholmes.eu.org</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <div>
+                                <h4 class="mb-1">LinkedIn</h4>
+                                <p class="mb-0">
+                                    <a href="https://www.linkedin.com/in/ziyadhares/" target="_blank" class="text-decoration-none">linkedin.com/in/ziyadhares</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="contact-form">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-glow w-100">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
-        &copy; 2024 Ziad Hares. All Rights Reserved.
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h3 class="h5 mb-3">Ziad Hares</h3>
+                    <p class="mb-0">Building the future of the web, one project at a time.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h3 class="h5 mb-3">Quick Links</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="#about" class="text-white text-decoration-none">About</a></li>
+                        <li class="mb-2"><a href="#projects" class="text-white text-decoration-none">Projects</a></li>
+                        <li><a href="#contact" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h3 class="h5 mb-3">Connect</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/haresholmes"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/ziyadhares/"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-white opacity-25">
+            <p class="text-center mb-0">&copy; 2024 Ziad Hares. All Rights Reserved.</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Animation on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('section').forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Project Card Hover Effect
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
 </body>
 </html>
