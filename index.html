@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ziad Hares - Computer Science Student and Full Stack Developer Portfolio">
+    <meta name="description" content="Ziad Hares - Cybersecurity Student and Web Developer Portfolio">
     <title>Ziad Hares - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="logo.png">
@@ -201,6 +201,12 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
         }
 
         .project-card img {
@@ -256,6 +262,46 @@
             transform: translateY(-3px);
         }
 
+        .experience-card {
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .badge-container {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .badge-featured {
+            background-color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .horizontal-line-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .horizontal-line-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .horizontal-line-list li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 1rem;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
         @media (max-width: 768px) {
             .hero-section {
                 text-align: center;
@@ -296,6 +342,9 @@
                         <a class="nav-link px-3" href="#experience">Experience</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link px-3" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link px-3" href="#projects">Projects</a>
                     </li>
                     <li class="nav-item">
@@ -312,7 +361,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 text-lg-start text-center mb-5 mb-lg-0">
                     <h1 class="display-4 fw-bold mb-4">Hey, I'm Ziad Hares</h1>
-                    <p class="lead mb-4">Crafting digital experiences through code and creativity</p>
+                    <p class="lead mb-4">Cybersecurity Student & Web Developer specializing in secure digital experiences</p>
                     <div class="d-flex gap-3 justify-content-lg-start justify-content-center">
                         <a href="#projects" class="btn btn-glow">View My Work</a>
                         <a href="#contact" class="btn btn-outline-light px-4">Contact Me</a>
@@ -332,11 +381,11 @@
             <div class="row g-4">
                 <div class="col-lg-6">
                     <div class="card h-100 p-4">
-                        <p class="lead mb-4">First-year Computer Science student at University of Wollongong, specializing in Web Development with a focus on creating intuitive and impactful digital experiences.</p>
+                        <p class="lead mb-4">Second-year Cybersecurity student at the University of Wollongong in Dubai with a strong foundation in Web Development. Highly organized, detail-oriented, and passionate about creating secure and impactful digital experiences.</p>
                         <div class="row g-4 mt-2">
                             <div class="col-6">
                                 <div class="text-center p-3 rounded bg-light">
-                                    <h3 class="fw-bold text-primary mb-0">1+</h3>
+                                    <h3 class="fw-bold text-primary mb-0">2+</h3>
                                     <p class="mb-0">Years Experience</p>
                                 </div>
                             </div>
@@ -351,33 +400,15 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="card h-100 p-4">
-                        <h3 class="mb-4">Skills & Expertise</h3>
-                        <div class="row g-3">
-                            <div class="col-6">
-                                <div class="skill-card">
-                                    <i class="fab fa-html5"></i>
-                                    <h4>HTML/CSS</h4>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="skill-card">
-                                    <i class="fab fa-js"></i>
-                                    <h4>JavaScript</h4>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="skill-card">
-                                    <i class="fab fa-wordpress"></i>
-                                    <h4>WordPress</h4>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="skill-card">
-                                    <i class="fab fa-linux"></i>
-                                    <h4>Linux</h4>
-                                </div>
-                            </div>
-                        </div>
+                        <h3 class="mb-4">Professional Summary</h3>
+                        <ul class="horizontal-line-list">
+                            <li>Cybersecurity focus with practical experience in web development and data management</li>
+                            <li>Experienced in revitalizing websites and improving user interfaces</li>
+                            <li>Strong attention to detail and problem-solving abilities</li>
+                            <li>Collaborative team player with excellent communication skills</li>
+                            <li>Languages: Arabic (native), English (proficient)</li>
+                            <li>Entrepreneurial experience with talent management and record label operation since 2019</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -391,7 +422,7 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3>University of Wollongong</h3>
+                        <h3>University of Wollongong in Dubai</h3>
                         <p class="text-muted">2022 - 2026 (Expected)</p>
                         <p>BSc. in Computer Science</p>
                         <p>Minor in Cyber Security</p>
@@ -409,34 +440,56 @@
         </div>
     </section>
 
+    <!-- Experience Section -->
     <section id="experience" class="py-5">
         <div class="container">
-            <h2 class="section-title">Experience</h2>
+            <h2 class="section-title">Professional Experience</h2>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
-                    <div class="project-card">
+                    <div class="project-card experience-card">
+                        <div class="badge-container">
+                            <span class="badge-featured text-white">Latest</span>
+                        </div>
+                        <div class="project-content">
+                            <h3>Intern | Axon Technologies</h3>
+                            <p class="text-muted">Oct 2024 to Jan 2025</p>
+                            <p>Revitalized the company website, enhancing content quality and front-end design to improve user engagement for this leading cybersecurity firm.</p>
+                            <ul class="horizontal-line-list">
+                                <li>Redesigned website layout for modern, responsive interface</li>
+                                <li>Updated website content for accuracy and relevance</li>
+                                <li>Utilized HTML, CSS, JavaScript for implementation</li>
+                                <li>Delivered polished website within project deadlines</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card experience-card">
                         <div class="project-content">
                             <h3>Intern | Armada Holding</h3>
-                            <p>Dec 2022 to Apr 2023</p>
-                            <p>Contributed to the e-commerce project Yalla Bazzar, managing inventory and enhancing user interfaces as a front-end developer.</p>
+                            <p class="text-muted">Dec 2022 to Apr 2023</p>
+                            <p>Contributed to Armada's e-commerce project, Yalla Bazzar, as part of this multi-billion portfolio entity.</p>
+                            <ul class="horizontal-line-list">
+                                <li>Managed inventory and data with Microsoft Excel and Google Sheets</li>
+                                <li>Enhanced user interfaces as a front-end developer</li>
+                                <li>Optimized product images using Adobe Photoshop</li>
+                                <li>Maintained organized database supporting platform launch</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
-                    <div class="project-card">
+                    <div class="project-card experience-card">
                         <div class="project-content">
-                            <h3>Web Developer</h3>
-                            <p>Freelance Projects</p>
-                            <p>Created dynamic and responsive websites using modern frameworks, ensuring exceptional user experience and accessibility.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="project-card">
-                        <div class="project-content">
-                            <h3>Content Manager</h3>
-                            <p>Record Label</p>
-                            <p>Managed and developed content strategies for online platforms, ensuring consistent branding and effective audience engagement.</p>
+                            <h3>Talent Manager & Record Label Owner</h3>
+                            <p class="text-muted">2019 - Present</p>
+                            <p>Self-employed entrepreneurial venture in the music industry with focus on talent development and promotion.</p>
+                            <ul class="horizontal-line-list">
+                                <li>Operating own record label since 2021</li>
+                                <li>Managing artist careers and promotion</li>
+                                <li>Developing content strategies for online platforms</li>
+                                <li>Building industry connections and partnerships</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -444,6 +497,70 @@
         </div>
     </section>
     
+    <!-- Skills Section -->
+    <section id="skills" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="skill-card">
+                        <i class="fab fa-html5"></i>
+                        <h4>Web Development</h4>
+                        <p>HTML, CSS, JavaScript</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="skill-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Cybersecurity</h4>
+                        <p>Security fundamentals</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="skill-card">
+                        <i class="fab fa-wordpress"></i>
+                        <h4>CMS</h4>
+                        <p>WordPress expertise</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="skill-card">
+                        <i class="fab fa-linux"></i>
+                        <h4>Operating Systems</h4>
+                        <p>Linux administration</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mt-4">
+                    <div class="skill-card">
+                        <i class="fas fa-table"></i>
+                        <h4>Data Management</h4>
+                        <p>Excel, Google Sheets</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mt-4">
+                    <div class="skill-card">
+                        <i class="fas fa-pencil-alt"></i>
+                        <h4>Design Tools</h4>
+                        <p>Adobe Photoshop</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mt-4">
+                    <div class="skill-card">
+                        <i class="fas fa-tasks"></i>
+                        <h4>Project Management</h4>
+                        <p>Deadline-oriented</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mt-4">
+                    <div class="skill-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Collaboration</h4>
+                        <p>Team communication</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Projects Section -->
     <section id="projects" class="py-5">
@@ -452,42 +569,58 @@
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
                     <div class="project-card">
-                        <img src="/api/placeholder/400/300" alt="Yalla Bazzar">
+                        <img src="axon.png" alt="Axon Technologies Website">
                         <div class="project-content">
-                            <h3>Yalla Bazzar</h3>
-                            <p>E-commerce platform with modern UI/UX design</p>
+                            <h3>Axon Technologies Website</h3>
+                            <p>Revitalized cybersecurity firm website with modern design and improved content</p>
                             <div class="d-flex gap-2 flex-wrap mt-3">
                                 <span class="badge bg-primary">HTML</span>
                                 <span class="badge bg-primary">CSS</span>
                                 <span class="badge bg-primary">JavaScript</span>
+                                <span class="badge bg-primary">UI/UX</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="project-card">
-                        <img src="/api/placeholder/400/300" alt="Portfolio Website">
+                        <img src="amalak.png" alt="Amal Al Khaleej">
                         <div class="project-content">
-                            <h3>Portfolio Website</h3>
-                            <p>Personal portfolio with modern design</p>
+                            <h3>Amal Al Khaleej</h3>
+                            <p>Premier interior design and engineering firm blending aesthetic elegance with structural precision</p>
                             <div class="d-flex gap-2 flex-wrap mt-3">
-                                <span class="badge bg-primary">React</span>
-                                <span class="badge bg-primary">Bootstrap</span>
-                                <span class="badge bg-primary">Node.js</span>
+                                <span class="badge bg-primary">Front-end Development</span>
+                                <span class="badge bg-primary">Back-end Development</span>
+                                <span class="badge bg-primary">SEO Optimization</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="project-card">
-                        <img src="/api/placeholder/400/300" alt="Task Manager">
+                        <img src="yallabazar.png" alt="Yalla Bazzar">
                         <div class="project-content">
-                            <h3>Task Manager</h3>
-                            <p>Web-based task management application</p>
+                            <h3>Yalla Bazzar</h3>
+                            <p>E-commerce platform with modern UI/UX design for Armada Holding</p>
                             <div class="d-flex gap-2 flex-wrap mt-3">
-                                <span class="badge bg-primary">Vue.js</span>
-                                <span class="badge bg-primary">Firebase</span>
+                                <span class="badge bg-primary">Front-end Development</span>
+                                <span class="badge bg-primary">Database Management</span>
+                                <span class="badge bg-primary">Image Optimization</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <img src="portfolio.png" alt="Personal Portfolio">
+                        <div class="project-content">
+                            <h3>Personal Portfolio</h3>
+                            <p>Responsive portfolio website showcasing skills and projects</p>
+                            <div class="d-flex gap-2 flex-wrap mt-3">
+                                <span class="badge bg-primary">HTML5</span>
                                 <span class="badge bg-primary">CSS3</span>
+                                <span class="badge bg-primary">Bootstrap</span>
+                                <span class="badge bg-primary">JavaScript</span>
                             </div>
                         </div>
                     </div>
@@ -507,7 +640,7 @@
                             <i class="fas fa-phone"></i>
                             <div>
                                 <h4 class="mb-1">Phone</h4>
-                                <p class="mb-0">0588997129</p>
+                                <p class="mb-0">+971 58 899 7129 | +971 56 120 0583</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -520,11 +653,27 @@
                             </div>
                         </div>
                         <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4 class="mb-1">Location</h4>
+                                <p class="mb-0">JLT, Dubai, UAE</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
                             <i class="fab fa-linkedin"></i>
                             <div>
                                 <h4 class="mb-1">LinkedIn</h4>
                                 <p class="mb-0">
                                     <a href="https://www.linkedin.com/in/ziyadhares/" target="_blank" class="text-decoration-none">linkedin.com/in/ziyadhares</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <div>
+                                <h4 class="mb-1">CV</h4>
+                                <p class="mb-0">
+                                    <a href="https://drive.google.com/file/d/1g071U_Y_7SaM2Fr4WWo3Nf7-oYF_Aco1/view?usp=sharing" target="_blank" class="text-decoration-none">CV PDF</a>
                                 </p>
                             </div>
                         </div>
@@ -536,13 +685,16 @@
                             <form id="contact-form" action="https://api.web3forms.com/submit" method="post">
                                 <input type="hidden" name="access_key" value="89e6cb5e-10d9-4c37-b2ae-b0fb263f902a">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                    <input type="text" class="form-control" name="name" placeholder="Your Name" required>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                    <input type="email" class="form-control" name="email" placeholder="Your Email" required>
                                 </div>
                                 <div class="mb-3">
-                                    <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" name="message" rows="5" placeholder="Your Message" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-glow w-100">Send Message</button>
                             </form>
@@ -559,12 +711,14 @@
             <div class="row g-4">
                 <div class="col-lg-4">
                     <h3 class="h5 mb-3">Ziad Hares</h3>
-                    <p class="mb-0">Building the future of the web, one project at a time.</p>
+                    <p class="mb-0">Cybersecurity student and web developer dedicated to creating secure and engaging digital experiences.</p>
                 </div>
                 <div class="col-lg-4">
                     <h3 class="h5 mb-3">Quick Links</h3>
                     <ul class="list-unstyled mb-0">
                         <li class="mb-2"><a href="#about" class="text-white text-decoration-none">About</a></li>
+                        <li class="mb-2"><a href="#experience" class="text-white text-decoration-none">Experience</a></li>
+                        <li class="mb-2"><a href="#skills" class="text-white text-decoration-none">Skills</a></li>
                         <li class="mb-2"><a href="#projects" class="text-white text-decoration-none">Projects</a></li>
                         <li><a href="#contact" class="text-white text-decoration-none">Contact</a></li>
                     </ul>
@@ -575,11 +729,12 @@
                         <a href="https://github.com/haresholmes"><i class="fab fa-github"></i></a>
                         <a href="https://www.linkedin.com/in/ziyadhares/"><i class="fab fa-linkedin"></i></a>
                         <a href="https://discord.com/users/482146045405691934"><i class="fab fa-discord"></i></a>
+                        <a href="https://linktr.ee/ZIYADHARES"><i class="fas fa-link"></i></a>
                     </div>
                 </div>
             </div>
             <hr class="my-4 bg-white opacity-25">
-            <p class="text-center mb-0">&copy; 2024 Ziad Hares. All Rights Reserved.</p>
+            <p class="text-center mb-0">&copy; 2025 Ziad Hares. All Rights Reserved.</p>
         </div>
     </footer>
 
