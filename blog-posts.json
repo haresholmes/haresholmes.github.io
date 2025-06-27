@@ -1,0 +1,23 @@
+[
+  {
+    "title": "How I Designed My Swiss-Style Portfolio",
+    "date": "2024-04-10",
+    "tags": ["design", "portfolio", "css"],
+    "lang": "en",
+    "content": "<p>After years of experimenting with flashy effects, I decided to embrace the clarity and discipline of Swiss/Scandinavian design. This post walks through my process, from grid systems to accent colors, and how minimalism can actually make your work stand out more.<\/p><ul><li>Start with a strict grid and lots of whitespace.<\/li><li>Use a single accent color for rhythm and focus.<\/li><li>Let typography and structure do the heavy lifting.<\/li><\/ul><p>Here is a sample CSS grid setup:<\/p><pre><code>main {\\n  display: grid;\\n  grid-template-columns: 1fr min(900px, 100%) 1fr;\\n}<\/code><\/pre>"
+  },
+  {
+    "title": "كيف أكتب مدونة بتصميم سويسري (مثال بالعربية)",
+    "date": "2024-04-12",
+    "tags": ["تصميم", "عربي", "تجربة"],
+    "lang": "ar",
+    "content": "<p>هذه أول تدوينة لي باللغة العربية باستخدام أسلوب التصميم السويسري البسيط والواضح. أستعرض هنا كيف يمكن الجمع بين الجمال والوضوح في عرض المحتوى.<\/p><ul><li>استخدم شبكة واضحة ومساحات بيضاء واسعة.<\/li><li>لون تمييزي واحد فقط.<\/li><li>اهتم بالخطوط والهيكل.<\/li><\/ul><p>مثال على كود CSS:<\/p><pre><code>body {\\n  direction: rtl;\\n  font-family: 'Inter', sans-serif;\\n}<\/code><\/pre>"
+  },
+  {
+    "title": "How I Solved a Real-World Cybersecurity Challenge",
+    "date": "2024-04-20",
+    "tags": ["cybersecurity", "ctf", "linux"],
+    "lang": "en",
+    "content": "<p>Recently, I participated in a Capture The Flag (CTF) event where I had to exploit a Linux misconfiguration. Here's how I approached the problem and what I learned.<\/p><h5>Step 1: Analyzing the Service<\/h5><p>The challenge provided SSH access to a sandboxed environment. I started by running <code>ps aux<\/code> and <code>netstat -tulnp<\/code> to see what was running.<\/p><h5>Step 2: Finding the Vulnerability<\/h5><p>I noticed a world-writable cron job:<\/p><pre><code>ls -l /etc/cron.d/\\n-rw-rw-rw- 1 root root  42 Apr 20 12:00 backup<\/code><\/pre><p>I edited the cron file to run my own script, and within a minute, I had a shell as root!<\/p><h5>Takeaways<\/h5><ul><li>Always check for misconfigurations.<\/li><li>World-writable files are dangerous.<\/li><li>Automation (like cron) can be a double-edged sword.<\/li><\/ul><p>Want more stories like this? <a href='blog.html'>Check out the rest of my blog!<\/a><\/p>"
+  }
+] 
