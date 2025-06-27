@@ -1062,4 +1062,161 @@ a:focus, button:focus, input:focus, textarea:focus {
   .blog-post h1, .blog-post h2 {
     font-size: 1.3rem;
   }
+}
+
+.education-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.education-item {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.edu-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  box-shadow: none;
+  flex-shrink: 0;
+}
+
+.edu-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.edu-school {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 2px;
+}
+
+.edu-degree {
+  font-size: 1rem;
+  color: #444;
+  font-weight: 400;
+}
+
+.edu-date {
+  font-size: 0.95rem;
+  color: #888;
+  font-weight: 400;
+}
+
+@media (max-width: 700px) {
+  .education-grid {
+    gap: 20px;
+  }
+  .education-item {
+    gap: 16px;
+  }
+  .edu-logo {
+    width: 48px;
+    height: 48px;
+  }
+  .edu-school {
+    font-size: 1rem;
+  }
+  .edu-degree, .edu-date {
+    font-size: 0.92rem;
+  }
+}
+
+.new-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  margin-top: 24px;
+}
+
+.form-row {
+  display: flex;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+}
+
+.form-group.full-width {
+  flex: 2;
+}
+
+.new-contact-form label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 2px;
+}
+
+.new-contact-form input,
+.new-contact-form textarea {
+  font-size: 1rem;
+  padding: 10px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 6px;
+  background: #fafbfc;
+  color: #111;
+  outline: none;
+  transition: border 0.2s;
+  font-family: inherit;
+  resize: none;
+}
+
+.new-contact-form input:focus,
+.new-contact-form textarea:focus {
+  border-color: var(--accent);
+  background: #fff;
+}
+
+.new-contact-form button[type="submit"] {
+  margin-top: 8px;
+  padding: 12px 32px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px #2563eb11;
+  align-self: flex-end;
+}
+
+.new-contact-form button[type="submit"]:hover,
+.new-contact-form button[type="submit"]:focus {
+  background: #174bbd;
+}
+
+@media (max-width: 700px) {
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .new-contact-form button[type="submit"] {
+    width: 100%;
+    align-self: stretch;
+  }
 } 
