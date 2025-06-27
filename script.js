@@ -369,4 +369,20 @@ if (window.location.pathname.endsWith('blog.html')) {
         });
       });
   }
+}
+
+// Mobile navbar menu toggle
+const navToggle = document.getElementById('navToggle');
+const navList = document.getElementById('navList');
+if (navToggle && navList) {
+  navToggle.addEventListener('click', function() {
+    const isOpen = navList.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  navList.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navList.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
 } 
