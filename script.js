@@ -359,10 +359,11 @@ if (window.location.pathname.endsWith('blog.html')) {
           const postDiv = document.createElement('div');
           postDiv.className = 'blog-index-item fade-in';
           postDiv.innerHTML = `
-            <h4 class="blog-title" style="margin-bottom:4px;">${post.title}</h4>
-            <div class="blog-meta" style="margin-bottom:8px;">${new Date(post.date).toLocaleDateString(post.lang === 'ar' ? 'ar' : 'en', { year: 'numeric', month: 'long', day: 'numeric' })} · <span class="blog-tags">${post.tags.map(t => '#' + t).join(' ')}</span></div>
-            <p style="margin-bottom:8px;">${excerpt}</p>
-            <a href="blog-post.html?id=${i}" class="blog-link" style="font-weight:600;color:var(--accent);text-decoration:underline;">Read more &rarr;</a>
+            <h4 class="blog-title">${post.title}</h4>
+            <div class="blog-meta">${new Date(post.date).toLocaleDateString(post.lang === 'ar' ? 'ar' : 'en', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+            <div class="blog-tags">${post.tags.map(t => '#' + t).join(' ')}</div>
+            <p>${excerpt}</p>
+            <a href="blog-post.html?id=${i}" class="blog-link">Read more &rarr;</a>
           `;
           blogList.appendChild(postDiv);
         });
