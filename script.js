@@ -342,33 +342,54 @@ if (contactForm) {
   });
 }
 
-// Blog index loader (only on blog.html)
-if (window.location.pathname.endsWith('blog.html')) {
-  const blogList = document.getElementById('blog-list');
-  if (blogList) {
-    fetch('blog-posts.json')
-      .then(res => res.json())
-      .then(posts => {
-        blogList.innerHTML = '';
-        posts.forEach((post, i) => {
-          // Strip HTML tags for excerpt
-          const tmp = document.createElement('div');
-          tmp.innerHTML = post.content;
-          let text = tmp.textContent || tmp.innerText || '';
-          let excerpt = text.length > 180 ? text.slice(0, 180) + '…' : text;
-          const postDiv = document.createElement('div');
-          postDiv.className = 'blog-index-item fade-in';
-          postDiv.innerHTML = `
-            <h4 class="blog-title">${post.title}</h4>
-            <div class="blog-meta">${new Date(post.date).toLocaleDateString(post.lang === 'ar' ? 'ar' : 'en', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
-            <div class="blog-tags">${post.tags.map(t => '#' + t).join(' ')}</div>
-            <p>${excerpt}</p>
-            <a href="blog-post.html?id=${i}" class="blog-link">Read more &rarr;</a>
-          `;
-          blogList.appendChild(postDiv);
-        });
-      });
+// Blog index loader function
+function initBlogLoader() {
+  // Only run on blog.html
+  if (!window.location.pathname.endsWith('blog.html')) {
+    return;
   }
+  
+  const blogList = document.getElementById('blog-list');
+  if (!blogList) {
+    return;
+  }
+  
+  fetch('blog-posts.json')
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(posts => {
+      if (!posts || posts.length === 0) {
+        blogList.innerHTML = '<p>No blog posts found.</p>';
+        return;
+      }
+      
+      blogList.innerHTML = '';
+      posts.forEach((post, i) => {
+        // Strip HTML tags for excerpt
+        const tmp = document.createElement('div');
+        tmp.innerHTML = post.content;
+        let text = tmp.textContent || tmp.innerText || '';
+        let excerpt = text.length > 180 ? text.slice(0, 180) + '…' : text;
+        const postDiv = document.createElement('div');
+        postDiv.className = 'blog-index-item fade-in';
+        postDiv.innerHTML = `
+          <h4 class="blog-title">${post.title}</h4>
+          <div class="blog-meta">${new Date(post.date).toLocaleDateString(post.lang === 'ar' ? 'ar' : 'en', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+          <div class="blog-tags">${post.tags.map(t => '#' + t).join(' ')}</div>
+          <p>${excerpt}</p>
+          <a href="blog-post.html?id=${i}" class="blog-link">Read more &rarr;</a>
+        `;
+        blogList.appendChild(postDiv);
+      });
+    })
+    .catch(error => {
+      console.error('Error loading blog posts:', error);
+      blogList.innerHTML = '<p>Error loading blog posts. Please try again later.</p>';
+    });
 }
 
 // Mobile navbar menu toggle
