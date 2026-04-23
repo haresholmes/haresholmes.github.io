@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ziad Hares – Blog</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Ultra-secure security meta tags -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()">
+    <meta http-equiv="X-Permitted-Cross-Domain-Policies" content="none">
+</head>
+<body>
+    <div id="scroll-progress"></div>
+    <nav class="navbar">
+        <img src="logo.png" alt="Ziad Hares Logo" class="logo-small" />
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navList">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <ul class="nav-list" id="navList">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="blog.html" class="blog-link">Blog</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="hero fade-in">
+            <div class="hero-bg-pattern"></div>
+            <h1><span class="hero-highlight">Blog</span></h1>
+            <h2>All Posts</h2>
+            <p class="hero-subtitle">Read my latest thoughts, tutorials, and updates in both English and Arabic.</p>
+            <div class="hero-accent-line"></div>
+    </section>
+        <hr class="section-divider">
+        <section id="blog-list" class="blog-grid">
+            <div class="blog-fallback" style="color:#888; font-size:1.1rem; text-align:center; margin:48px 0;">No blog posts found.</div>
+    </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Ziad Hares</p>
+    </footer>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8679;</button>
+    <script src="script.js"></script>
+</body>
+</html>

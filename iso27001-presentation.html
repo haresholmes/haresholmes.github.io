@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISO 27001 Remediation Plan – NewBridge Pharma</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
+    body { width: 100vw; height: 100vh; }
+    .slide-viewport {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #fff;
+    }
+    .slide-container {
+      max-width: 900px;
+      min-width: 320px;
+      margin: 0 auto;
+      padding: 48px 0 0 0;
+      position: relative;
+      width: 100%;
+      height: auto;
+      will-change: transform;
+      transform-origin: top center;
+      transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+      background: none;
+    }
+    .slide { display: none; flex-direction: column; align-items: flex-start; min-height: 60vh; justify-content: center; animation: fadeInUp 0.7s cubic-bezier(.4,0,.2,1); background: none; box-shadow: none; border-radius: 0; padding: 0 24px; }
+    .slide.active { display: flex; }
+    .slide-title { font-size: 2.2rem; font-weight: 900; color: var(--accent); margin-bottom: 0.5em; text-align: left; line-height: 1.1; display: flex; align-items: center; gap: 0.5em; }
+    .slide-subtitle { font-size: 1.2rem; color: #333; margin-bottom: 1.5em; text-align: left; }
+    .slide-content { font-size: 1.1rem; color: #222; max-width: 700px; text-align: left; }
+    .slide-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; }
+    .slide-table th, .slide-table td { border: 1px solid #e5e7eb; padding: 0.7em 1em; text-align: left; }
+    .slide-table th { background: #f3f4f6; color: var(--accent); font-weight: 700; }
+    .slide-table tr:nth-child(even) { background: #f9fafb; }
+    .slide-nav { display: flex; justify-content: center; gap: 32px; margin-top: 2em; }
+    .slide-arrow { background: var(--accent); color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 2rem; cursor: pointer; box-shadow: 0 2px 8px #2563eb22; transition: background 0.2s; }
+    .slide-arrow:disabled { background: #e5e7eb; color: #aaa; cursor: not-allowed; }
+    .slide-indicator { margin-top: 1em; color: #888; font-size: 1rem; text-align: center; }
+    .logo-placeholder { font-size: 2.5rem; font-weight: 900; color: var(--accent); margin-bottom: 0.5em; letter-spacing: 0.02em; text-align: left; }
+    .key-takeaway { margin-top: 2em; font-size: 1.05rem; color: #2563eb; background: #f3f6fd; border-left: 4px solid var(--accent); padding: 0.7em 1em; border-radius: 6px; font-weight: 500; }
+    .timeline-bar { display: flex; align-items: center; justify-content: space-between; margin: 2em 0 1em 0; gap: 0.5em; }
+    .timeline-step { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0; }
+    .timeline-emoji { font-size: 2rem; margin-bottom: 0.2em; }
+    .timeline-label { font-size: 1rem; color: #222; text-align: center; }
+    .timeline-dot { width: 16px; height: 16px; background: var(--accent); border-radius: 50%; margin: 0 0.2em; }
+    .kpi-list { list-style: none; padding: 0; margin: 1.5em 0 0 0; }
+    .kpi-list li { font-size: 1.1rem; margin-bottom: 0.7em; display: flex; align-items: center; gap: 0.7em; }
+    @media (max-width: 700px) { .slide-container { padding: 16px 0 0 0; } .slide-title { font-size: 1.3rem; } .slide-content { font-size: 1rem; } .slide-arrow { width: 38px; height: 38px; font-size: 1.3rem; } .timeline-bar { flex-direction: column; gap: 1em; } .timeline-step { flex-direction: row; gap: 0.5em; } .timeline-emoji { font-size: 1.3rem; } }
+  </style>
+</head>
+<body>
+  <div class="slide-viewport">
+    <main style="width:100%;height:100%;">
+      <div class="slide-container" id="slideContainer">
+        <!-- Slides start here -->
+        <div class="slide active">
+          <div class="logo-placeholder">NewBridge Pharma</div>
+          <div class="slide-title">Strategic Remediation Plan<br>for ISO 27001:2022 Certification</div>
+          <div class="slide-subtitle">A modern, phased approach to security and compliance</div>
+          <div class="key-takeaway">🚀 <b>Goal:</b> Achieve ISO 27001:2022 certification with innovative, practical solutions.</div>
+        </div>
+        <div class="slide">
+          <div class="slide-title">Executive Summary 📄</div>
+          <div class="slide-content">
+            <ul>
+              <li>Practical, innovative approach to ISO 27001:2022 alignment</li>
+              <li>Addresses all identified security risks</li>
+              <li>Goal: successful certification for NewBridge Pharma</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">💡 <b>Key Takeaway:</b> This plan is actionable and tailored for real-world impact.</div>
+        </div>
+        <div class="slide">
+          <div class="slide-title">Risk Assessment Overview 📊</div>
+          <div class="slide-content">
+            <ul>
+              <li><b>Total Risks Identified:</b> 23 (Very High: 5, High: 10, Medium: 6, Low: 2)</li>
+              <li><b>Methodology Used:</b> ISO 27005 risk management process</li>
+              <li><b>Scope:</b> Information assets, IT systems, all organizational divisions, and third-party providers</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">🔎 <b>Key Takeaway:</b> Comprehensive risk coverage across the organization.</div>
+        </div>
+        <div class="slide">
+          <div class="slide-title">Gap Analysis: Risk Findings Mapped to ISO 27001:2022 Controls 🕵️‍♂️</div>
+          <div class="slide-content">
+            <table class="slide-table">
+              <tr><th>Risk Category</th><th>ISO Control Reference</th><th>Control Weakness</th></tr>
+              <tr><td>🔒 Weak Access Controls</td><td>A.5.15, A.5.18</td><td>No centralized IAM, missing RBAC implementation</td></tr>
+              <tr><td>🕵️ Inadequate Logging and Monitoring</td><td>A.5.28, A.5.29</td><td>No SIEM, no centralized logging, no incident alerts</td></tr>
+              <tr><td>📤 Lack of DLP Mechanisms</td><td>A.5.10, A.5.24</td><td>No data classification or outbound data control</td></tr>
+              <tr><td>🏢 Weak Third-Party Security</td><td>A.5.19–5.22</td><td>No vendor vetting, contract gaps, access risks</td></tr>
+              <tr><td>💾 Absence of Backups & DRP</td><td>A.5.30</td><td>No backup tests, lack of documented recovery plans</td></tr>
+              <tr><td>🧑‍💻 Low Cybersecurity Awareness</td><td>A.6.3</td><td>Employees untrained on phishing and data risks</td></tr>
+            </table>
+          </div>
+          <div class="key-takeaway">⚠️ <b>Key Takeaway:</b> Addressing these gaps is critical for compliance and security.</div>
+        </div>
+        <!-- Remediation Priorities (Phase 1) split into individual slides -->
+        <div class="slide">
+          <div class="slide-title">Deploy Zero Trust Architecture (ZTA) 🔒</div>
+          <div class="slide-content">
+            <ul>
+              <li>Micro-segmentation and dynamic trust scoring for internal systems</li>
+              <li>Identity-aware proxies for sensitive internal applications</li>
+              <li><b>Tools:</b> Twingate, Cloudflare Zero Trust</li>
+              <li><b>ISO Alignment:</b> A.5.15, A.5.18</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">🔒 <b>Key Takeaway:</b> Zero Trust reduces lateral movement and insider risk.</div>
+        </div>
+        <div class="slide">
+          <div class="slide-title">Set Up Open-Source SIEM + Threat Intelligence Feed 🕵️</div>
+          <div class="slide-content">
+            <ul>
+              <li>Wazuh with Sigma rules for log collection, enrichment, and alerting</li>
+              <li>Integrate with threat intel feeds (Abuse.ch, AlienVault OTX)</li>
+              <li><b>ISO Alignment:</b> A.5.28, A.5.29</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">🕵️ <b>Key Takeaway:</b> Centralized monitoring enables rapid incident response.</div>
+        </div>
+        <div class="slide">
+          <div class="slide-title">Launch Continuous Cyber Awareness via Microlearning 🧑‍💻</div>
+          <div class="slide-content">
+            <ul>
+              <li>Gamified weekly security challenges</li>
+              <li>Phishing simulations and quizzes for monthly recognition rewards</li>
+              <li><b>Tools:</b> PhishER, Cybrary for Teams</li>
+              <li><b>ISO Alignment:</b> A.6.3</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">🧑‍💻 <b>Key Takeaway:</b> Engaged employees are the first line of defense.</div>
+        </div>
+        <div class="slide">
+          <div class="slide-title">Implement DLP + Data Classification on M365 📤</div>
+          <div class="slide-content">
+            <ul>
+              <li>Auto-tag documents using Microsoft Purview</li>
+              <li>Block unauthorized uploads and email forwarding via adaptive DLP rules</li>
+              <li><b>ISO Alignment:</b> A.5.10, A.5.24</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">📤 <b>Key Takeaway:</b> DLP prevents data leaks and enforces compliance.</div>
+        </div>
+        <div class="slide">
+          <div class="slide-title">Conduct Third-Party Risk Audit & Contract Redrafting 🏢</div>
+          <div class="slide-content">
+            <ul>
+              <li>Create a vendor portal to track compliance documents, access logs, and test results</li>
+              <li>Include penalty clauses for non-compliance</li>
+              <li><b>ISO Alignment:</b> A.5.19–5.22</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">🏢 <b>Key Takeaway:</b> Strong vendor management reduces supply chain risk.</div>
+        </div>
+        <!-- Phase 2: Tactical Enhancements split into individual slides -->
+        <div class="slide">
+          <div class="slide-title">Backup Modernization with Immutable Snapshots 💾</div>
+          <div class="slide-content">
+            <ul>
+              <li>Veeam or AWS Backup with versioning and GFS retention</li>
+              <li>Quarterly restoration drills</li>
+              <li><b>ISO Alignment:</b> A.5.30</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">�� <b>Key Takeaway:</b> Immutable backups ensure rapid recovery from ransomware.</div>
+        </div>
+        <div class="slide">
+          <div class="slide-title">Secure Remote Access with Passwordless Authentication 🔑</div>
+          <div class="slide-content">
+            <ul>
+              <li>FIDO2/U2F hardware tokens (Yubikeys) or biometric-based SSO</li>
+              <li><b>ISO Alignment:</b> A.5.15</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">🔑 <b>Key Takeaway:</b> Passwordless access reduces credential theft risk.</div>
+        </div>
+        <div class="slide">
+          <div class="slide-title">Network Segmentation Using SD-WAN 🌐</div>
+          <div class="slide-content">
+            <ul>
+              <li>Enforce VLANs for finance, HR, R&D</li>
+              <li>SD-WAN overlays allow faster deployment</li>
+              <li><b>ISO Alignment:</b> A.5.23</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">🌐 <b>Key Takeaway:</b> Segmentation limits the blast radius of attacks.</div>
+        </div>
+        <!-- Timeline as a visual roadmap -->
+        <div class="slide">
+          <div class="slide-title">6-Month Remediation Roadmap ⏰</div>
+          <div class="slide-content">
+            <div class="timeline-bar">
+              <div class="timeline-step"><span class="timeline-emoji">1️⃣</span><span class="timeline-label">Awareness training<br>+ asset inventory</span></div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-step"><span class="timeline-emoji">2️⃣</span><span class="timeline-label">RBAC<br>+ 3rd-party policy</span></div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-step"><span class="timeline-emoji">3️⃣</span><span class="timeline-label">Deploy SIEM<br>+ threat hunting</span></div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-step"><span class="timeline-emoji">4️⃣</span><span class="timeline-label">Backup & DR<br>test simulations</span></div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-step"><span class="timeline-emoji">5️⃣</span><span class="timeline-label">Internal audit<br>+ gap closure</span></div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-step"><span class="timeline-emoji">6️⃣</span><span class="timeline-label">Readiness audit</span></div>
+            </div>
+          </div>
+          <div class="key-takeaway">⏰ <b>Action:</b> Each month brings us closer to certification.</div>
+        </div>
+        <!-- Budget & Tooling Recommendations -->
+        <div class="slide">
+          <div class="slide-title">Budget & Tooling Recommendations 💸</div>
+          <div class="slide-content">
+            <table class="slide-table">
+              <tr><th>Tool</th><th>Purpose</th><th>Cost</th></tr>
+              <tr><td>Wazuh + ELK</td><td>SIEM & Log Aggregation</td><td>Free</td></tr>
+              <tr><td>Microsoft Purview</td><td>DLP & Classification (M365)</td><td>License-based</td></tr>
+              <tr><td>PhishER or Cybrary</td><td>Awareness Training</td><td>~ AED 15/user/mo</td></tr>
+              <tr><td>Veeam or AWS Backup</td><td>Immutable Backups</td><td>Usage-based</td></tr>
+              <tr><td>Cloudflare Access / Twingate</td><td>Zero Trust Remote Access</td><td>Scalable</td></tr>
+            </table>
+          </div>
+          <div class="key-takeaway">💸 <b>Key Takeaway:</b> Strategic investment in security tools maximizes ROI.</div>
+        </div>
+        <!-- KPIs as a checklist -->
+        <div class="slide">
+          <div class="slide-title">KPIs to Track Progress ✅</div>
+          <div class="slide-content">
+            <ul class="kpi-list">
+              <li>✅ % users completing security training</li>
+              <li>✅ # vendors with compliance documentation</li>
+              <li>✅ # logs ingested daily + incidents flagged</li>
+              <li>✅ % systems covered by DLP and backup</li>
+              <li>✅ % completion of remediation milestones</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">✅ <b>Key Takeaway:</b> KPIs ensure measurable progress toward certification.</div>
+        </div>
+        <!-- Final Slide -->
+        <div class="slide">
+          <div class="slide-title">Ready for Certification 🏆</div>
+          <div class="slide-content">
+            <ul>
+              <li>All ISO 27001:2022 controls addressed</li>
+              <li>Modern, sustainable security posture</li>
+              <li>Cross-department collaboration and executive sponsorship</li>
+            </ul>
+          </div>
+          <div class="key-takeaway">🏆 <b>Action:</b> Let’s get certified and strengthen our security for the future!</div>
+          <div style="width:100%;display:flex;justify-content:center;margin-top:2em;">
+            <button id="restartBtn" style="background:var(--accent);color:#fff;border:none;border-radius:6px;padding:0.75em 2em;font-size:1.1rem;font-weight:700;cursor:pointer;box-shadow:0 2px 8px #2563eb22;transition:background 0.2s;">Restart Presentation</button>
+          </div>
+        </div>
+        <!-- Slides end here -->
+        <div class="slide-nav">
+          <button class="slide-arrow" id="prevSlide" aria-label="Previous slide">&#8592;</button>
+          <button class="slide-arrow" id="nextSlide" aria-label="Next slide">&#8594;</button>
+        </div>
+        <div class="slide-indicator" id="slideIndicator"></div>
+      </div>
+    </main>
+  </div>
+  <script>
+    // Slideshow logic
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    const indicator = document.getElementById('slideIndicator');
+    let current = 0;
+    function showSlide(idx) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === idx);
+      });
+      prevBtn.disabled = idx === 0;
+      nextBtn.disabled = idx === slides.length - 1;
+      indicator.textContent = `Slide ${idx + 1} of ${slides.length}`;
+    }
+    prevBtn.addEventListener('click', () => { if (current > 0) { current--; showSlide(current); } });
+    nextBtn.addEventListener('click', () => { if (current < slides.length - 1) { current++; showSlide(current); } });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') prevBtn.click();
+      if (e.key === 'ArrowRight') nextBtn.click();
+    });
+    showSlide(current);
+
+    // Dynamic scaling to fit slide in viewport
+    function scaleToFit() {
+      const container = document.getElementById('slideContainer');
+      const viewport = document.querySelector('.slide-viewport');
+      if (!container || !viewport) return;
+      // Reset scale first
+      container.style.transform = 'scale(1)';
+      // Give browser a tick to recalc
+      setTimeout(() => {
+        const vw = viewport.clientWidth;
+        const vh = viewport.clientHeight;
+        const sw = container.scrollWidth;
+        const sh = container.scrollHeight;
+        // Padding fudge factor for nav/indicator
+        const fudge = 24;
+        const scaleW = vw / (sw + fudge);
+        const scaleH = vh / (sh + fudge);
+        let scale = Math.min(scaleW, scaleH, 1);
+        // Prevent scaling below 0.5 for readability
+        scale = Math.max(scale, 0.5);
+        container.style.transform = `scale(${scale})`;
+        // Center vertically
+        container.style.marginTop = scale < 1 ? `${(vh - sh * scale) / 2}px` : '';
+      }, 10);
+    }
+    window.addEventListener('resize', scaleToFit);
+    // Re-scale on slide change
+    const origShowSlide = showSlide;
+    showSlide = function(idx) {
+      origShowSlide(idx);
+      scaleToFit();
+    };
+    // Initial scale
+    scaleToFit();
+
+    // Add restart button logic
+    const restartBtn = document.getElementById('restartBtn');
+    if (restartBtn) {
+      restartBtn.addEventListener('click', () => {
+        current = 0;
+        showSlide(current);
+      });
+    }
+  </script>
+</body>
+</html> 

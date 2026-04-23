@@ -1,0 +1,114 @@
+Slide: Organizational Controls
+Script: This section explains the 37 Organizational Controls from ISO 27001:2022. These controls are foundational — they shape policies, management responsibilities, supply chain trust, and incident response preparedness.
+
+Slide: A.5.1 – Policies for information security
+Script: This control requires organizations to define, approve, publish, and communicate information security policies. These policies provide the foundation for the ISMS. Example: An organization creates a formal 'Information Security Policy' signed by top management, covering topics such as data protection, acceptable use, and incident reporting. Source: ISO/IEC 27002:2022.
+
+Slide: A.5.2 – Information security roles and responsibilities
+Script: This control ensures that information security responsibilities are clearly defined and assigned. It avoids confusion and accountability issues. Example: Appointing a Chief Information Security Officer (CISO) to oversee the ISMS, while individual departments have designated security leads.
+
+Slide: A.5.3 – Segregation of duties
+Script: Duties and responsibilities are divided among different people to reduce opportunities for unauthorized modification or misuse of assets. Example: One person initiates financial transactions, and another approves them. This is especially important in finance, IT, and system administration.
+
+Slide: A.5.4 – Management responsibilities
+Script: Management must actively support the ISMS by providing resources, resolving conflicts, and promoting a security culture. Example: Management includes information security updates in monthly meetings and sponsors training programs.
+
+Slide: A.5.5 – Contact with authorities
+Script: Organizations must establish procedures for contacting regulatory and legal authorities when necessary, such as in case of a data breach or cyber incident. Example: Having predefined contact lists and protocols for notifying data protection authorities (e.g., under GDPR Article 33).
+
+Slide: A.5.6 – Contact with special interest groups
+Script: Participation in security communities helps organizations stay informed about threats and best practices. Example: Joining FIRST (Forum of Incident Response and Security Teams) or local CERT groups to share and receive threat intelligence.
+
+Slide: A.5.7 – Threat intelligence
+Script: This involves gathering and analyzing threat data to proactively protect the organization. Example: Subscribing to commercial threat feeds (e.g., Recorded Future, Mandiant) or using open-source feeds like AlienVault OTX.
+
+Slide: A.5.8 – Information security in project management
+Script: Security must be integrated into all project management stages. Example: In a software development project, threat modeling is conducted during design, and penetration testing is included before release.
+
+Slide: A.5.9 – Inventory of information and other assets
+Script: Maintain an inventory of assets including hardware, software, data, and services. Example: Using asset management tools like Lansweeper or ServiceNow to track laptops, servers, and cloud services.
+
+Slide: A.5.10 – Acceptable use of information and other assets
+Script: Define rules for how employees may use organizational resources. Example: Policy stating employees cannot use corporate email for personal business or install unauthorized software.
+
+Slide: A.5.11 – Return of assets
+Script: Ensure that employees return devices, ID badges, and access credentials upon termination. Example: HR and IT follow a checklist on exit interviews to collect assets and revoke access rights.
+
+Slide: A.5.12 – Classification of information
+Script: Information should be classified based on sensitivity and criticality. Example: Using labels like 'Confidential', 'Internal Use Only', 'Public' on documents and emails.
+
+Slide: A.5.13 – Labelling of information
+Script: Support classification by clearly labelling physical and digital information. Example: Automatically tagging confidential files using Microsoft Purview or other DLP tools.
+
+Slide: A.5.14 – Information transfer
+Script: Protect data in transit through encryption and secure channels. Example: Mandating the use of TLS/SSL for emails and HTTPS for web traffic.
+
+Slide: A.5.15 – Access control
+Script: Define and enforce policies to ensure only authorized users access systems and data. Example: Implementing role-based access control (RBAC) using Azure AD or Okta.
+
+Slide: A.5.16 – Identity management
+Script: Ensure proper provisioning and de-provisioning of user identities. Example: Automating account creation/removal via identity lifecycle management tools.
+
+Slide: A.5.17 – Authentication information
+Script: Protect passwords, PINs, and other credentials. Example: Enforcing MFA (Multi-Factor Authentication) and password vaults like LastPass or Bitwarden.
+
+Slide: A.5.18 – Access rights
+Script: Review and revoke access rights regularly. Example: Quarterly access reviews using IAM systems to verify permissions.
+
+Slide: A.5.19 – Information security in supplier relationships
+Script: Include security requirements in procurement and vendor management. Example: Using questionnaires or audits to evaluate vendor security postures.
+
+Slide: A.5.20 – Addressing information security within supplier agreements
+Script: Contracts must cover security terms like data protection, breach notification, and compliance. Example: Adding DPA (Data Processing Addendum) clauses for cloud providers.
+
+Slide: A.5.21 – Managing information security in the ICT supply chain
+Script: Identify risks related to outsourced ICT services and mitigate them. Example: Using third-party risk platforms like RiskRecon or SecurityScorecard.
+
+Slide: A.5.22 – Monitoring, review and change management of supplier services
+Script: Review supplier performance regularly and manage changes to ensure security. Example: Annual supplier audits or SLAs with performance metrics.
+
+Slide: A.5.23 – Information security for use of cloud services
+Script: Apply security controls specific to cloud. Example: Enabling logging, encryption, and compliance checks in AWS using Security Hub or Azure Defender.
+
+Slide: A.5.24 – Information security incident management planning and preparation
+Script: Have plans, tools, and teams in place to detect and respond to incidents. Example: Maintaining an IRP (Incident Response Plan) and using SIEM tools.
+
+Slide: A.5.25 – Assessment and decision on information security events
+Script: Triage events and determine if they are actual incidents. Example: Using SOAR platforms to automate event correlation and alerting.
+
+Slide: A.5.26 – Response to information security incidents
+Script: Contain, eradicate, and recover from incidents. Example: Playbooks for ransomware or phishing attacks.
+
+Slide: A.5.27 – Learning from information security incidents
+Script: Perform root cause analysis and improve controls post-incident. Example: Conducting post-mortems and updating policies.
+
+Slide: A.5.28 – Collection of evidence
+Script: Ensure proper logging and chain-of-custody for investigations. Example: Using forensic tools like FTK Imager or EnCase.
+
+Slide: A.5.29 – Information security during disruption
+Script: Protect information during natural disasters or system failures. Example: Maintaining backup power and redundant systems.
+
+Slide: A.5.30 – ICT readiness for business continuity
+Script: Test systems for disaster recovery and business continuity. Example: Running BCP/DR drills annually.
+
+Slide: A.5.31 – Legal, statutory, regulatory and contractual requirements
+Script: Comply with all applicable laws and regulations. Example: GDPR, UAE Federal Law No. 45 of 2021 on data protection.
+
+Slide: A.5.32 – Intellectual property rights
+Script: Respect IPRs and avoid copyright/trademark infringement. Example: Using licensed software and avoiding pirated content.
+
+Slide: A.5.33 – Protection of records
+Script: Secure records from unauthorized access and tampering. Example: Archiving records in WORM (Write Once Read Many) storage.
+
+Slide: A.5.34 – Privacy and protection of PII
+Script: Protect personal data in line with privacy laws. Example: Anonymizing datasets and encrypting PII at rest and in transit.
+
+Slide: A.5.35 – Independent review of information security
+Script: Get external reviews or audits to validate the ISMS. Example: Hiring a third-party auditor for ISO 27001 surveillance audit.
+
+Slide: A.5.36 – Compliance with policies, rules and standards
+Script: Monitor internal compliance with ISMS policies. Example: Internal audit checklist for policy adherence.
+
+Slide: A.5.37 – Documented operating procedures
+Script: Maintain SOPs for IT, HR, security operations. Example: Using Confluence or SharePoint to store and manage SOPs.
+

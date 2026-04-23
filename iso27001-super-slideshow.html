@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISO 27001 Organizational Controls – Animated Slideshow</title>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #2563eb;
+      --accent-dark: #174bbd;
+      --text: #111;
+      --text-light: #64748b;
+      --bg: #0a0f0a;
+      --matrix-green: #39ff14;
+      --matrix-glow: 0 0 8px #39ff14, 0 0 16px #39ff1488;
+      --matrix-dot: rgba(57,255,20,0.12);
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--matrix-green);
+      font-family: 'DotGothic16', monospace, 'Fira Mono', 'Consolas', 'Menlo', Arial, sans-serif;
+      overflow: hidden;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg, #0a0f0a 60%, #101c10 100%);
+    }
+    .matrix-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.13;
+      mix-blend-mode: lighten;
+    }
+    .matrix-grid {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: repeating-linear-gradient(0deg, var(--matrix-dot) 0 1px, transparent 1px 32px),
+                        repeating-linear-gradient(90deg, var(--matrix-dot) 0 1px, transparent 1px 32px);
+    }
+    .status-bar {
+      position: fixed;
+      top: 0; left: 0; width: 100vw;
+      height: 32px;
+      background: rgba(10,20,10,0.92);
+      color: var(--matrix-green);
+      font-family: 'VT323', monospace;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      padding-left: 24px;
+      z-index: 10;
+      box-shadow: 0 2px 12px #39ff1422;
+      border-bottom: 1px solid #39ff1422;
+      user-select: none;
+      text-shadow: var(--matrix-glow);
+    }
+    .slideshow-container {
+      position: relative;
+      z-index: 1;
+      width: 90vw;
+      max-width: 900px;
+      min-height: 70vh;
+      background: rgba(30, 50, 30, 0.97);
+      border-radius: 24px;
+      box-shadow: 0 8px 48px #2563eb22, 0 1.5px 8px #2563eb11;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 32px 56px 32px;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+      margin-top: 48px;
+    }
+    .slides {
+      position: relative;
+      width: 100%;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+    }
+    .slide {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+    }
+    .slide.active {
+      display: flex !important;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      z-index: 2;
+    }
+    .slide-title {
+      font-family: 'DotGothic16', monospace;
+      font-size: 2.8rem;
+      color: #fff;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.2em;
+      line-height: 1.1;
+      text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff1488, 0 0 2px #fff;
+      filter: brightness(1.2) contrast(1.2);
+      border-bottom: 2px dotted var(--matrix-green);
+      display: inline-block;
+      min-height: 3.2em;
+      background: none;
+      overflow: hidden;
+    }
+    .slide-title .char {
+      opacity: 0;
+      display: inline-block;
+      transform: translateY(1em) scale(0.8);
+      animation: titleIn 0.5s cubic-bezier(.4,0,.2,1) forwards;
+    }
+    .slide-title .char.glow {
+      text-shadow: 0 0 8px #baffc9, 0 0 16px #39ff14, 0 0 2px #fff;
+      color: #fff;
+    }
+    @keyframes titleIn {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .slide-script {
+      font-family: 'DotGothic16', monospace;
+      font-size: 1.3rem;
+      color: #fff;
+      background: #101c10;
+      border: 2px dotted #39ff14;
+      max-width: 700px;
+      margin: 0 auto 2em auto;
+      line-height: 1.7;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      border-radius: 12px;
+      padding: 1.2em 1.5em;
+      box-shadow: 0 2px 12px #39ff1422, 0 0 16px #39ff1444;
+      word-break: break-word;
+      text-shadow: 0 0 8px #39ff14, 0 0 2px #fff;
+      filter: brightness(1.2) contrast(1.2);
+    }
+    .slide-indicator {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.1rem;
+      color: var(--matrix-green);
+      letter-spacing: 0.1em;
+      opacity: 0.9;
+      font-family: 'VT323', monospace;
+      background: rgba(10,20,10,0.7);
+      border-radius: 8px;
+      padding: 4px 16px;
+      box-shadow: 0 1px 4px #39ff1411;
+      border: 1px solid #39ff1422;
+      text-shadow: var(--matrix-glow);
+      user-select: none;
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(10,20,10,0.92);
+      color: var(--matrix-green);
+      border: 2px solid #39ff14;
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      font-size: 2.2rem;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #39ff1422, 0 0 16px #39ff1444 inset;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s, color 0.2s;
+      z-index: 2;
+      opacity: 0.92;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      text-shadow: var(--matrix-glow);
+      filter: brightness(1.2);
+      animation: navPulse 1.5s infinite alternate;
+    }
+    .nav-btn:active {
+      background: #39ff1422;
+      color: #fff;
+      transform: translateY(-50%) scale(0.96);
+      box-shadow: 0 0 24px #39ff14cc;
+    }
+    .nav-btn.left { left: 16px; }
+    .nav-btn.right { right: 16px; }
+    @keyframes navPulse {
+      to { box-shadow: 0 0 24px #39ff14cc, 0 0 16px #39ff1444 inset; }
+    }
+    @media (max-width: 700px) {
+      .slideshow-container { padding: 24px 4vw 48px 4vw; }
+      .slide-title { font-size: 1.5rem; }
+      .slide-script { font-size: 1rem; padding: 1em 0.5em; }
+      .nav-btn { width: 38px; height: 38px; font-size: 1.3rem; }
+      .status-bar { font-size: 1rem; height: 26px; padding-left: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="status-bar" id="statusBar">MATRIX SLIDESHOW // ISO 27001 // <span id="clock"></span></div>
+  <div class="matrix-grid"></div>
+  <canvas class="matrix-bg"></canvas>
+  <div class="slideshow-container">
+    <button class="nav-btn left" aria-label="Previous slide">&#8592;</button>
+    <button class="nav-btn right" aria-label="Next slide">&#8594;</button>
+    <div class="slide-indicator"></div>
+    <div class="slides">
+      <div class="slide">
+        <div class="slide-title">Organizational Controls</div>
+        <div class="slide-script">This section explains the 37 Organizational Controls from ISO 27001:2022. These controls are foundational — they shape policies, management responsibilities, supply chain trust, and incident response preparedness.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.1 – Policies for information security</div>
+        <div class="slide-script">This control requires organizations to define, approve, publish, and communicate information security policies. These policies provide the foundation for the ISMS. Example: An organization creates a formal 'Information Security Policy' signed by top management, covering topics such as data protection, acceptable use, and incident reporting. Source: ISO/IEC 27002:2022.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.2 – Information security roles and responsibilities</div>
+        <div class="slide-script">This control ensures that information security responsibilities are clearly defined and assigned. It avoids confusion and accountability issues. Example: Appointing a Chief Information Security Officer (CISO) to oversee the ISMS, while individual departments have designated security leads.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.3 – Segregation of duties</div>
+        <div class="slide-script">Duties and responsibilities are divided among different people to reduce opportunities for unauthorized modification or misuse of assets. Example: One person initiates financial transactions, and another approves them. This is especially important in finance, IT, and system administration.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.4 – Management responsibilities</div>
+        <div class="slide-script">Management must actively support the ISMS by providing resources, resolving conflicts, and promoting a security culture. Example: Management includes information security updates in monthly meetings and sponsors training programs.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.5 – Contact with authorities</div>
+        <div class="slide-script">Organizations must establish procedures for contacting regulatory and legal authorities when necessary, such as in case of a data breach or cyber incident. Example: Having predefined contact lists and protocols for notifying data protection authorities (e.g., under GDPR Article 33).</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.6 – Contact with special interest groups</div>
+        <div class="slide-script">Participation in security communities helps organizations stay informed about threats and best practices. Example: Joining FIRST (Forum of Incident Response and Security Teams) or local CERT groups to share and receive threat intelligence.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.7 – Threat intelligence</div>
+        <div class="slide-script">This involves gathering and analyzing threat data to proactively protect the organization. Example: Subscribing to commercial threat feeds (e.g., Recorded Future, Mandiant) or using open-source feeds like AlienVault OTX.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.8 – Information security in project management</div>
+        <div class="slide-script">Security must be integrated into all project management stages. Example: In a software development project, threat modeling is conducted during design, and penetration testing is included before release.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.9 – Inventory of information and other assets</div>
+        <div class="slide-script">Maintain an inventory of assets including hardware, software, data, and services. Example: Using asset management tools like Lansweeper or ServiceNow to track laptops, servers, and cloud services.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.10 – Acceptable use of information and other assets</div>
+        <div class="slide-script">Define rules for how employees may use organizational resources. Example: Policy stating employees cannot use corporate email for personal business or install unauthorized software.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.11 – Return of assets</div>
+        <div class="slide-script">Ensure that employees return devices, ID badges, and access credentials upon termination. Example: HR and IT follow a checklist on exit interviews to collect assets and revoke access rights.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.12 – Classification of information</div>
+        <div class="slide-script">Information should be classified based on sensitivity and criticality. Example: Using labels like 'Confidential', 'Internal Use Only', 'Public' on documents and emails.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.13 – Labelling of information</div>
+        <div class="slide-script">Support classification by clearly labelling physical and digital information. Example: Automatically tagging confidential files using Microsoft Purview or other DLP tools.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.14 – Information transfer</div>
+        <div class="slide-script">Protect data in transit through encryption and secure channels. Example: Mandating the use of TLS/SSL for emails and HTTPS for web traffic.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.15 – Access control</div>
+        <div class="slide-script">Define and enforce policies to ensure only authorized users access systems and data. Example: Implementing role-based access control (RBAC) using Azure AD or Okta.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.16 – Identity management</div>
+        <div class="slide-script">Ensure proper provisioning and de-provisioning of user identities. Example: Automating account creation/removal via identity lifecycle management tools.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.17 – Authentication information</div>
+        <div class="slide-script">Protect passwords, PINs, and other credentials. Example: Enforcing MFA (Multi-Factor Authentication) and password vaults like LastPass or Bitwarden.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.18 – Access rights</div>
+        <div class="slide-script">Review and revoke access rights regularly. Example: Quarterly access reviews using IAM systems to verify permissions.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.19 – Information security in supplier relationships</div>
+        <div class="slide-script">Include security requirements in procurement and vendor management. Example: Using questionnaires or audits to evaluate vendor security postures.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.20 – Addressing information security within supplier agreements</div>
+        <div class="slide-script">Contracts must cover security terms like data protection, breach notification, and compliance. Example: Adding DPA (Data Processing Addendum) clauses for cloud providers.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.21 – Managing information security in the ICT supply chain</div>
+        <div class="slide-script">Identify risks related to outsourced ICT services and mitigate them. Example: Using third-party risk platforms like RiskRecon or SecurityScorecard.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.22 – Monitoring, review and change management of supplier services</div>
+        <div class="slide-script">Review supplier performance regularly and manage changes to ensure security. Example: Annual supplier audits or SLAs with performance metrics.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.23 – Information security for use of cloud services</div>
+        <div class="slide-script">Apply security controls specific to cloud. Example: Enabling logging, encryption, and compliance checks in AWS using Security Hub or Azure Defender.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.24 – Information security incident management planning and preparation</div>
+        <div class="slide-script">Have plans, tools, and teams in place to detect and respond to incidents. Example: Maintaining an IRP (Incident Response Plan) and using SIEM tools.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.25 – Assessment and decision on information security events</div>
+        <div class="slide-script">Triage events and determine if they are actual incidents. Example: Using SOAR platforms to automate event correlation and alerting.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.26 – Response to information security incidents</div>
+        <div class="slide-script">Contain, eradicate, and recover from incidents. Example: Playbooks for ransomware or phishing attacks.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.27 – Learning from information security incidents</div>
+        <div class="slide-script">Perform root cause analysis and improve controls post-incident. Example: Conducting post-mortems and updating policies.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.28 – Collection of evidence</div>
+        <div class="slide-script">Ensure proper logging and chain-of-custody for investigations. Example: Using forensic tools like FTK Imager or EnCase.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.29 – Information security during disruption</div>
+        <div class="slide-script">Protect information during natural disasters or system failures. Example: Maintaining backup power and redundant systems.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.30 – ICT readiness for business continuity</div>
+        <div class="slide-script">Test systems for disaster recovery and business continuity. Example: Running BCP/DR drills annually.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.31 – Legal, statutory, regulatory and contractual requirements</div>
+        <div class="slide-script">Comply with all applicable laws and regulations. Example: GDPR, UAE Federal Law No. 45 of 2021 on data protection.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.32 – Intellectual property rights</div>
+        <div class="slide-script">Respect IPRs and avoid copyright/trademark infringement. Example: Using licensed software and avoiding pirated content.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.33 – Protection of records</div>
+        <div class="slide-script">Secure records from unauthorized access and tampering. Example: Archiving records in WORM (Write Once Read Many) storage.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.34 – Privacy and protection of PII</div>
+        <div class="slide-script">Protect personal data in line with privacy laws. Example: Anonymizing datasets and encrypting PII at rest and in transit.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.35 – Independent review of information security</div>
+        <div class="slide-script">Get external reviews or audits to validate the ISMS. Example: Hiring a third-party auditor for ISO 27001 surveillance audit.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.36 – Compliance with policies, rules and standards</div>
+        <div class="slide-script">Monitor internal compliance with ISMS policies. Example: Internal audit checklist for policy adherence.</div>
+      </div>
+      <div class="slide">
+        <div class="slide-title">A.5.37 – Documented operating procedures</div>
+        <div class="slide-script">Maintain SOPs for IT, HR, security operations. Example: Using Confluence or SharePoint to store and manage SOPs.</div>
+      </div>
+    </div>
+  </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Digital clock for status bar
+    function updateClock() {
+      const now = new Date();
+      const pad = n => n.toString().padStart(2, '0');
+      document.getElementById('clock').textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+    }
+    setInterval(updateClock, 1000); updateClock();
+
+    // Matrix background animation (optimized)
+    const canvas = document.querySelector('.matrix-bg');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let fontSize = 18;
+    let columns, drops;
+    function resizeMatrix() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      columns = Math.floor(width / fontSize);
+      drops = Array(columns).fill(1);
+    }
+    window.addEventListener('resize', resizeMatrix);
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(10,20,10,0.08)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.font = fontSize + "px 'VT323', monospace";
+      ctx.fillStyle = '#39ff14';
+      for (let i = 0; i < columns; i++) {
+        if (Math.random() > 0.98) drops[i] = 0;
+        const char = String.fromCharCode(0x30A0 + Math.random() * 96);
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        drops[i]++;
+        if (drops[i] * fontSize > height) drops[i] = 0;
+      }
+    }
+    resizeMatrix();
+    setInterval(drawMatrix, 70);
+
+    // Navigation logic for static slides
+    const slideEls = Array.from(document.querySelectorAll('.slide'));
+    const indicator = document.querySelector('.slide-indicator');
+    let current = 0;
+    function showSlide(idx, direction = 1) {
+      slideEls.forEach((el, i) => {
+        el.classList.remove('active');
+        el.style.opacity = 0;
+        el.style.transform = `translateY(${direction * 40}px) scale(0.98)`;
+      });
+      const el = slideEls[idx];
+      if (!el) { console.error('No slide element for idx', idx); return; }
+      el.classList.add('active');
+      el.style.opacity = 1;
+      el.style.transform = 'translateY(0) scale(1)';
+      indicator.textContent = `Slide ${idx + 1} / ${slideEls.length}`;
+    }
+    function nextSlide() {
+      if (current < slideEls.length - 1) {
+        current++;
+        showSlide(current, 1);
+      }
+    }
+    function prevSlide() {
+      if (current > 0) {
+        current--;
+        showSlide(current, -1);
+      }
+    }
+    document.querySelector('.nav-btn.left').onclick = prevSlide;
+    document.querySelector('.nav-btn.right').onclick = nextSlide;
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+    document.querySelector('.slides').addEventListener('click', e => {
+      if (e.target.classList.contains('slide') || e.target.classList.contains('slide-script')) nextSlide();
+    });
+    // Initial show
+    showSlide(current);
+  });
+  </script>
+</body>
+</html> 
