@@ -1,6 +1,6 @@
 # Ziad Hares - Portfolio Website
 
-A modern, responsive portfolio website for Ziad Hares, a Cybersecurity Student and Web Developer based in Dubai, UAE.
+A modern, responsive portfolio website for Ziad Hares, cybersecurity & systems engineer and founder of Computator Technology, based in Dubai, UAE. The CV is authored in `cv.html` and rendered to `Ziad Hares CV.pdf` with headless Chrome (see "Updating the CV" below).
 
 ## 🌟 Features
 
@@ -146,5 +146,15 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Last Updated**: January 2025
-**Version**: 2.0.0 
+**Last Updated**: November 2026
+**Version**: 3.0.0 
+## 📝 Updating the CV
+
+The CV source is `cv.html` (plain HTML + CSS, A4 print styles). Edit it, then re-render the PDF:
+
+```sh
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer \
+  --print-to-pdf="$PWD/Ziad Hares CV.pdf" "file://$PWD/cv.html"
+```
+
+Keep the output filename `Ziad Hares CV.pdf`; `index.html` links to it in the hero and contact sections.

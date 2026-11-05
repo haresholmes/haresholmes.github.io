@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ziad Hares — CV</title>
+<meta name="robots" content="noindex">
+<style>
+  @page { size: A4; margin: 11mm 12mm; }
+  :root {
+    --ink: #111827; --muted: #4b5563; --line: #d1d5db; --accent: #0f172a; --rule: #1d4ed8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink); font-size: 9.45pt; line-height: 1.32; background: #fff;
+  }
+  .page { max-width: 186mm; margin: 0 auto; padding: 10mm 0; }
+  @media print { .page { max-width: none; padding: 0; } }
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 5px; margin-bottom: 7px; }
+  h1 { font-size: 20pt; margin: 0; letter-spacing: -0.3px; }
+  .tagline { font-size: 10.5pt; font-weight: 600; color: var(--rule); margin: 1px 0 3px; }
+  .contact { font-size: 8.6pt; color: var(--muted); }
+  .contact a { color: inherit; text-decoration: none; }
+  .contact span + span::before { content: " · "; color: #9ca3af; }
+  h2 {
+    font-size: 9.6pt; text-transform: uppercase; letter-spacing: 1.1px; color: var(--accent);
+    border-bottom: 1px solid var(--line); margin: 9px 0 4px; padding-bottom: 2px;
+  }
+  p { margin: 0 0 4px; }
+  .item { margin-bottom: 5px; break-inside: avoid; }
+  .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .role { font-weight: 700; }
+  .org { color: var(--muted); }
+  .date { white-space: nowrap; color: var(--muted); font-size: 8.6pt; }
+  ul { margin: 2px 0 0; padding-left: 13px; }
+  li { margin: 0 0 1.2px; }
+  .skills { display: grid; grid-template-columns: 1fr; gap: 1.5px; }
+  .skills div b { color: var(--accent); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+  .small { font-size: 8.6pt; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <h1>Ziad Hares</h1>
+  <div class="tagline">Cybersecurity &amp; Systems Engineer · Founder, Computator Technology</div>
+  <div class="contact">
+    <span>Dubai, UAE</span>
+    <span><a href="tel:+971588997129">+971 58 899 7129</a></span>
+    <span><a href="mailto:ziad@haresholmes.eu.org">ziad@haresholmes.eu.org</a></span>
+    <span><a href="https://haresholmes.eu.org">haresholmes.eu.org</a></span>
+    <span><a href="https://www.linkedin.com/in/ziyadhares">linkedin.com/in/ziyadhares</a></span>
+    <span><a href="https://github.com/haresholmes">github.com/haresholmes</a></span>
+  </div>
+</header>
+
+<h2>Summary</h2>
+<p>Final-year BSc Cybersecurity student (UOWD, graduating Dec 2026) and founder of Computator Technology, a Dubai DET-licensed software and managed-IT practice. Since August 2026 the sole engineer behind begad.ae, a bilingual UAE marketplace on PHP 8.3, MariaDB and AWS: fixed revenue-critical payment and stock defects, rebuilt ad attribution, shipped iOS/Android apps and recovered the platform from git after its production instance was deleted. Background in penetration testing, ISO 27001 governance, hardened self-hosted infrastructure (WireGuard, Matrix E2EE, Traefik, Proxmox) and local-first AI systems. Comfortable owning a production system end to end: threat model, build, deploy, recover.</p>
+
+<h2>Experience</h2>
+
+<div class="item">
+  <div class="item-head"><div><span class="role">Founder &amp; Lead Engineer</span> <span class="org">· Computator Technology · Dubai, UAE</span></div><div class="date">Aug 2026 – Present</div></div>
+  <ul>
+    <li>Run a licensed sole establishment delivering websites, custom software and managed IT; engineering partner to Begad General Trading L.L.C under a 12-month software development and digital services agreement (Sep 2026).</li>
+    <li>Own all engineering for the begad.ae marketplace: 2,400+ production commits across storefront, checkout, wallet, seller payouts, logistics tracking, admin and seller portals, with granular, documented git history.</li>
+    <li>Closed revenue leaks: orders were confirmed and stock deducted before Stripe capture; gated confirmation strictly post-payment and added Stripe Payment Element (Apple/Google Pay) and Tabby BNPL.</li>
+    <li>Rebuilt ad attribution from zero e-commerce events to full-funnel Meta Conversions API + TikTok Events API with event_id deduplication and SHA-256 hashed match data.</li>
+    <li>Restored the platform from git history after the production instance was deleted with no backups (Aug 2026); then introduced versioned migrations, automated backups, GitHub Actions CI/CD and infrastructure runbooks.</li>
+    <li>Cut UAE page latency: CloudFront origin keep-alive tuning, tracking-parameter cache normalisation, stale-while-revalidate page caches and edge caching of guest and signed-in pages.</li>
+    <li>Shipped iOS/Android apps (Capacitor with native Swift/Java bridges), an iMessage extension, and a public agent API (catalog, search, product, MCP tools, llms.txt) so AI assistants can shop the catalogue.</li>
+    <li>Built vidvie.ae for VIDVIE's UAE distributor, fed live from the Begad API; private S3 + CloudFront, GitHub OIDC deploys with no stored keys. Built computator.ae on React 19, Vite and Tailwind v4 with verified, auto-rollback deployments.</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><div><span class="role">Lead Engineer (contract)</span> <span class="org">· BHF Auctions · Dubai, UAE</span></div><div class="date">May 2026 – Aug 2026</div></div>
+  <ul>
+    <li>Built a luxury auction platform on Next.js 15, Prisma and MariaDB with Pusher real-time bidding and bilingual catalogue support.</li>
+    <li>Engineered deterministic proxy bidding, an immutable bid ledger, reconciliation and signed close reports; wrote rehearsal scripts to audit ledger consistency under concurrent bidding.</li>
+    <li>Designed the encrypted KYC data lifecycle, point-in-time recovery runbooks and an off-server recovery drill (Jul 2026); purged a leaked credential from repository history.</li>
+    <li>Authored the full technical handoff: architecture, roadmap, quality and security gates, operations and restart checklist.</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><div><span class="role">Technology &amp; Growth Lead</span> <span class="org">· Mon Adoptive Technology · Dubai, UAE</span></div><div class="date">May 2026 – Aug 2026</div></div>
+  <ul>
+    <li>Led the SME Solutions Division: ERP/CRM implementation offer, six-month business plan and executive strategy for the owner, corporate portal, and client proposals including a nightclub CRM and a hardened-device and secure-router offering.</li>
+    <li>Built the Mon Maison real-estate intelligence platform: consolidated 23M+ owner and property rows from hundreds of source files with deduplication and entity resolution, Telegram (Telethon MTProto) and WhatsApp ingestion, and a local AI research assistant.</li>
+    <li>Developed Komissio, a local-first company operating system (FastAPI, React, SQLite, ChromaDB) piloted at Mon Maison; customised ERPNext; automated a live stock portfolio with EODHD market data and generated Excel/VBA workbooks.</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><div><span class="role">Backend Development &amp; Security Intern</span> <span class="org">· Tamam · Sharjah, UAE</span></div><div class="date">Jun 2025 – Aug 2025</div></div>
+  <ul>
+    <li>Built Python and SQL data-collection pipelines and multi-area vendor scrapers with input validation, sanitisation and rate-limit handling.</li>
+    <li>Implemented access control, SQL-injection prevention and query optimisation on the backend database.</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><div><span class="role">IT Security Intern</span> <span class="org">· NewBridge Pharmaceuticals · Dubai, UAE</span></div><div class="date">Jun 2025 – Jul 2025</div></div>
+  <ul>
+    <li>Drafted security policies aligned with ISO/IEC 27001 (including third-party cybersecurity policy), a risk register and a remediation plan; supported risk assessment and awareness initiatives.</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><div><span class="role">Web Security &amp; Development Intern</span> <span class="org">· Axon Technologies · Dubai, UAE</span></div><div class="date">Oct 2024 – Jan 2025</div></div>
+  <ul>
+    <li>Redesigned and delivered the company website with OWASP-aligned front-end controls (input validation, XSS prevention) and performance improvements.</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><div><span class="role">E-Commerce Development Intern</span> <span class="org">· Armada Holdings · Dubai, UAE</span></div><div class="date">Dec 2022 – Apr 2023</div></div>
+  <ul>
+    <li>Contributed to the Yalla Bazzar e-commerce platform: inventory and customer data workflows, front-end UX and access control.</li>
+  </ul>
+</div>
+
+<h2>Selected Projects</h2>
+<div class="item">
+  <div class="item-head"><div><span class="role">Kontraktus</span> <span class="org">· local-first contract intelligence platform (UOWD capstone)</span></div><div class="date">May 2026 – Oct 2026</div></div>
+  <ul>
+    <li>Python/Streamlit app that parses, indexes and analyses contracts entirely on-device with zero network egress: Ollama (Qwen 2.5), bge-small embeddings, ChromaDB + BM25 hybrid retrieval with reciprocal rank fusion, clause-aware chunking with verbatim citations, YAML risk rules, missing-clause detection, Tesseract OCR; retrieval evaluated on 102 lawyer-labelled CUAD contracts.</li>
+  </ul>
+</div>
+<div class="item">
+  <div class="item-head"><div><span class="role">Self-hosted secure communications stack</span></div><div class="date">2026</div></div>
+  <ul>
+    <li>WireGuard VPN with admin dashboard, Matrix Synapse homeserver with end-to-end encryption and Matrix Authentication Service (OAuth2/OIDC SSO), LiveKit WebRTC, Traefik with Let's Encrypt, Glance SSO dashboard, Netdata monitoring, encrypted DNS and an E2EE ops bot; scripted, repeatable deployments.</li>
+  </ul>
+</div>
+<div class="item">
+  <div class="item-head"><div><span class="role">Homelab, pentest range &amp; OSINT self-audit dashboard</span></div><div class="date">2024 – Present</div></div>
+  <ul>
+    <li>Proxmox VE with segmented attack/target subnets (Kali, Metasploitable, Windows Server), OpenWrt firewall and WireGuard segment; Nmap, Metasploit, Burp Suite and Wireshark practice. Dockerised LXC dashboard combining Maigret, Sherlock, WhatsMyName, Holehe and PhoneInfoga with image EXIF/OCR auditing; Traefik routing and NFS storage.</li>
+  </ul>
+</div>
+<div class="item">
+  <div class="item-head"><div><span class="role">Client websites</span></div><div class="date">2024 – 2026</div></div>
+  <ul>
+    <li>Al Reemas Center (Libyan gold importer: bilingual AR/EN site and 36-concept logo lab), VIDVIE UAE, Amal Al Khaleej, Axon Technologies, Yalla Bazzar, professional portfolios and small-business sites on GitHub Pages and AWS.</li>
+  </ul>
+</div>
+
+<h2>Education</h2>
+<div class="item">
+  <div class="item-head"><div><span class="role">Bachelor of Science in Cybersecurity</span> <span class="org">· University of Wollongong in Dubai</span></div><div class="date">Sep 2023 – Dec 2026 (expected)</div></div>
+  <div class="small">Coursework: Ethical Hacking, Network Security, System Security, Information Security Management, Database Systems (Oracle PL/SQL), Software Development Methodologies, Capstone Project. Member, UOWD Cybersecurity Club (CTF practice) since 2024.</div>
+</div>
+<div class="item">
+  <div class="item-head"><div><span class="role">American High School Diploma</span> <span class="org">· Pioneers International School, Alexandria, Egypt</span></div><div class="date">Sep 2018 – Jun 2022</div></div>
+  <div class="small">ACT 23 · GPA 3.8</div>
+</div>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+  <div><b>Security:</b> Nmap, Metasploit, Burp Suite, Wireshark, Nessus, OpenVAS, Nikto, Hydra; OWASP Top 10, CSP/HSTS hardening, JWT, OAuth2/OIDC, encrypted data lifecycles; ISO/IEC 27001 policies, risk treatment, CVSS triage, incident runbooks</div>
+  <div><b>Infrastructure &amp; DevOps:</b> Linux (Debian, Ubuntu, Kali), Proxmox VE, Docker/Podman, Traefik, WireGuard, Matrix Synapse, LiveKit, Netdata; AWS (EC2, ALB, CloudFront, S3, Route 53, RDS, IAM/OIDC, SSM), GitHub Actions CI/CD, backups and point-in-time recovery</div>
+  <div><b>Languages:</b> Python, TypeScript/JavaScript, PHP 8, SQL, Bash, C/C++; Swift and Java for mobile bridges</div>
+  <div><b>Web &amp; mobile:</b> React 19, Next.js 15, Vite, Tailwind CSS v4, Node.js, FastAPI, Prisma, Pusher WebSockets, Capacitor, bilingual RTL/LTR interfaces, Stripe and Tabby integrations</div>
+  <div><b>Data &amp; AI:</b> PostgreSQL, MariaDB, SQLite, Oracle PL/SQL, DuckDB; Ollama, ChromaDB, hybrid BM25/vector retrieval, Tesseract OCR, Telethon; entity resolution and deduplication at scale; Excel/VBA automation</div>
+  <div><b>Tools:</b> Git, Claude Code and multi-agent workflows, Figma, Microsoft 365</div>
+</div>
+
+<h2>Languages</h2>
+<p>Arabic (native) · English (proficient)</p>
+</div>
+</body>
+</html>
