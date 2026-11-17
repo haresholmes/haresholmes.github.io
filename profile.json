@@ -4,7 +4,9 @@
   "headline": "CTO at Begad · founder of Computator Technology · cybersecurity &amp; systems engineer",
   "hero_subtitle": "BSc Cybersecurity (UOWD) · graduating <strong>Dec 2026</strong> · Dubai, UAE. Running production e-commerce, hardened infrastructure and local-first AI for UAE clients. Open to security engineering roles and consulting engagements.",
   "location": "Dubai, UAE",
-  "phones": ["+971 58 899 7129"],
+  "phones": [
+    "+971 58 899 7129"
+  ],
   "email": "ziad@haresholmes.eu.org",
   "site": "haresholmes.eu.org",
   "linkedin": "linkedin.com/in/ziyadhares",
@@ -30,7 +32,11 @@
         "Cut UAE page latency: CloudFront origin keep-alive tuning, tracking-parameter cache normalisation, stale-while-revalidate page caches and edge caching of guest and signed-in pages.",
         "Shipped iOS/Android apps (Capacitor with native Swift/Java bridges), an iMessage extension, Sign in with Apple, and a public agent API (catalog, search, product, MCP tools, llms.txt) so AI assistants can shop the catalogue.",
         "Launched vidvie.ae, the UAE distributor site for the VIDVIE brand, fed live from the Begad API; private S3 + CloudFront, GitHub OIDC deploys with no stored keys, Route 53 DNS.",
-        "Set direction for Begad's mobile launch, Libya market expansion and agent-commerce roadmap under a 12-month engineering agreement (Sep 2026)."
+        "Set direction for Begad's mobile launch, Libya market expansion and agent-commerce roadmap under a 12-month engineering agreement (Sep 2026).",
+        "Launched Begad Food (food.begad.ae), expanding core marketplace infrastructure into food delivery with integrated administrative management and dedicated ordering workflows.",
+        "Automated Fulfilled by Begad (FBB) seller warehouse pickups, engineering address and geospatial coordinate validation with scheduled logistics dispatch.",
+        "Rebuilt vidvie.ae as a white-label marketplace served via CloudFront with static page generation and automated bilingual guides syndicated from Begad content.",
+        "Enhanced the logistics driver suite with real-time job push updates, offline-resilient route refresh, and bidirectional shipment editing."
       ],
       "site_bullets": [
         "Own technology end to end for a bilingual UAE marketplace: platform engineering, AWS infrastructure, payments, mobile apps, analytics and security, with 2,400+ production commits.",
@@ -40,7 +46,11 @@
         "Recovered the platform from git history after the production instance was deleted without backups; introduced versioned migrations, automated backups, CI/CD and infrastructure runbooks.",
         "Cut UAE latency with CloudFront keep-alive tuning, cache-key normalisation and edge caching; shipped iOS/Android apps, an iMessage extension and a public agent API with MCP tools.",
         "Launched vidvie.ae, the UAE distributor site for VIDVIE, fed live from the Begad API on S3 + CloudFront with GitHub OIDC deploys.",
-        "Set direction for the mobile launch, Libya market expansion and the agent-commerce roadmap."
+        "Set direction for the mobile launch, Libya market expansion and the agent-commerce roadmap.",
+        "Launched Begad Food (food.begad.ae), expanding core marketplace infrastructure into food delivery with integrated administrative management and dedicated ordering workflows.",
+        "Automated Fulfilled by Begad (FBB) seller warehouse pickups, engineering address and geospatial coordinate validation with scheduled logistics dispatch.",
+        "Rebuilt vidvie.ae as a white-label marketplace served via CloudFront with static page generation and automated bilingual guides syndicated from Begad content.",
+        "Enhanced the logistics driver suite with real-time job push updates, offline-resilient route refresh, and bidirectional shipment editing."
       ]
     },
     {
@@ -50,14 +60,15 @@
       "start": "May 2026",
       "end": "Present",
       "bullets": [
-        "Run a Dubai DET-licensed sole establishment delivering custom software, data platforms, websites and managed IT to UAE and Libyan clients; engineering partner to Begad."
+        "Run a Dubai DET-licensed sole establishment delivering custom software, data platforms, websites and managed IT to UAE and Libyan clients; engineering partner to Begad.",
+        "Engineered an automated invoicing and billing engine supporting multi-account routing (Ziina integration) and programmatic PDF export."
       ],
       "engagements": [
         {
           "client": "BHF Auctions",
           "start": "May 2026",
           "end": "Present",
-          "text": "luxury auction platform on Next.js 15, Prisma and MariaDB with Pusher real-time bidding and a bilingual catalogue; deterministic proxy bidding, immutable bid ledger, reconciliation and signed close reports with rehearsal scripts for concurrent bidding; encrypted KYC lifecycle, point-in-time recovery runbooks, an off-server recovery drill and a full technical handoff; ongoing engineering towards public sale readiness.",
+          "text": "luxury auction platform on Next.js 15, Prisma and MariaDB with Pusher real-time bidding and a bilingual catalogue; deterministic proxy bidding, immutable bid ledger, reconciliation and signed close reports with rehearsal scripts for concurrent bidding; encrypted KYC lifecycle, point-in-time recovery runbooks, an off-server recovery drill and a full technical handoff; ongoing engineering towards public sale readiness; hardened auction platform APIs against data exposure and price manipulation, and rebuilt the client mobile application on live platform feeds.",
           "site_text": "luxury auction platform on Next.js 15, Prisma and MariaDB with real-time bidding, deterministic proxy bidding, an immutable bid ledger, encrypted KYC storage, tested off-server recovery and ongoing engineering towards public sale readiness."
         },
         {
@@ -172,7 +183,12 @@
       "badge": "Production",
       "featured": true,
       "desc": "Bilingual UAE marketplace on PHP 8.3, MariaDB and AWS where I serve as CTO since August 2026: post-capture payment gating, Stripe and Tabby, full-funnel conversion tracking, CloudFront edge caching, iOS/Android apps, an iMessage extension, seller payouts and logistics tracking, plus a public agent API so AI assistants can search and prepare orders. Rebuilt from git after the production server was deleted with no backups.",
-      "tags": ["PHP 8.3", "AWS", "Capacitor", "Payments"],
+      "tags": [
+        "PHP 8.3",
+        "AWS",
+        "Capacitor",
+        "Payments"
+      ],
       "cv": false
     },
     {
@@ -182,7 +198,11 @@
       "period": "May 2026 – Oct 2026",
       "desc": "Local-first contract intelligence platform with zero network egress: Ollama (Qwen 2.5), ChromaDB and BM25 hybrid retrieval, clause-aware chunking with verbatim citations, YAML risk rules, missing-clause detection and OCR, evaluated on 102 lawyer-labelled CUAD contracts.",
       "cv_desc": "Python/Streamlit app that parses, indexes and analyses contracts entirely on-device with zero network egress: Ollama (Qwen 2.5), bge-small embeddings, ChromaDB + BM25 hybrid retrieval with reciprocal rank fusion, clause-aware chunking with verbatim citations, YAML risk rules, missing-clause detection, Tesseract OCR; retrieval evaluated on 102 lawyer-labelled CUAD contracts.",
-      "tags": ["Python", "RAG", "Privacy"],
+      "tags": [
+        "Python",
+        "RAG",
+        "Privacy"
+      ],
       "cv": true
     },
     {
@@ -190,25 +210,41 @@
       "period": "2026",
       "desc": "WireGuard VPN with admin dashboard, Matrix Synapse with end-to-end encryption and OIDC single sign-on, LiveKit WebRTC, Traefik with Let's Encrypt, Glance dashboard, Netdata monitoring, encrypted DNS and an E2EE ops bot, all scripted for repeatable deployment.",
       "cv_desc": "WireGuard VPN with admin dashboard, Matrix Synapse homeserver with end-to-end encryption and Matrix Authentication Service (OAuth2/OIDC SSO), LiveKit WebRTC, Traefik with Let's Encrypt, Glance SSO dashboard, Netdata monitoring, encrypted DNS and an E2EE ops bot; scripted, repeatable deployments.",
-      "tags": ["WireGuard", "Matrix E2EE", "Traefik"],
+      "tags": [
+        "WireGuard",
+        "Matrix E2EE",
+        "Traefik"
+      ],
       "cv": true
     },
     {
       "title": "BHF Auctions platform",
       "desc": "Luxury auction engine on Next.js 15, Prisma and MariaDB: deterministic proxy bidding, immutable bid ledger, signed close reports, real-time bidding over Pusher, encrypted KYC storage and a tested off-server recovery drill.",
-      "tags": ["Next.js", "Real-time", "Recovery"],
+      "tags": [
+        "Next.js",
+        "Real-time",
+        "Recovery"
+      ],
       "cv": false
     },
     {
       "title": "Komissio",
       "desc": "Local-first company operating system built in Dubai: contacts, leads, deals, approvals, documents, invoicing, accounting and payroll in one tenant-isolated workspace, with private local AI over company data and real-estate intelligence. Piloted at Mon Maison and under active development.",
-      "tags": ["FastAPI", "React", "Local AI"],
+      "tags": [
+        "FastAPI",
+        "React",
+        "Local AI"
+      ],
       "cv": false
     },
     {
       "title": "Mon Maison data platform",
       "desc": "Consolidated 23M+ real-estate owner and property rows with deduplication and entity resolution, Telegram MTProto and WhatsApp ingestion, and a local AI research assistant that Komissio was later built on top of.",
-      "tags": ["Entity resolution", "Telethon", "SQLite"],
+      "tags": [
+        "Entity resolution",
+        "Telethon",
+        "SQLite"
+      ],
       "cv": false
     },
     {
@@ -218,49 +254,75 @@
       "period": "2024 – Present",
       "desc": "Proxmox VE with segmented attack and target subnets, Kali and vulnerable targets, OpenWrt firewall and a WireGuard segment; plus a Dockerised self-audit dashboard combining Maigret, Sherlock, WhatsMyName, Holehe and PhoneInfoga with image EXIF and OCR checks.",
       "cv_desc": "Proxmox VE with segmented attack/target subnets (Kali, Metasploitable, Windows Server), OpenWrt firewall and WireGuard segment; Nmap, Metasploit, Burp Suite and Wireshark practice. Dockerised LXC dashboard combining Maigret, Sherlock, WhatsMyName, Holehe and PhoneInfoga with image EXIF/OCR auditing; Traefik routing and NFS storage.",
-      "tags": ["Proxmox", "OSINT", "Defense in depth"],
+      "tags": [
+        "Proxmox",
+        "OSINT",
+        "Defense in depth"
+      ],
       "cv": true
     },
     {
       "title": "VIDVIE UAE (vidvie.ae)",
       "desc": "Distributor site for VIDVIE in the UAE, fed live from the Begad agent API with cart handoff to checkout; private S3 bucket behind CloudFront, GitHub OIDC deployments with no stored keys, Route 53 DNS and ACM certificates.",
-      "tags": ["AWS", "OIDC", "E-commerce"],
+      "tags": [
+        "AWS",
+        "OIDC",
+        "E-commerce"
+      ],
       "cv": false
     },
     {
       "title": "Monumental Events",
       "desc": "Brand-led website for an events company: concept design across desktop and mobile, build and hosted deployment at monuevents.com.",
-      "tags": ["Web design", "Branding"],
+      "tags": [
+        "Web design",
+        "Branding"
+      ],
       "cv": false
     },
     {
       "title": "Al Reemas Center",
       "desc": "Bilingual Arabic and English corporate site for a Tripoli gold and jewellery importer, with a 36-concept minimalist logo lab and side-by-side comparison tool.",
-      "tags": ["Bilingual", "Brand identity"],
+      "tags": [
+        "Bilingual",
+        "Brand identity"
+      ],
       "cv": false
     },
     {
       "title": "Axon Technologies website",
       "desc": "Security-conscious redesign and front-end delivery for a UAE cybersecurity company, balancing clarity, performance, and OWASP-aligned controls.",
-      "tags": ["Web security", "OWASP"],
+      "tags": [
+        "Web security",
+        "OWASP"
+      ],
       "cv": false
     },
     {
       "title": "Amal Al Khaleej",
       "desc": "Premier interior design and engineering firm website, blending aesthetic elegance with structural precision.",
-      "tags": ["Interior Design", "Engineering"],
+      "tags": [
+        "Interior Design",
+        "Engineering"
+      ],
       "cv": false
     },
     {
       "title": "Yalla Bazzar",
       "desc": "E-commerce build for Armada Holdings: inventory and customer data workflows, UI improvements, and pragmatic access control.",
-      "tags": ["E-commerce", "UI/UX"],
+      "tags": [
+        "E-commerce",
+        "UI/UX"
+      ],
       "cv": false
     },
     {
       "title": "CTF &amp; competitions",
       "desc": "CTF practice led through the UOWD Tech Club cybersecurity team and self-directed challenges: enumeration, web exploitation, crypto basics and binary exploitation.",
-      "tags": ["Cybersecurity", "CTF"],
+      "tags": [
+        "Cybersecurity",
+        "CTF"
+      ],
       "cv": false
     }
   ],
@@ -342,7 +404,13 @@
     }
   ],
   "languages": [
-    {"name": "Arabic", "level": "Native"},
-    {"name": "English", "level": "Proficient"}
+    {
+      "name": "Arabic",
+      "level": "Native"
+    },
+    {
+      "name": "English",
+      "level": "Proficient"
+    }
   ]
 }
