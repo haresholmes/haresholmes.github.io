@@ -1,8 +1,12 @@
 name: Sync profile from activity
 
 # Weekly: read Ziad's recent GitHub activity, let Claude propose evidence-backed
-# additions to profile.json, rebuild cv.html / index.html / the CV PDF, and push.
-# The push triggers the normal "Deploy to GitHub Pages" workflow.
+# additions to profile.json, have Hermes and OpenClaw (homelab agents) negotiate
+# and decide what is applied, rebuild cv.html / index.html / the CV PDF, and push
+# to main. The push triggers the normal "Deploy to GitHub Pages" workflow.
+# Set the repository variable SYNC_REQUIRE_PR=true to open a pull request instead.
+# Model calls go through the OmniRoute gateway on the homelab (ANTHROPIC_BASE_URL); SYNC_MODELS
+# (repo variable) is the comma-separated fallback list of gateway models.
 
 on:
   schedule:
@@ -18,6 +22,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: profile-sync
@@ -26,7 +31,7 @@ concurrency:
 jobs:
   sync:
     runs-on: [self-hosted, homelab]
-    timeout-minutes: 20
+    timeout-minutes: 75
     env:
       PY: /home/runner/venvs/portfolio/bin/python
     steps:
@@ -34,12 +39,25 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
 
-      - name: Propose and apply profile changes
+      - name: Check the OmniRoute gateway on the homelab
+        run: |
+          # The model step goes through Ziad's Anthropic-compatible OmniRoute gateway, not api.anthropic.com.
+          test -r /home/runner/.config/omniroute/key || { echo "::error::OmniRoute key missing at /home/runner/.config/omniroute/key"; exit 1; }
+          code=$(curl -s -m 15 -o /dev/null -w '%{http_code}' -H "x-api-key: $(cat /home/runner/.config/omniroute/key)" \
+                 -H "anthropic-version: 2023-06-01" "$ANTHROPIC_BASE_URL/v1/models" || true)
+          [ "$code" = "200" ] || { echo "::error::OmniRoute gateway at $ANTHROPIC_BASE_URL not reachable (HTTP $code)"; exit 1; }
+          echo "gateway OK"
+        env:
+          ANTHROPIC_BASE_URL: http://192.168.2.170:20128
+
+      - name: Propose, negotiate and apply profile changes
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_BASE_URL: http://192.168.2.170:20128
+          SYNC_MODELS: ${{ vars.SYNC_MODELS || 'auto/best-coding,auto/best-reasoning,auto/best-chat' }}
           SYNC_DAYS: ${{ github.event.inputs.days || '14' }}
         run: |
+          export ANTHROPIC_API_KEY="$(cat /home/runner/.config/omniroute/key)"
           case "${{ github.event.inputs.mode || 'full' }}" in
             digest-only) $PY scripts/sync_profile.py --digest-only ;;
             dry-run)     $PY scripts/sync_profile.py --dry-run ;;
@@ -52,14 +70,36 @@ jobs:
           chromium --headless=new --no-sandbox --disable-gpu --no-pdf-header-footer \
             --print-to-pdf="$PWD/Ziad Hares CV.pdf" "file://$PWD/cv.html"
 
-      - name: Commit and push if anything changed
+      - name: Commit and push (or open a pull request when SYNC_REQUIRE_PR=true)
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          REQUIRE_PR: ${{ vars.SYNC_REQUIRE_PR }}
         run: |
           git config user.name "profile-sync"
-          git config user.email "ziad@haresholmes.eu.org"
-          git add profile.json profile-changes.md cv.html index.html "Ziad Hares CV.pdf"
+          git config user.email "profile-sync@users.noreply.github.com"
+          git add -A -- profile.json profile-changes.md cv.html index.html "Ziad Hares CV.pdf"
           if git diff --cached --quiet; then
             echo "No changes."
             exit 0
           fi
-          git commit -m "Sync profile from recent activity ($(date -u +%F))" -m "$(tail -n +1 profile-changes.md | awk '/^## /{n++} n==0 || /^## /{next} n>0 && !/^$/' | tail -n 20)"
-          git push origin HEAD:main
+          STAMP=$(date -u +%Y-%m-%d)
+          git commit -m "Sync profile from recent activity ($STAMP)" -m "Agreed by Hermes and OpenClaw; details in profile-changes.md."
+          if [ "$REQUIRE_PR" != "true" ]; then
+            git push origin HEAD:main
+            exit 0
+          fi
+          BRANCH="profile-sync/$(date -u +%Y%m%d-%H%M)"
+          git push origin "HEAD:refs/heads/$BRANCH"
+          $PY - "$BRANCH" "$STAMP" <<'EOF'
+          import json, os, sys, urllib.request
+          branch, stamp = sys.argv[1:3]
+          log = open("profile-changes.md").read()
+          body = log[log.rfind("\n## "):] if "\n## " in log else log
+          payload = json.dumps({"title": f"Profile sync {stamp}", "head": branch, "base": "main", "body": body[:60000]}).encode()
+          req = urllib.request.Request(
+              f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/pulls", data=payload,
+              headers={"Authorization": f"Bearer {os.environ['GH_PAT']}", "Accept": "application/vnd.github+json",
+                       "Content-Type": "application/json", "User-Agent": "portfolio-sync"})
+          with urllib.request.urlopen(req) as r:
+              print("Opened", json.load(r)["html_url"])
+          EOF

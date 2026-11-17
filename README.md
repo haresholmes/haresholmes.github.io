@@ -166,11 +166,20 @@ workflow runs the same build and PDF render on every push, so a `profile.json` c
 ## 🔄 Automatic sync from GitHub activity
 
 `.github/workflows/sync-profile.yml` runs every Monday (and on demand from the Actions tab) on the homelab
-runner. `scripts/sync_profile.py` collects the repositories pushed in the last 14 days (descriptions, README
-heads, commit subjects), asks Claude (`claude-opus-5-5`) for evidence-backed additions to `profile.json`, drops
-any proposal that does not cite a repository from that digest, applies the rest, logs them to
-`profile-changes.md`, rebuilds the CV and site, and pushes to `main`. Secrets: `GH_PAT` (reads private repos)
-and `ANTHROPIC_API_KEY`. Work that never reaches GitHub is not seen; add it to `profile.json` by hand.
+runner. `scripts/sync_profile.py`:
+
+1. collects the repositories pushed in the last 14 days (descriptions, README heads, commit subjects) with the
+   `GH_PAT` secret;
+2. asks a model through the OmniRoute gateway on the homelab (`ANTHROPIC_BASE_URL`, key at
+   `/home/runner/.config/omniroute/key` on the runner; models from the `SYNC_MODELS` variable) for
+   evidence-backed proposals, dropping any that do not cite a repository from the digest;
+3. relays a two-round negotiation between Hermes and OpenClaw, Ziad's homelab agents, over SSH
+   (`ask-hermes` / `ask-openclaw`, restricted by a forced-command key). Only what both approve, possibly
+   rewritten, is applied; disagreements are dropped; they may jointly add items the digest missed;
+4. logs the outcome and the transcript to `profile-changes.md`, rebuilds the CV and site, and pushes to `main`
+   (set the repository variable `SYNC_REQUIRE_PR=true` to get a pull request instead).
+
+Work that never reaches GitHub and that the agents do not know about is not seen; add it to `profile.json` by hand.
 
 ## 🚀 Deployment
 
