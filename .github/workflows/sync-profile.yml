@@ -1,0 +1,65 @@
+name: Sync profile from activity
+
+# Weekly: read Ziad's recent GitHub activity, let Claude propose evidence-backed
+# additions to profile.json, rebuild cv.html / index.html / the CV PDF, and push.
+# The push triggers the normal "Deploy to GitHub Pages" workflow.
+
+on:
+  schedule:
+    - cron: "0 5 * * 1"   # Mondays 05:00 UTC (09:00 Dubai)
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Look-back window in days"
+        default: "14"
+      mode:
+        description: "full | dry-run | digest-only"
+        default: "full"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: [self-hosted, homelab]
+    timeout-minutes: 20
+    env:
+      PY: /home/runner/venvs/portfolio/bin/python
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Propose and apply profile changes
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SYNC_DAYS: ${{ github.event.inputs.days || '14' }}
+        run: |
+          case "${{ github.event.inputs.mode || 'full' }}" in
+            digest-only) $PY scripts/sync_profile.py --digest-only ;;
+            dry-run)     $PY scripts/sync_profile.py --dry-run ;;
+            *)           $PY scripts/sync_profile.py ;;
+          esac
+
+      - name: Rebuild CV and site from profile.json
+        run: |
+          $PY scripts/build.py
+          chromium --headless=new --no-sandbox --disable-gpu --no-pdf-header-footer \
+            --print-to-pdf="$PWD/Ziad Hares CV.pdf" "file://$PWD/cv.html"
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "profile-sync"
+          git config user.email "ziad@haresholmes.eu.org"
+          git add profile.json profile-changes.md cv.html index.html "Ziad Hares CV.pdf"
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git commit -m "Sync profile from recent activity ($(date -u +%F))" -m "$(tail -n +1 profile-changes.md | awk '/^## /{n++} n==0 || /^## /{next} n>0 && !/^$/' | tail -n 20)"
+          git push origin HEAD:main

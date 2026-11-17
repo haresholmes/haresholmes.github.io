@@ -148,16 +148,29 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Last Updated**: November 2026
 **Version**: 3.0.0 
-## 📝 Updating the CV
+## 📝 Updating the CV and site content
 
-The CV source is `cv.html` (plain HTML + CSS, A4 print styles). Edit it, then re-render the PDF:
+`profile.json` is the single source of truth for the CV and for the hero, About, Experience, Skills and
+Projects sections of `index.html`. Edit it, then rebuild:
 
 ```sh
+python3 scripts/build.py          # regenerates cv.html and the marked sections of index.html
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer \
   --print-to-pdf="$PWD/Ziad Hares CV.pdf" "file://$PWD/cv.html"
 ```
 
-Keep the output filename `Ziad Hares CV.pdf`; `index.html` links to it in the hero and contact sections.
+`cv.html` is generated; do not edit it by hand. In `index.html`, only the content between
+`<!-- profile:<section>:start -->` and `<!-- profile:<section>:end -->` markers is generated. The deploy
+workflow runs the same build and PDF render on every push, so a `profile.json` change alone is enough.
+
+## 🔄 Automatic sync from GitHub activity
+
+`.github/workflows/sync-profile.yml` runs every Monday (and on demand from the Actions tab) on the homelab
+runner. `scripts/sync_profile.py` collects the repositories pushed in the last 14 days (descriptions, README
+heads, commit subjects), asks Claude (`claude-opus-5-5`) for evidence-backed additions to `profile.json`, drops
+any proposal that does not cite a repository from that digest, applies the rest, logs them to
+`profile-changes.md`, rebuilds the CV and site, and pushes to `main`. Secrets: `GH_PAT` (reads private repos)
+and `ANTHROPIC_API_KEY`. Work that never reaches GitHub is not seen; add it to `profile.json` by hand.
 
 ## 🚀 Deployment
 

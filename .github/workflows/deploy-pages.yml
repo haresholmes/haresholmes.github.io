@@ -21,10 +21,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Build CV and site sections from profile.json
+        run: |
+          /home/runner/venvs/portfolio/bin/python scripts/build.py
+          chromium --headless=new --no-sandbox --disable-gpu --no-pdf-header-footer \
+            --print-to-pdf="$PWD/Ziad Hares CV.pdf" "file://$PWD/cv.html"
+
       - name: Stage static site
         run: |
           rm -rf _site && mkdir _site
-          rsync -a --exclude='.git' --exclude='.github' --exclude='_site' --exclude='publish.sh' --exclude='README.md' ./ _site/
+          rsync -a --exclude='.git' --exclude='.github' --exclude='_site' --exclude='publish.sh' --exclude='README.md' --exclude='scripts' --exclude='profile-changes.md' ./ _site/
           ls -la _site | head -40
 
       - uses: actions/configure-pages@v5
