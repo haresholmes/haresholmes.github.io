@@ -23,9 +23,7 @@ jobs:
 
       - name: Build CV and site sections from profile.json
         run: |
-          /home/runner/venvs/portfolio/bin/python scripts/build.py
-          chromium --headless=new --no-sandbox --disable-gpu --no-pdf-header-footer \
-            --print-to-pdf="$PWD/Ziad Hares CV.pdf" "file://$PWD/cv.html"
+          PY=/home/runner/venvs/portfolio/bin/python scripts/render_cv.sh
 
       - name: Stage static site
         run: |

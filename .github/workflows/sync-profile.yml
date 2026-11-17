@@ -66,9 +66,7 @@ jobs:
 
       - name: Rebuild CV and site from profile.json
         run: |
-          $PY scripts/build.py
-          chromium --headless=new --no-sandbox --disable-gpu --no-pdf-header-footer \
-            --print-to-pdf="$PWD/Ziad Hares CV.pdf" "file://$PWD/cv.html"
+          PY=$PY scripts/render_cv.sh
 
       - name: Commit and push (or open a pull request when SYNC_REQUIRE_PR=true)
         if: ${{ (github.event.inputs.mode || 'full') == 'full' }}

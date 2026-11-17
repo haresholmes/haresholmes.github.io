@@ -4,8 +4,12 @@
 profile.json is the single source of truth. Strings in it are trusted HTML
 fragments (entities such as &amp; are already encoded where needed).
 
-Usage:  python3 scripts/build.py            # writes cv.html and index.html in place
-        python3 scripts/build.py --check    # exit 1 if either file would change
+Usage:  python3 scripts/build.py              # writes cv.html and index.html in place
+        python3 scripts/build.py --check      # exit 1 if either file would change
+        python3 scripts/build.py --compact=1  # tighter CV type/margins (0, 1 or 2); render_cv.sh picks this
+
+The CV shows the first `cv_max_bullets` bullets of each role (profile default 7, per-role override);
+the website shows all of them, so sync-added bullets grow the site without overflowing the CV.
 """
 import json
 import pathlib
@@ -17,8 +21,10 @@ PROFILE = ROOT / "profile.json"
 CV = ROOT / "cv.html"
 INDEX = ROOT / "index.html"
 
+COMPACT = {0: ("11mm 12mm", "9.2pt", "1.3"), 1: ("10mm 11mm", "8.9pt", "1.27"), 2: ("9mm 10mm", "8.6pt", "1.24")}
+
 CV_CSS = """\
-  @page { size: A4; margin: 11mm 12mm; }
+  @page { size: A4; margin: %(margin)s; }
   :root {
     --ink: #111827; --muted: #4b5563; --line: #d1d5db; --accent: #0f172a; --rule: #1d4ed8;
   }
@@ -26,7 +32,7 @@ CV_CSS = """\
   html, body { margin: 0; padding: 0; }
   body {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    color: var(--ink); font-size: 9.2pt; line-height: 1.3; background: #fff;
+    color: var(--ink); font-size: %(font)s; line-height: %(lh)s; background: #fff;
   }
   .page { max-width: 186mm; margin: 0 auto; padding: 10mm 0; }
   @media print { .page { max-width: none; padding: 0; } }
@@ -79,13 +85,16 @@ def cv_item(role, org, when, bullets, small=None):
     return f'<div class="item">\n  {head}{body}\n</div>'
 
 
-def render_cv(p):
+def render_cv(p, compact=0):
+    margin, font, lh = COMPACT[max(0, min(compact, 2))]
+    css = CV_CSS % {"margin": margin, "font": font, "lh": lh}
+    cv_max = int(p.get("cv_max_bullets", 7))
     out = []
     out.append("<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n"
                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
                f"<title>{p['name']} — CV</title>\n<meta name=\"robots\" content=\"noindex\">\n"
                "<!-- GENERATED FILE: edit profile.json and run scripts/build.py -->\n"
-               f"<style>\n{CV_CSS}</style>\n</head>\n<body>\n<div class=\"page\">")
+               f"<style>\n{css}</style>\n</head>\n<body>\n<div class=\"page\">")
     contact = [f"<span>{p['location']}</span>"]
     for ph in p["phones"]:
         contact.append(f'<span><a href="tel:{ph.replace(" ", "")}">{ph}</a></span>')
@@ -100,7 +109,7 @@ def render_cv(p):
 
     out.append("<h2>Experience</h2>")
     for e in p["experience"]:
-        bullets = list(e.get("bullets", []))
+        bullets = list(e.get("bullets", []))[: int(e.get("cv_max_bullets", cv_max))]
         for g in e.get("engagements", []):
             bullets.append(f"<b>{g['client']}</b> ({g['start']} – {g['end']}): {g['text']}")
         bullets += e.get("closing_bullets", [])
@@ -232,8 +241,12 @@ def render_index(p, html):
 
 def main():
     check = "--check" in sys.argv
+    compact = 0
+    for a in sys.argv[1:]:
+        if a.startswith("--compact="):
+            compact = int(a.split("=", 1)[1])
     p = load_profile()
-    new_cv = render_cv(p)
+    new_cv = render_cv(p, compact)
     new_index = render_index(p, INDEX.read_text())
     changed = []
     for path, content in ((CV, new_cv), (INDEX, new_index)):

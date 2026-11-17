@@ -154,10 +154,11 @@ This project is open source and available under the [MIT License](LICENSE).
 Projects sections of `index.html`. Edit it, then rebuild:
 
 ```sh
-python3 scripts/build.py          # regenerates cv.html and the marked sections of index.html
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer \
-  --print-to-pdf="$PWD/Ziad Hares CV.pdf" "file://$PWD/cv.html"
+scripts/render_cv.sh   # runs scripts/build.py, renders the PDF with Chrome, tightens the layout if it exceeds 2 pages
 ```
+
+The CV shows the first `cv_max_bullets` bullets of each role (default 7, per-role override in `profile.json`);
+the website shows all of them.
 
 `cv.html` is generated; do not edit it by hand. In `index.html`, only the content between
 `<!-- profile:<section>:start -->` and `<!-- profile:<section>:end -->` markers is generated. The deploy
