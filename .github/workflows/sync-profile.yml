@@ -88,6 +88,9 @@ jobs:
           STAMP=$(date -u +%Y-%m-%d)
           git commit -m "Sync profile from recent activity ($STAMP)" -m "Agreed by Hermes and OpenClaw; details in profile-changes.md."
           if [ "$REQUIRE_PR" != "true" ]; then
+            # main may have moved while the agents were talking; replay our commit on top of it.
+            git fetch origin main
+            git rebase origin/main
             git push origin HEAD:main
             exit 0
           fi

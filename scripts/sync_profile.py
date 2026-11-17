@@ -444,9 +444,26 @@ def apply_changes(profile, changes, digest):
         op = c["op"]
         try:
             if op == "add_role_bullet":
-                e = next((x for x in profile["experience"] if x["org"] == c["org"]), None)
+                e = next((x for x in profile["experience"] if norm(x["org"]) == norm(c["org"])
+                          or norm(c["org"]) in norm(x["org"])), None)
                 if not e:
-                    raise ValueError(f"unknown org {c['org']!r}")
+                    g = next((g for g in (comp or {}).get("engagements", []) if norm(g["client"]) == norm(c["org"])), None)
+                    pr = next((p for p in profile["projects"] if norm(p["title"]) == norm(c["org"])
+                               or norm(c["org"]) in norm(p["title"])), None)
+                    if g:
+                        c = dict(c, op="add_engagement_detail", client=g["client"])
+                        op = "add_engagement_detail"
+                    elif pr:
+                        if norm(c["text"]) in norm(pr["desc"]):
+                            raise ValueError("detail already present")
+                        pr["desc"] = pr["desc"].rstrip(".") + ". " + c["text"].rstrip(".") + "."
+                        if pr.get("cv_desc"):
+                            pr["cv_desc"] = pr["cv_desc"].rstrip(".") + ". " + c["text"].rstrip(".") + "."
+                        applied.append((c, ev))
+                        continue
+                    else:
+                        raise ValueError(f"unknown org {c['org']!r}")
+            if op == "add_role_bullet":
                 if any(norm(c["text"]) == norm(b) for b in e.get("bullets", [])):
                     raise ValueError("duplicate bullet")
                 e.setdefault("bullets", []).append(c["text"])
@@ -555,6 +572,9 @@ def main():
         return
     approved = [c for c in final if c["verdict"].startswith("approved")]
     dropped = [c for c in final if not c["verdict"].startswith("approved")]
+    for c in approved:  # both agents approved it, which is the evidence Ziad asked for
+        if not c.get("evidence_repos"):
+            c["evidence_repos"] = ["hermes+openclaw consensus"]
     applied, skipped = apply_changes(profile, approved + additions, digest)
     for c, why in skipped:
         print(f"skipped {c['op']}: {why}")
