@@ -108,7 +108,7 @@ def collect_digest(token):
     return {"generated_at": dt.datetime.now(dt.timezone.utc).isoformat(), "days": DAYS, "repos": active}
 
 
-def digest_text(d, full=True):
+def digest_text(d, full=True, readme_chars=2500):
     lines = [f"Activity window: last {d['days']} days (generated {d['generated_at']})", ""]
     for r in d["repos"]:
         lines.append(f"### {r['repo']} ({'private' if r['private'] else 'public'}; {r['language']}; last push {r['pushed_at']})")
@@ -117,10 +117,10 @@ def digest_text(d, full=True):
         if r["topics"]:
             lines.append("Topics: " + ", ".join(r["topics"]))
         lines.append(f"Commits by Ziad in window: {r['commits_in_window']}")
-        lines += [f"- {s}" for s in r["commit_subjects"][: (60 if full else 12)]]
-        if full and r["readme_head"]:
+        lines += [f"- {s}" for s in r["commit_subjects"][: (60 if full else 25)]]
+        if r["readme_head"] and (full or readme_chars):
             lines.append("README (head):")
-            lines.append(r["readme_head"])
+            lines.append(r["readme_head"][:readme_chars])
         lines.append("")
     return "\n".join(lines)
 
@@ -204,10 +204,11 @@ def propose(profile, digest):
     OmniRoute on the homelab) the responding model varies, so it falls back to JSON-in-text with a
     fallback list of gateway models and strips <think> blocks."""
     import anthropic  # imported here so --digest-only works without the SDK
-    client = anthropic.Anthropic()
     gateway = bool(os.environ.get("ANTHROPIC_BASE_URL"))
+    # Gateway models can be slow; cap each attempt so the fallback list still fits in the job timeout.
+    client = anthropic.Anthropic(timeout=float(os.environ.get("SYNC_MODEL_TIMEOUT", "420")), max_retries=1)
     user = ("Current profile.json:\n```json\n" + json.dumps(profile, ensure_ascii=False, indent=1)
-            + "\n```\n\nGitHub activity digest:\n" + digest_text(digest)
+            + "\n```\n\nGitHub activity digest:\n" + digest_text(digest, full=not gateway, readme_chars=1200 if gateway else 2500)
             + "\n\nReturn ONLY one fenced ```json block with an object of this exact shape and nothing else:\n"
             + json.dumps({"changes": [{k: ("[]" if SCHEMA["properties"]["changes"]["items"]["properties"][k]["type"] == "array" else "")
                                         for k in SCHEMA["properties"]["changes"]["items"]["required"]}], "summary": ""}, indent=1)
@@ -228,6 +229,10 @@ def propose(profile, digest):
             continue
         except anthropic.APIStatusError as e:
             print(f"{model}: API error {e.status_code}: {e.message[:200]}; trying next model")
+            last_err = e
+            continue
+        except (anthropic.APITimeoutError, anthropic.APIConnectionError) as e:
+            print(f"{model}: {e.__class__.__name__}; trying next model")
             last_err = e
             continue
         if resp.stop_reason == "refusal":
@@ -310,7 +315,7 @@ def brief_text(profile, proposals, digest):
     return (f"Context: Ziad's public CV and portfolio website (haresholmes.eu.org) are updated automatically. "
             f"The profile already covers: {', '.join(known)}.\n"
             f"Proposed additions generated from his GitHub activity since {since}:\n{numbered}\n\n"
-            f"Short view of that GitHub activity:\n{digest_text(digest, full=False)[:6000]}\n\n{PRIVACY}")
+            f"Short view of that GitHub activity:\n{digest_text(digest, full=False, readme_chars=0)[:6000]}\n\n{PRIVACY}")
 
 
 def negotiate(profile, proposals, digest):
