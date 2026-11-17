@@ -36,7 +36,9 @@
         "Launched Begad Food (food.begad.ae), expanding core marketplace infrastructure into food delivery with integrated administrative management and dedicated ordering workflows.",
         "Automated Fulfilled by Begad (FBB) seller warehouse pickups, engineering address and geospatial coordinate validation with scheduled logistics dispatch.",
         "Rebuilt vidvie.ae as a white-label marketplace served via CloudFront with static page generation and automated bilingual guides syndicated from Begad content.",
-        "Enhanced the logistics driver suite with real-time job push updates, offline-resilient route refresh, and bidirectional shipment editing."
+        "Enhanced the logistics driver suite with real-time job push updates, offline-resilient route refresh, and bidirectional shipment editing.",
+        "Built return-window payout holds: seller money for orders still inside the customer return window is held back (never for cancelled or failed orders), with the not-settled amount shown in seller statements, Seller Payouts pages and the Seller API.",
+        "Rebuilt the logistics shipments page into Deliveries, Pickups & returns and Marketplace tabs, and added shipment deletion with a confirmation step before cancelling."
       ],
       "site_bullets": [
         "Own technology end to end for a bilingual UAE marketplace: platform engineering, AWS infrastructure, payments, mobile apps, analytics and security, with 2,400+ production commits.",
@@ -50,7 +52,9 @@
         "Launched Begad Food (food.begad.ae), expanding core marketplace infrastructure into food delivery with integrated administrative management and dedicated ordering workflows.",
         "Automated Fulfilled by Begad (FBB) seller warehouse pickups, engineering address and geospatial coordinate validation with scheduled logistics dispatch.",
         "Rebuilt vidvie.ae as a white-label marketplace served via CloudFront with static page generation and automated bilingual guides syndicated from Begad content.",
-        "Enhanced the logistics driver suite with real-time job push updates, offline-resilient route refresh, and bidirectional shipment editing."
+        "Enhanced the logistics driver suite with real-time job push updates, offline-resilient route refresh, and bidirectional shipment editing.",
+        "Built return-window payout holds: seller money for orders still inside the customer return window is held back (never for cancelled or failed orders), with the not-settled amount shown in seller statements, Seller Payouts pages and the Seller API.",
+        "Rebuilt the logistics shipments page into Deliveries, Pickups & returns and Marketplace tabs, and added shipment deletion with a confirmation step before cancelling."
       ]
     },
     {
@@ -196,8 +200,8 @@
       "badge": "Capstone",
       "cv_subtitle": "local-first contract intelligence platform (UOWD capstone)",
       "period": "May 2026 – Oct 2026",
-      "desc": "Local-first contract intelligence platform with zero network egress: Ollama (Qwen 2.5), ChromaDB and BM25 hybrid retrieval, clause-aware chunking with verbatim citations, YAML risk rules, missing-clause detection and OCR, evaluated on 102 lawyer-labelled CUAD contracts.",
-      "cv_desc": "Python/Streamlit app that parses, indexes and analyses contracts entirely on-device with zero network egress: Ollama (Qwen 2.5), bge-small embeddings, ChromaDB + BM25 hybrid retrieval with reciprocal rank fusion, clause-aware chunking with verbatim citations, YAML risk rules, missing-clause detection, Tesseract OCR; retrieval evaluated on 102 lawyer-labelled CUAD contracts.",
+      "desc": "Local-first contract intelligence platform with zero network egress: Ollama (Qwen 2.5), ChromaDB and BM25 hybrid retrieval, clause-aware chunking with verbatim citations, YAML risk rules, missing-clause detection and OCR, evaluated on 102 lawyer-labelled CUAD contracts. Hardened the contract-analysis platform: access control enforced for uploads, analysis and report export (including after reviewer access is revoked), atomic analysis commits, and DOCX table extraction.",
+      "cv_desc": "Python/Streamlit app that parses, indexes and analyses contracts entirely on-device with zero network egress: Ollama (Qwen 2.5), bge-small embeddings, ChromaDB + BM25 hybrid retrieval with reciprocal rank fusion, clause-aware chunking with verbatim citations, YAML risk rules, missing-clause detection, Tesseract OCR; retrieval evaluated on 102 lawyer-labelled CUAD contracts. Hardened the contract-analysis platform: access control enforced for uploads, analysis and report export (including after reviewer access is revoked), atomic analysis commits, and DOCX table extraction.",
       "tags": [
         "Python",
         "RAG",
@@ -384,9 +388,9 @@
     {
       "icon": "🧩",
       "title": "Web &amp; mobile",
-      "site": "React 19, Next.js 15, Vite, Tailwind v4, Node.js, FastAPI, Prisma, Pusher, Capacitor, bilingual RTL/LTR, Stripe and Tabby",
+      "site": "React 19, Next.js 15, Vite, Tailwind v4, Node.js, FastAPI, Prisma, Pusher, Capacitor, bilingual RTL/LTR, Stripe and Tabby, Streamlit",
       "cv_title": "Web &amp; mobile",
-      "cv": "React 19, Next.js 15, Vite, Tailwind CSS v4, Node.js, FastAPI, Prisma, Pusher WebSockets, Capacitor, bilingual RTL/LTR interfaces, Stripe and Tabby integrations"
+      "cv": "React 19, Next.js 15, Vite, Tailwind CSS v4, Node.js, FastAPI, Prisma, Pusher WebSockets, Capacitor, bilingual RTL/LTR interfaces, Stripe and Tabby integrations, Streamlit"
     },
     {
       "icon": "🗄️",

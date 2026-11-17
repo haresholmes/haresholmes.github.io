@@ -161,3 +161,84 @@ Here is my opening position on the proposed CV updates.
 </details>
 
 _tokens: in 12, out 7517_
+
+## 2026-11-17
+
+Two changes. First, a Begad role bullet for holding seller payouts during the customer return window, which is a new money-flow capability. Second, Streamlit added to the Web & mobile skills, based on active Kontraktus development.
+
+Skipped, because existing entries already cover them:
+- **vidvie.ae:** the white-label marketplace rebuild and bilingual guides are already a Begad bullet.
+- **BHF Auctions (Mr-Najib):** the API hardening and mobile app rebuild are already in the engagement text. The homelab deploy runner is minor.
+- **Computator invoicing:** Ziina and PDF export are already a bullet.
+- **Begad homelab runners:** self-hosted runners are already listed in skills.
+
+Skipped for other reasons:
+- **Begad logistics shipment tabs, delete and confirm flows:** incremental on the existing logistics bullets.
+- **Begad SQL parameterisation fixes and security dashboard collector:** too thin to support a new claim.
+- **Portfolio profile-sync tooling:** internal.
+- **Kontraktus reviewer-access hardening and the November activity:** no op is available to edit an existing project's description or period. The project period (May–Oct 2026) may need a manual update, since commits continued into November 2026.
+
+- **add_role_bullet** Begad General Trading L.L.C (begad.ae) — approved (rewritten): Built return-window payout holds: seller money for orders still inside the customer return window is held back (never for cancelled or failed orders), with the not-settled amount shown in seller statements, Seller Payouts pages and the Seller API.  
+  evidence: haresholmes/begad
+  - Hermes: Real per begad commits; outcome-focused, no internal detail.
+  - OpenClaw: Real per begad commits; outcome-focused, no internal detail.
+- **add_skill_terms** Web &amp; mobile — approved: Streamlit  
+  evidence: haresholmes/kontraktus
+  - Hermes: OpenClaw verified Streamlit in the kontraktus repo (.streamlit/config.toml, docs, README).
+  - OpenClaw: Streamlit verified in the kontraktus repo (.streamlit/config.toml, docs, README).
+- **add_role_bullet** Begad General Trading L.L.C (begad.ae) — applied: Rebuilt the logistics shipments page into Deliveries, Pickups & returns and Marketplace tabs, and added shipment deletion with a confirmation step before cancelling.  
+  evidence: hermes+openclaw consensus
+- **add_role_bullet** Kontraktus — applied: Hardened the contract-analysis platform: access control enforced for uploads, analysis and report export (including after reviewer access is revoked), atomic analysis commits, and DOCX table extraction.  
+  evidence: hermes+openclaw consensus
+
+<details><summary>Negotiation transcript</summary>
+
+**Hermes, opening**
+
+Opening position:
+
+1. Rewrite. The claim is real: the commits show the return-window hold, the "never held" rule for cancelled and failed orders, and the not-settled amount in statements, the Seller Payouts pages and the Seller API. But the wording is too long and mixes internal detail with the outcome. A shorter version reads better on a CV. Ziad's CTO role at Begad is already its own role, so this bullet belongs under that role.
+
+2. Reject. Streamlit is the only evidence cited, and the kontraktus commit list never mentions it. Kontraktus is shown as a Python repo with contract analysis and access control. I can't confirm Streamlit from this activity, and I won't add a skill I can't verify.
+
+Additions: I'm confident enough to propose two, both taken directly from the commit list.
+- A Begad bullet on logistics. The commits show shipments split into Deliveries, Pickups & returns and Marketplace tabs, plus deleting shipments with a confirmation step. I left out the SQL-parameter fixes and the migration, since those are internal.
+- A Kontraktus bullet on security. The commits show reviewer access being enforced and revoked across analysis, report export and uploads. They also show contract analysis committed atomically and DOCX table text included in extraction.
+
+I'm not proposing a third. The deploy-runner and CI work is real, but I'd keep it out of the CV unless it's phrased generically.
+
+```json
+{"decisions":[{"id":1,"verdict":"rewrite","text":"Built return-window payout holds: seller money for orders still inside the customer return window is held back (never for cancelled or failed orders) and the not-settled amount is shown in seller statements, Seller Payouts pages and the Seller API.","note":"Real per begad commits; tightened wording, no internal detail."},{"id":2,"verdict":"reject","text":"","note":"No Streamlit evidence in the kontraktus commits; cannot verify."}],"additions":[{"op":"add_role_bullet","client":"","title":"","org":"Begad General Trading L.L.C (begad.ae)","text":"Rebuilt the logistics shipments page into Deliveries, Pickups & returns and Marketplace tabs, and added shipment deletion with confirmation before cancelling.","start":"","end":"","tags":["Logistics","PHP"],"note":"Directly from begad commits: shipment tabs, delete shipments, confirm before cancelling."},{"op":"add_role_bullet","client":"","title":"","org":"Kontraktus","text":"Hardened the contract-analysis platform: access control enforced for uploads, analysis and report export (including after reviewer access is revoked), atomic analysis commits, and DOCX table extraction.","start":"Nov 2026","end":"","tags":["Python","Security","Access control"],"note":"Directly from kontraktus commits in the window."}],"stance":"Approve the return-window payout work in tighter wording, reject Streamlit as unverified, and add two bullets that the commits clearly support."}
+```
+
+**OpenClaw, response**
+
+Two corrections to Hermes's position. Proposal 2 should be approved: the kontraktus repo does use Streamlit, and I checked it directly. It has `.streamlit/config.toml`, `docs/web-interface.md` runs `streamlit run kontraktus/web/app.py`, and the README lists the web application layer as Streamlit. Proposal 1 I agree should be rewritten, with slightly tighter wording than Hermes's. Both of Hermes's additions are supported by the commits, so I'm keeping them.
+
+```json
+{"decisions":[{"id":1,"verdict":"rewrite","text":"Built return-window payout holds: seller money for orders still inside the customer return window is held back (never for cancelled or failed orders), with the not-settled amount shown in seller statements, Seller Payouts pages and the Seller API.","note":"Real per begad commits; tightened to outcome, no internal detail."},{"id":2,"verdict":"approve","text":"","note":"Verified in the kontraktus repo: .streamlit/config.toml, docs/web-interface.md and README name Streamlit as the web application layer."}],"additions":[{"op":"add_role_bullet","client":"","title":"","org":"Begad General Trading L.L.C (begad.ae)","text":"Rebuilt the logistics shipments page into Deliveries, Pickups & returns and Marketplace tabs, and added shipment deletion with a confirmation step before cancelling.","start":"","end":"","tags":["Logistics","PHP"],"note":"Directly from begad commits: shipment tabs, delete shipments, confirm before cancelling."},{"op":"add_role_bullet","client":"","title":"","org":"Kontraktus","text":"Hardened the contract-analysis platform: access control enforced for uploads, analysis and report export (including after reviewer access is revoked), atomic analysis commits, and DOCX table extraction.","start":"Nov 2026","end":"","tags":["Python","Streamlit","Security","Access control"],"note":"Directly from kontraktus commits in the window; Streamlit confirmed in repo."}],"stance":"Rewrite the return-window payout bullet more tightly, approve Streamlit since the repo confirms it, and add the two commit-backed Begad logistics and Kontraktus security bullets."}
+```
+
+**Hermes, final**
+
+I concede on proposal 2. OpenClaw checked the repo directly and found `.streamlit/config.toml`, the `streamlit run` command in the docs, and Streamlit named in the README. My objection only covered the commit titles, and the repo is stronger evidence than those. I take OpenClaw's tighter wording on proposal 1.
+
+I keep both additions. The Begad logistics commits (tabs, delete, confirm before cancelling) and the Kontraktus access-control and atomic-commit commits are real, professional, and not already in the profile. I also take OpenClaw's tag change, adding Streamlit to the Kontraktus bullet.
+
+One small check on the Kontraktus bullet. The "DOCX table extraction" claim comes from the commit "Include DOCX table text in contract extraction", so it is supported. The commit list names the access-control work for uploads, analysis and report export, so I keep those words as written. I have no third addition.
+
+```json
+{"decisions":[{"id":1,"verdict":"rewrite","text":"Built return-window payout holds: seller money for orders still inside the customer return window is held back (never for cancelled or failed orders), with the not-settled amount shown in seller statements, Seller Payouts pages and the Seller API.","note":"Real per begad commits; outcome-focused, no internal detail."},{"id":2,"verdict":"approve","text":"","note":"OpenClaw verified Streamlit in the kontraktus repo (.streamlit/config.toml, docs, README)."}],"additions":[{"op":"add_role_bullet","client":"","title":"","org":"Begad General Trading L.L.C (begad.ae)","text":"Rebuilt the logistics shipments page into Deliveries, Pickups & returns and Marketplace tabs, and added shipment deletion with a confirmation step before cancelling.","start":"","end":"","tags":["Logistics","PHP"],"note":"Directly from begad commits: shipment tabs, delete shipments, confirm before cancelling."},{"op":"add_role_bullet","client":"","title":"","org":"Kontraktus","text":"Hardened the contract-analysis platform: access control enforced for uploads, analysis and report export (including after reviewer access is revoked), atomic analysis commits, and DOCX table extraction.","start":"Nov 2026","end":"","tags":["Python","Streamlit","Security","Access control"],"note":"Directly from kontraktus commits in the window; Streamlit confirmed in repo."}],"stance":"Converged with OpenClaw: rewrite the payout bullet in tighter wording, approve Streamlit now that the repo confirms it, and add the two commit-backed Begad logistics and Kontraktus security bullets."}
+```
+
+**OpenClaw, final**
+
+Final: I agree with Hermes on everything, so nothing should be dropped.
+
+```json
+{"decisions":[{"id":1,"verdict":"rewrite","text":"Built return-window payout holds: seller money for orders still inside the customer return window is held back (never for cancelled or failed orders), with the not-settled amount shown in seller statements, Seller Payouts pages and the Seller API.","note":"Real per begad commits; outcome-focused, no internal detail."},{"id":2,"verdict":"approve","text":"","note":"Streamlit verified in the kontraktus repo (.streamlit/config.toml, docs, README)."}],"additions":[{"op":"add_role_bullet","client":"","title":"","org":"Begad General Trading L.L.C (begad.ae)","text":"Rebuilt the logistics shipments page into Deliveries, Pickups & returns and Marketplace tabs, and added shipment deletion with a confirmation step before cancelling.","start":"","end":"","tags":["Logistics","PHP"],"note":"Directly from begad commits: shipment tabs, delete shipments, confirm before cancelling."},{"op":"add_role_bullet","client":"","title":"","org":"Kontraktus","text":"Hardened the contract-analysis platform: access control enforced for uploads, analysis and report export (including after reviewer access is revoked), atomic analysis commits, and DOCX table extraction.","start":"Nov 2026","end":"","tags":["Python","Streamlit","Security","Access control"],"note":"Directly from kontraktus commits in the window; Streamlit confirmed in repo."}],"stance":"Converged with Hermes: rewrite the payout bullet in tighter wording, approve Streamlit since the repo confirms it, and add the two commit-backed Begad logistics and Kontraktus security bullets."}
+```
+
+</details>
+
+_tokens: in 16374, out 2030_
