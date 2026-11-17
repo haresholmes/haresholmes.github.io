@@ -182,6 +182,19 @@ def _strip_think(text):
     return re.sub(r"<think>.*?</think>", "", text or "", flags=re.S).strip()
 
 
+def _str_list(value):
+    """A list of strings from whatever the model sent: a list, a JSON-array string ('["a"]') or 'a, b'."""
+    if isinstance(value, str):
+        text = value.strip()
+        try:
+            value = json.loads(text) if text.startswith("[") else [p for p in text.split(",")]
+        except ValueError:
+            value = text.strip("[]").replace('"', "").split(",")
+    if not isinstance(value, list):
+        return []
+    return [str(v).strip() for v in value if str(v).strip()]
+
+
 def _normalise_proposals(data):
     """Coerce whatever model answered into the SCHEMA shape; drop malformed items."""
     out = []
@@ -191,9 +204,9 @@ def _normalise_proposals(data):
         item = {k: "" for k in ("org", "client", "text", "site_text", "title", "start", "end", "skill_title", "reason")}
         item.update({k: str(c.get(k) or "") for k in item})
         item["op"] = c["op"]
-        item["tags"] = [str(t) for t in (c.get("tags") or [])][:4]
-        item["terms"] = [str(t) for t in (c.get("terms") or [])]
-        item["evidence_repos"] = [str(t) for t in (c.get("evidence_repos") or [])]
+        item["tags"] = _str_list(c.get("tags"))[:4]
+        item["terms"] = _str_list(c.get("terms"))
+        item["evidence_repos"] = _str_list(c.get("evidence_repos"))
         out.append(item)
     return {"changes": out, "summary": str((data or {}).get("summary") or "")}
 
@@ -210,7 +223,7 @@ def propose(profile, digest):
     user = ("Current profile.json:\n```json\n" + json.dumps(profile, ensure_ascii=False, indent=1)
             + "\n```\n\nGitHub activity digest:\n" + digest_text(digest, full=not gateway, readme_chars=1200 if gateway else 2500)
             + "\n\nReturn ONLY one fenced ```json block with an object of this exact shape and nothing else:\n"
-            + json.dumps({"changes": [{k: ("[]" if SCHEMA["properties"]["changes"]["items"]["properties"][k]["type"] == "array" else "")
+            + json.dumps({"changes": [{k: ([] if SCHEMA["properties"]["changes"]["items"]["properties"][k]["type"] == "array" else "")
                                         for k in SCHEMA["properties"]["changes"]["items"]["required"]}], "summary": ""}, indent=1)
             + "\nAllowed op values: " + ", ".join(OPS) + ". Use [] for empty arrays and \"\" for empty strings.")
     models = ([m for m in os.environ.get("SYNC_MODELS", "auto/best-coding,auto/best-reasoning,auto/best-chat").split(",") if m.strip()]
