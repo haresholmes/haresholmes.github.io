@@ -158,3 +158,13 @@ The CV source is `cv.html` (plain HTML + CSS, A4 print styles). Edit it, then re
 ```
 
 Keep the output filename `Ziad Hares CV.pdf`; `index.html` links to it in the hero and contact sections.
+
+## 🚀 Deployment
+
+Pushes to `main` publish the site through `.github/workflows/deploy-pages.yml`, which runs on the
+self-hosted homelab runner (labels `self-hosted, homelab`) rather than GitHub-hosted runners. The
+runner is the systemd service `actions.runner.haresholmes-haresholmes.github.io.homelab-gh-runner-portfolio`
+inside Proxmox container 107 (`gh-runner`) on the homelab host, installed at
+`/home/runner/actions-runner-portfolio`, next to the Computator runner in `/home/runner/actions-runner`.
+The Pages source for the repository is set to **GitHub Actions**. `README.md`, `publish.sh` and the
+`.github` folder are excluded from the published site.
