@@ -71,17 +71,20 @@ jobs:
             --print-to-pdf="$PWD/Ziad Hares CV.pdf" "file://$PWD/cv.html"
 
       - name: Commit and push (or open a pull request when SYNC_REQUIRE_PR=true)
+        if: ${{ (github.event.inputs.mode || 'full') == 'full' }}
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           REQUIRE_PR: ${{ vars.SYNC_REQUIRE_PR }}
         run: |
           git config user.name "profile-sync"
           git config user.email "profile-sync@users.noreply.github.com"
-          git add -A -- profile.json profile-changes.md cv.html index.html "Ziad Hares CV.pdf"
+          # The PDF re-renders with different bytes on every run; commit it only when the content changed.
+          git add -A -- profile.json profile-changes.md cv.html index.html
           if git diff --cached --quiet; then
-            echo "No changes."
+            echo "No content changes."
             exit 0
           fi
+          git add -A -- "Ziad Hares CV.pdf"
           STAMP=$(date -u +%Y-%m-%d)
           git commit -m "Sync profile from recent activity ($STAMP)" -m "Agreed by Hermes and OpenClaw; details in profile-changes.md."
           if [ "$REQUIRE_PR" != "true" ]; then
