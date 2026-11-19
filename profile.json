@@ -32,11 +32,12 @@
         "Shipped iOS/Android apps, a public agent API with MCP tools, Begad Food (food.begad.ae), vidvie.ae, and automated seller pickups and driver logistics."
       ],
       "cv_bullets": [
-        "Lead all technology for begad.ae: platform, payments, AWS, mobile apps and security (2,400+ commits).",
-        "Run an ISO/IEC 27001-aligned security programme; closed a security and money audit in Nov 2026.",
-        "Stopped revenue leaks by confirming orders only after payment; added Apple Pay, Google Pay and Tabby.",
-        "Restored production from git after it was deleted with no backups, then added CI/CD and automated backups.",
-        "Shipped iOS and Android apps, an agent API for AI shopping, Begad Food and vidvie.ae."
+        "<b>Technology leadership.</b> Own Begad's technology end to end under a 12-month engineering agreement, setting the roadmap for the mobile launch, Libya expansion and agent commerce.",
+        "<b>Revenue protection.</b> Fixed a checkout flaw that confirmed orders and deducted stock before payment cleared; added Apple Pay, Google Pay and Tabby, and held seller payouts through the return window.",
+        "<b>Security &amp; compliance.</b> Built and run an ISO/IEC 27001-aligned programme: least privilege, signed payment webhooks, tested backups and audit logging; closed a full security and money audit (Nov 2026).",
+        "<b>Disaster recovery.</b> Rebuilt the platform from git history after production was deleted with no backups, then introduced CI/CD, versioned migrations and automated backups to prevent a repeat.",
+        "<b>Growth &amp; performance.</b> Took ad attribution from zero tracked events to full-funnel Meta and TikTok server-side conversions, and cut UAE page load times with CloudFront edge caching.",
+        "<b>Product delivery.</b> Shipped iOS and Android apps, an agent API that lets AI assistants shop the catalogue, Begad Food and vidvie.ae, across 2,400+ production commits."
       ]
     },
     {

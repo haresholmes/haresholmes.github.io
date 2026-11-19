@@ -36,7 +36,7 @@ CV_CSS = """\
   .sheet { width: 210mm; height: 297mm; padding: %(margin)s; position: relative; overflow: hidden; margin: 0 auto; background: #fff; }
   .sheet + .sheet { break-before: page; }
   @media screen { body { background: #e5e7eb; } .sheet { margin: 10mm auto; box-shadow: 0 2px 14px rgba(0,0,0,.12); } }
-  .sheet2 > h2:first-child { margin-top: 0; }
+  .sheet2 > h2:first-of-type { margin-top: 0; }
   svg.px { shape-rendering: crispEdges; display: block; }
   header { margin-bottom: 4px; }
   .head-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
@@ -271,12 +271,13 @@ def render_cv(p, compact=0):
         org = f"{e['org']} · {e['location']}" if e.get("location") else e["org"]
         out.append(cv_item(e["role"], org, period(e["start"], e["end"]), bullets))
 
+    out.append('</div>\n<div class="sheet sheet2">')
     if p.get("leadership"):
         out.append(h2("Leadership"))
         for l in p["leadership"]:
             out.append(cv_item(l["role"], l["org"], period(l["start"], l["end"]), [l.get("cv_text", l["text"])]))
 
-    out.append('</div>\n<div class="sheet sheet2">\n' + h2("Selected Projects"))
+    out.append(h2("Selected Projects"))
     for pr in p["projects"]:
         if not pr.get("cv"):
             continue
