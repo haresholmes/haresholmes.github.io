@@ -55,7 +55,8 @@ CV_CSS = """\
   }
   h2 svg.icon { flex-shrink: 0; }
   .cursor { display: inline-block; width: 0.42em; height: 0.78em; background: var(--rule); margin-left: 5px; vertical-align: -0.04em; }
-  .burj-wrap { position: absolute; right: 0; bottom: 0; width: 44mm; z-index: 0; }
+  .sheet2 { padding-right: 64mm; }
+  .burj-wrap { position: absolute; right: 0; bottom: 0; width: 56mm; z-index: 0; }
   .burj-wrap svg.px { width: 100%%; height: auto; }
   h2::after { content: ""; flex: 1; border-bottom: 1px solid var(--line); margin-left: 4px; }
   p { margin: 0; }
@@ -108,71 +109,112 @@ def pixel_icon(rows):
 
 
 def pixel_burj():
-    """A detailed pixel-art Burj Khalifa: stepped Y-plan setbacks, glass bands, a lit core and the spire."""
-    W, H, cx = 56, 168, 28
-    base, top = 150, 34                      # tower body rows
+    """Detailed pixel-art Burj Khalifa (front view): central core and spire, wing slabs that step back
+    out of phase like the real spiral setbacks, vertical fins, floor lines, mechanical-floor bands,
+    observation decks, podium terraces, the Dubai Fountain lake with jets, palms, clouds and birds."""
+    W, H, cx = 80, 400, 40
     px = {}
 
     def put(x, y, c):
         if 0 <= x < W and 0 <= y < H:
             px[(x, y)] = c
 
-    # Stepped silhouette: the three wings end at different heights, so left and right step out of phase.
-    def half(y, phase):
-        t = (base - y) / (base - top)
-        steps = 13
-        level = min(steps - 1, int((t * steps + phase) // 1))
-        return max(1, round(19 * (1 - level / steps) ** 1.15))
+    ground = H - 34                    # tower meets podium
+    roof = 92                          # top of the central core
+    # Palettes: (body, fin, floor line, outer edge)
+    LIT = ("#3b82f6", "#60a5fa", "#2563eb", "#2563eb")
+    CORE = ("#93c5fd", "#bfdbfe", "#7cb4fb", "#60a5fa")
+    SHADE = ("#1d4ed8", "#2563eb", "#1e40af", "#1e3a8a")
 
-    for y in range(top, base):
-        l, r = half(y, 0.0), half(y, 0.5)
-        band = (y % 4 == 0)
-        for x in range(cx - l, cx + r + 1):
-            d = x - cx
-            if abs(d) <= 1:
-                c = "#bfdbfe" if band else "#93c5fd"          # lit central core
-            elif d < 0:
-                c = "#60a5fa" if band else ("#3b82f6" if d > -l + 1 else "#2563eb")
-            else:
-                c = "#1e40af" if band else ("#1d4ed8" if d < r - 1 else "#1e3a8a")
-            put(x, y, c)
-        # setback ledges catch the light
-        if half(y - 1, 0.0) < l:
-            for x in range(cx - l, cx - half(y - 1, 0.0)):
-                put(x, y, "#dbeafe")
-        if half(y - 1, 0.5) < r:
-            for x in range(cx + half(y - 1, 0.5) + 1, cx + r + 1):
-                put(x, y, "#93c5fd")
-    # Spire with its pinnacle and a warm beacon.
-    for y in range(4, top):
-        w = 0 if y < 16 else 1
-        for x in range(cx - w, cx + w + 1):
-            put(x, y, "#93c5fd" if x <= cx else "#3b82f6")
-    put(cx, 3, "#f59e0b")
-    # Podium, plaza and fountain line.
-    for y in range(base, base + 7):
-        for x in range(cx - 24, cx + 25):
-            put(x, y, "#dbeafe" if (x + y) % 6 else "#bfdbfe")
-    for x in range(cx - 22, cx + 23, 3):
-        put(x, base + 2, "#ffffff")
-        put(x, base + 4, "#ffffff")
-    for x in range(W):
-        put(x, base + 7, "#93c5fd")
-        put(x, base + 8, "#bfdbfe")
-    # Two small palms at the foot.
-    for px0 in (cx - 22, cx + 21):
-        for y in range(base - 6, base):
-            put(px0, y, "#a16207")
-        for dx, dy in ((-2, -7), (-1, -8), (0, -8), (1, -8), (2, -7), (-3, -6), (3, -6), (0, -7)):
-            put(px0 + dx, base + dy, "#16a34a")
-    # A couple of soft clouds.
-    for cx0, cy0 in ((10, 40), (44, 70)):
-        for dx in range(-4, 5):
+    def slab(x0, x1, top, pal, outer):
+        body, fin, floor, edge = pal
+        for y in range(top, ground):
+            for x in range(x0, x1 + 1):
+                c = fin if (x - x0) % 2 == 1 else body
+                if (y - top) % 4 == 3:
+                    c = floor
+                if x == outer:
+                    c = edge
+                if (y - 40) % 46 in (0, 1):          # mechanical floors
+                    c = "#1e3a8a" if pal is not CORE else "#3b82f6"
+                put(x, y, c)
+        # rounded cap and a sunlit ledge
+        for x in range(x0, x1 + 1):
+            put(x, top, "#dbeafe")
+        put(outer, top, None)
+        put(outer, top + 1, "#dbeafe")
+
+    # Wing slabs, outermost first so inner ones draw over them.
+    left = [(4, 334), (4, 310), (4, 282), (4, 250), (4, 214), (4, 176), (4, 136), (4, 104)]
+    right = [(4, 322), (4, 296), (4, 266), (4, 232), (4, 195), (4, 156), (4, 120), (4, 98)]
+    xl = cx - 4
+    lspans = []
+    for w, top in reversed(left):
+        lspans.append((xl - w + 1, xl, top)); xl -= w
+    xr = cx + 4
+    rspans = []
+    for w, top in reversed(right):
+        rspans.append((xr, xr + w - 1, top)); xr += w
+    for x0, x1, top in reversed(lspans):
+        slab(x0, x1, top, LIT, x0)
+    for x0, x1, top in reversed(rspans):
+        slab(x0, x1, top, SHADE, x1)
+    slab(cx - 3, cx + 3, roof, CORE, cx - 3)
+    # Observation decks: bright window rows across the core and nearest wings.
+    for y in (168, 169, 214, 215):
+        for x in range(cx - 7, cx + 8):
+            if (x, y) in px and px[(x, y)]:
+                put(x, y, "#ffffff" if x % 2 else "#e0f2fe")
+    # Crown and spire: stepped sections with rings, antenna and beacon.
+    sections = [(roof - 1, 70, 2), (70, 50, 1), (50, 22, 1), (22, 10, 0)]
+    for y0, y1, hw in sections:
+        for y in range(y1, y0 + 1):
+            for x in range(cx - hw, cx + hw + 1):
+                c = "#bfdbfe" if x < cx else "#93c5fd" if x == cx else "#60a5fa"
+                if (y - y1) % 6 == 0:
+                    c = "#e0f2fe"
+                put(x, y, c)
+    for y in range(4, 10):
+        put(cx, y, "#94a3b8")
+    put(cx, 3, "#f59e0b"); put(cx, 2, "#fde68a")
+    # Podium terraces.
+    for i, (inset, h, col) in enumerate([(2, 4, "#e0e7ff"), (6, 3, "#dbeafe"), (12, 3, "#c7d2fe")]):
+        for y in range(ground + i * 3, ground + i * 3 + h):
+            for x in range(inset, W - inset):
+                put(x, y, col if (x + y) % 7 else "#bfdbfe")
+    for x in range(cx - 3, cx + 4):                  # entrance
+        for y in range(ground + 4, ground + 9):
+            put(x, y, "#1e3a8a" if x in (cx - 3, cx + 3) or y == ground + 4 else "#60a5fa")
+    # Dubai Fountain lake with jets.
+    lake = ground + 12
+    for y in range(lake, H - 4):
+        for x in range(W):
+            put(x, y, "#93c5fd" if (x * 3 + y * 5) % 11 else "#dbeafe")
+    for jx, jh in ((6, 9), (16, 14), (27, 11), (40, 18), (53, 11), (64, 14), (74, 9)):
+        for dy in range(jh):
+            put(jx, lake - 1 - dy, "#e0f2fe" if dy % 2 else "#ffffff")
+        for dx in (-2, -1, 1, 2):
+            put(jx + dx, lake - jh + abs(dx), "#e0f2fe")
+    for y in range(H - 4, H):
+        for x in range(W):
+            put(x, y, "#cbd5e1" if (x + y) % 5 else "#e2e8f0")
+    # Palms on the promenade.
+    for x0 in (3, W - 4):
+        for y in range(ground - 9, ground + 3):
+            put(x0, y, "#a16207")
+        for dx, dy in ((-3, -10), (-2, -11), (-1, -12), (0, -12), (1, -12), (2, -11), (3, -10), (-4, -9), (4, -9), (0, -11)):
+            put(x0 + dx, ground + dy, "#16a34a")
+    # Clouds and birds.
+    for cx0, cy0, w in ((12, 70, 6), (60, 150, 5), (10, 230, 4)):
+        for dx in range(-w, w + 1):
             put(cx0 + dx, cy0, "#e0e7ff")
-        for dx in range(-2, 3):
-            put(cx0 + dx, cy0 - 1, "#e0e7ff")
-    cells = "".join(f'<rect x="{x}" y="{y}" width="1" height="1" fill="{c}"/>' for (x, y), c in sorted(px.items()))
-    return f'<svg class="px burj" viewBox="0 0 {W} {base + 9}" aria-hidden="true">' + cells + "</svg>"
+        for dx in range(-w + 2, w - 1):
+            put(cx0 + dx, cy0 - 1, "#eef2ff")
+    for bx, by in ((54, 40), (60, 46), (20, 120)):
+        for dx, dy in ((-1, 0), (0, 1), (1, 0)):
+            put(bx + dx, by + dy, "#64748b")
+    cells = "".join(f'<rect x="{x}" y="{y}" width="1" height="1" fill="{c}"/>' for (x, y), c in sorted(px.items()) if c)
+    return f'<svg class="px burj" viewBox="0 0 {W} {H}" aria-hidden="true">' + cells + "</svg>"
 
 
 def pixel_strip(n=90):
