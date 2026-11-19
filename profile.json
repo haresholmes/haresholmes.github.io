@@ -32,7 +32,7 @@
         "Shipped iOS/Android apps, a public agent API with MCP tools, Begad Food (food.begad.ae), vidvie.ae, and automated seller pickups and driver logistics."
       ],
       "cv_bullets": [
-        "<b>Technology leadership.</b> Own Begad's technology end to end under a 12-month engineering agreement, setting the roadmap for the mobile launch, Libya expansion and agent commerce.",
+        "<b>Technology leadership.</b> Full-time CTO accountable for all of Begad's technology, setting the roadmap for the mobile launch, Libya expansion and agent commerce.",
         "<b>Revenue protection.</b> Fixed a checkout flaw that confirmed orders and deducted stock before payment cleared; added Apple Pay, Google Pay and Tabby, and held seller payouts through the return window.",
         "<b>Security &amp; compliance.</b> Built and run an ISO/IEC 27001-aligned programme: least privilege, signed payment webhooks, tested backups and audit logging; closed a full security and money audit (Nov 2026).",
         "<b>Disaster recovery.</b> Rebuilt the platform from git history after production was deleted with no backups, then introduced CI/CD, versioned migrations and automated backups to prevent a repeat.",
@@ -47,7 +47,7 @@
       "start": "May 2026",
       "end": "Present",
       "bullets": [
-        "Run a Dubai DET-licensed sole establishment delivering custom software, data platforms, websites and managed IT to UAE and Libyan clients; engineering partner to Begad.",
+        "Run a Dubai DET-licensed sole establishment delivering custom software, data platforms, websites and managed IT to UAE and Libyan clients.",
         "Engineered an automated invoicing and billing engine supporting multi-account routing (Ziina integration) and programmatic PDF export."
       ],
       "engagements": [
