@@ -37,13 +37,16 @@
   .role { font-weight: 700; }
   .org { color: var(--muted); }
   .date { white-space: nowrap; color: var(--muted); font-size: 8.6pt; }
-  ul { margin: 2px 0 0; padding-left: 13px; }
+  ul { margin: 2px 0 0; padding-left: 13px; list-style: none; }
+  ul li { position: relative; }
+  ul li::before { content: ""; position: absolute; left: -10px; top: 0.6em; width: 4px; height: 4px; border-radius: 2px; background: var(--accent); }
   li { margin: 0 0 1.2px; }
   .skills { display: grid; grid-template-columns: 1fr; gap: 1.5px; }
   .skills div b { color: var(--accent); }
   .small { font-size: 8.6pt; color: var(--muted); }
   .comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px 12px; }
-  .comp div::before { content: "▪ "; color: var(--rule); }
+  .comp div { position: relative; padding-left: 9px; }
+  .comp div::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 4px; height: 4px; background: var(--rule); }
   .skills div { margin-bottom: 1.5px; }
   .head-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
   .qr-row { display: flex; gap: 4px; flex-shrink: 0; }
