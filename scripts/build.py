@@ -21,7 +21,7 @@ PROFILE = ROOT / "profile.json"
 CV = ROOT / "cv.html"
 INDEX = ROOT / "index.html"
 
-COMPACT = {0: ("11mm 12mm", "9.2pt", "1.3"), 1: ("10mm 11mm", "8.9pt", "1.27"), 2: ("9mm 10mm", "8.6pt", "1.24")}
+COMPACT = {0: ("16mm 18mm", "9.2pt", "1.3"), 1: ("15mm 16mm", "8.9pt", "1.27"), 2: ("14mm 15mm", "8.6pt", "1.24")}
 
 CV_CSS = """\
   @page { size: A4; margin: %(margin)s; }
@@ -59,6 +59,15 @@ CV_CSS = """\
   .skills { display: grid; grid-template-columns: 1fr; gap: 1.5px; }
   .skills div b { color: var(--accent); }
   .small { font-size: 8.6pt; color: var(--muted); }
+  .head-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
+  .qr-row { display: flex; gap: 4px; flex-shrink: 0; }
+  .qr { width: 18mm; text-align: center; font-size: 6.8pt; color: var(--muted); line-height: 1.15; }
+  .qr svg { width: 18mm; height: 18mm; display: block; }
+  .qr a { color: inherit; text-decoration: none; }
+  .live { break-inside: avoid; }
+  .live .qr-row { gap: 10px; margin-top: 2px; }
+  .live .qr { width: 22mm; }
+  .live .qr svg { width: 22mm; height: 22mm; }
 """
 
 
@@ -85,6 +94,16 @@ def cv_item(role, org, when, bullets, small=None):
     return f'<div class="item">\n  {head}{body}\n</div>'
 
 
+def qr_block(links):
+    """Small scannable QR codes so a printed CV still reaches the live links."""
+    import segno  # pip install segno (in /home/runner/venvs/portfolio on the runner)
+    cells = []
+    for link in links:
+        svg = segno.make(link["url"], error="m").svg_inline(scale=1, border=2, dark="#111827", omitsize=True)
+        cells.append(f'<div class="qr"><a href="{link['url']}">{svg}<div>{link['label']}</div></a></div>')
+    return '<div class="qr-row">' + "".join(cells) + "</div>"
+
+
 def render_cv(p, compact=0):
     margin, font, lh = COMPACT[max(0, min(compact, 2))]
     css = CV_CSS % {"margin": margin, "font": font, "lh": lh}
@@ -102,8 +121,9 @@ def render_cv(p, compact=0):
     contact.append(f'<span><a href="https://{p["site"]}">{p["site"]}</a></span>')
     contact.append(f'<span><a href="https://www.{p["linkedin"]}">{p["linkedin"]}</a></span>')
     contact.append(f'<span><a href="https://{p["github"]}">{p["github"]}</a></span>')
-    out.append("<header>\n  <h1>%s</h1>\n  <div class=\"tagline\">%s</div>\n  <div class=\"contact\">\n    %s\n  </div>\n</header>"
-               % (p["name"], p["title"], "\n    ".join(contact)))
+    qr = qr_block(p["cv_qr"]) if p.get("cv_qr") else ""
+    out.append("<header>\n<div class=\"head-row\"><div>\n  <h1>%s</h1>\n  <div class=\"tagline\">%s</div>\n  <div class=\"contact\">\n    %s\n  </div>\n</div>%s</div>\n</header>"
+               % (p["name"], p["title"], "\n    ".join(contact), qr))
 
     out.append(f"<h2>Summary</h2>\n<p>{p['summary']}</p>")
 
@@ -141,6 +161,8 @@ def render_cv(p, compact=0):
             out.append(f'  <div><b>{s.get("cv_title", s["title"])}:</b> {s["cv"]}</div>')
     out.append('  <div><b>Spoken languages:</b> ' + " · ".join(f"{l['name']} ({l['level'].lower()})" for l in p["languages"]) + "</div>")
     out.append("</div>")
+    if p.get("cv_live_links"):
+        out.append('<div class="live"><h2>Live work: scan to open</h2>' + qr_block(p["cv_live_links"]) + "</div>")
     out.append("</div>\n</body>\n</html>\n")
     return "\n\n".join(out)
 

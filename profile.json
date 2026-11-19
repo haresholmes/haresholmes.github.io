@@ -393,5 +393,37 @@
     }
   ],
   "max_role_bullets": 6,
-  "max_entry_words": 40
+  "max_entry_words": 40,
+  "cv_qr": [
+    {
+      "label": "Portfolio",
+      "url": "https://haresholmes.eu.org"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/ziyadhares"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/haresholmes"
+    }
+  ],
+  "cv_live_links": [
+    {
+      "label": "begad.ae",
+      "url": "https://begad.ae"
+    },
+    {
+      "label": "vidvie.ae",
+      "url": "https://vidvie.ae"
+    },
+    {
+      "label": "monuevents.com",
+      "url": "https://monuevents.com"
+    },
+    {
+      "label": "computator.ae",
+      "url": "https://computator.ae"
+    }
+  ]
 }
