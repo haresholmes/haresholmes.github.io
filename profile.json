@@ -30,6 +30,13 @@
         "Rebuilt ad attribution from zero events to full-funnel Meta and TikTok server-side tracking, and cut UAE latency with CloudFront edge caching.",
         "Recovered the platform from git after production was deleted with no backups (Aug 2026), then added CI/CD, automated backups and runbooks.",
         "Shipped iOS/Android apps, a public agent API with MCP tools, Begad Food (food.begad.ae), vidvie.ae, and automated seller pickups and driver logistics."
+      ],
+      "cv_bullets": [
+        "Lead all technology for begad.ae: platform, payments, AWS, mobile apps and security (2,400+ commits).",
+        "Run an ISO/IEC 27001-aligned security programme; closed a security and money audit in Nov 2026.",
+        "Stopped revenue leaks by confirming orders only after payment; added Apple Pay, Google Pay and Tabby.",
+        "Restored production from git after it was deleted with no backups, then added CI/CD and automated backups.",
+        "Shipped iOS and Android apps, an agent API for AI shopping, Begad Food and vidvie.ae."
       ]
     },
     {
@@ -48,35 +55,40 @@
           "start": "May 2026",
           "end": "Present",
           "text": "luxury auction platform (Next.js 15, Prisma, MariaDB) with real-time and proxy bidding, an immutable bid ledger, encrypted KYC, tested off-server recovery and hardened APIs; also rebuilt the client mobile app.",
-          "site_text": "luxury auction platform with real-time bidding, an immutable bid ledger, encrypted KYC and tested off-server recovery."
+          "site_text": "luxury auction platform with real-time bidding, an immutable bid ledger, encrypted KYC and tested off-server recovery.",
+          "cv_text": "luxury auction platform with real-time bidding and an immutable bid ledger."
         },
         {
           "client": "Komissio",
           "start": "Jul 2026",
           "end": "Present",
           "text": "local-first company operating system (FastAPI, React, SQLite, ChromaDB): CRM, deals, documents, invoicing, accounting and payroll with private local AI; piloted at Mon Maison.",
-          "site_text": "local-first company operating system: CRM, invoicing, accounting and private local AI in one workspace; piloted at Mon Maison."
+          "site_text": "local-first company operating system: CRM, invoicing, accounting and private local AI in one workspace; piloted at Mon Maison.",
+          "cv_text": "local-first company OS: CRM, invoicing and accounting with private AI."
         },
         {
           "client": "Mon Adoptive Technology",
           "start": "May 2026",
           "end": "Aug 2026",
           "text": "technology and growth advisory for its SME Solutions Division: ERP/CRM offer, business plan, executive strategy and client proposals.",
-          "site_text": "technology and growth advisory for its SME Solutions Division."
+          "site_text": "technology and growth advisory for its SME Solutions Division.",
+          "cv_text": "technology and growth advisory for its SME division."
         },
         {
           "client": "Mon Maison",
           "start": "Jun 2026",
           "end": "Aug 2026",
           "text": "real-estate intelligence platform consolidating 23M+ owner and property rows with entity resolution, Telegram and WhatsApp ingestion and a local AI assistant; ERPNext customisation.",
-          "site_text": "real-estate intelligence platform with 23M+ consolidated property rows and a local AI assistant."
+          "site_text": "real-estate intelligence platform with 23M+ consolidated property rows and a local AI assistant.",
+          "cv_text": "real-estate data platform consolidating 23M+ property records."
         },
         {
           "client": "Monumental Events",
           "start": "Jul 2026",
           "end": "Aug 2026",
           "text": "brand-led website for an events company (monuevents.com): concept design across desktop and mobile, build and hosted deployment.",
-          "site_text": "brand-led website for an events company (monuevents.com): concept design, build and hosted deployment."
+          "site_text": "brand-led website for an events company (monuevents.com): concept design, build and hosted deployment.",
+          "cv_text": "brand-led website, from design to deployment."
         }
       ],
       "closing_bullets": [
@@ -84,7 +96,11 @@
       ],
       "site_closing_bullets": [
         "Built computator.ae (React 19, Vite, Tailwind v4, PHP API) with verified auto-rollback deployments; delivered client sites including Al Reemas Center."
-      ]
+      ],
+      "cv_bullets": [
+        "Dubai-licensed firm delivering software, data platforms and managed IT to UAE and Libyan clients."
+      ],
+      "cv_closing_bullets": []
     },
     {
       "role": "Backend Development &amp; Security Intern",
@@ -100,6 +116,9 @@
         "Built data collection pipelines in Python and SQL with API integration, validation, and sanitization.",
         "Hardened access control and query paths, including SQL injection prevention and performance-aware tuning.",
         "Automated workflows to improve data quality and operational reliability."
+      ],
+      "cv_bullets": [
+        "Built secure Python/SQL data pipelines with access control and SQL-injection prevention."
       ]
     },
     {
@@ -115,6 +134,9 @@
         "Contributed to security policy documentation aligned with ISO 27001 and common good-practice frameworks.",
         "Supported risk assessments and identification of weaknesses across IT infrastructure.",
         "Helped roll out awareness and compliance initiatives; collaborated on incident response preparation with IT."
+      ],
+      "cv_bullets": [
+        "Drafted ISO/IEC 27001 security policies, a risk register and a remediation plan."
       ]
     },
     {
@@ -130,6 +152,9 @@
         "Improved web performance while applying secure coding and OWASP-oriented controls (validation, XSS reduction).",
         "Collaborated on a responsive site redesign with clear information architecture for a cybersecurity firm.",
         "Delivered production-ready front-end work on schedule."
+      ],
+      "cv_bullets": [
+        "Rebuilt the company website with OWASP-aligned security controls."
       ]
     },
     {
@@ -144,6 +169,9 @@
       "site_bullets": [
         "Contributed to an e-commerce platform (Yalla Bazzar): inventory, customer data, and front-end UX.",
         "Emphasized data integrity, access control, and practical security within delivery timelines."
+      ],
+      "cv_bullets": [
+        "Built inventory and customer workflows for the Yalla Bazzar e-commerce platform."
       ]
     }
   ],
@@ -153,7 +181,8 @@
       "org": "UOWD Tech Club · University of Wollongong in Dubai",
       "start": "2024",
       "end": "Present",
-      "text": "Founded and lead the club's cybersecurity team: CTF practice sessions, the Cybersecurity Fundamentals 101 workshop, the Prompt Wars web-dev showdown (Oct 2025), event planning and procurement."
+      "text": "Founded and lead the club's cybersecurity team: CTF practice sessions, the Cybersecurity Fundamentals 101 workshop, the Prompt Wars web-dev showdown (Oct 2025), event planning and procurement.",
+      "cv_text": "Founded the club's cybersecurity team; run CTF sessions, workshops and the Prompt Wars showdown."
     }
   ],
   "projects": [
@@ -173,10 +202,10 @@
     {
       "title": "Kontraktus",
       "badge": "Capstone",
-      "cv_subtitle": "local-first contract intelligence platform (UOWD capstone)",
+      "cv_subtitle": "UOWD capstone",
       "period": "May 2026 – Oct 2026",
       "desc": "Local-first contract analysis with zero network egress: Ollama, hybrid ChromaDB/BM25 retrieval, verbatim clause citations, risk rules and OCR, evaluated on 102 lawyer-labelled CUAD contracts.",
-      "cv_desc": "Python/Streamlit app that analyses contracts fully on-device: Ollama (Qwen 2.5), ChromaDB + BM25 hybrid retrieval, clause-aware chunking with citations, YAML risk rules and OCR; evaluated on 102 lawyer-labelled CUAD contracts, with access-controlled reviewer workflows.",
+      "cv_desc": "On-device contract analysis with Ollama and hybrid retrieval, evaluated on 102 lawyer-labelled contracts.",
       "tags": [
         "Python",
         "RAG",
@@ -188,7 +217,7 @@
       "title": "Self-hosted secure communications stack",
       "period": "2026",
       "desc": "WireGuard VPN, Matrix Synapse with E2EE and SSO, LiveKit video, Traefik and Netdata monitoring, all scripted for repeatable deployment.",
-      "cv_desc": "WireGuard VPN, Matrix Synapse with E2EE and OIDC SSO, LiveKit WebRTC, Traefik with Let's Encrypt, Netdata and encrypted DNS; scripted, repeatable deployments.",
+      "cv_desc": "WireGuard, end-to-end encrypted Matrix with SSO, LiveKit video and Traefik, fully scripted.",
       "tags": [
         "WireGuard",
         "Matrix E2EE",
@@ -229,10 +258,10 @@
     {
       "title": "Homelab, pentest range &amp; OSINT dashboard",
       "badge": "Lab",
-      "cv_title": "Homelab, pentest range &amp; OSINT self-audit dashboard",
+      "cv_title": "Homelab &amp; pentest range",
       "period": "2024 – Present",
       "desc": "Proxmox pentest range with segmented attack and target subnets, an OpenWrt firewall and WireGuard, plus a Dockerised OSINT self-audit dashboard.",
-      "cv_desc": "Proxmox VE pentest range with segmented attack/target subnets (Kali, Metasploitable, Windows Server), OpenWrt firewall and WireGuard; Dockerised OSINT self-audit dashboard (Maigret, Sherlock, Holehe) with EXIF/OCR checks.",
+      "cv_desc": "Proxmox range with segmented attack and target networks, plus an OSINT self-audit dashboard.",
       "tags": [
         "Proxmox",
         "OSINT",
@@ -308,7 +337,7 @@
   "cv_client_websites": {
     "title": "Client websites",
     "period": "2024 – 2026",
-    "desc": "Al Reemas Center (Libyan gold importer: bilingual AR/EN site and 36-concept logo lab), Monumental Events, VIDVIE UAE, Amal Al Khaleej, Axon Technologies, Yalla Bazzar, professional portfolios and small-business sites on GitHub Pages and AWS."
+    "desc": "Al Reemas Center, Monumental Events, VIDVIE UAE, Amal Al Khaleej, Axon Technologies and Yalla Bazzar."
   },
   "education": [
     {
@@ -316,7 +345,8 @@
       "school": "University of Wollongong in Dubai",
       "start": "Sep 2023",
       "end": "Dec 2026 (expected)",
-      "note": "Coursework: Ethical Hacking, Network Security, System Security, Information Security Management, Database Systems (Oracle PL/SQL), Software Development Methodologies, Capstone Project."
+      "note": "Coursework: Ethical Hacking, Network Security, System Security, Information Security Management, Database Systems (Oracle PL/SQL), Software Development Methodologies, Capstone Project.",
+      "cv_note": "Ethical Hacking · Network Security · Information Security Management · Capstone: Kontraktus"
     },
     {
       "degree": "American High School Diploma",
@@ -331,8 +361,8 @@
       "icon": "🎯",
       "title": "Offensive security",
       "site": "Nmap, Metasploit, Burp Suite, Wireshark, Nessus, OpenVAS, Nikto, Hydra; segmented Proxmox attack labs, CTF practice",
-      "cv_title": "Security &amp; compliance",
-      "cv": "ISO/IEC 27001 ISMS (policies, risk register, risk treatment, audits); secure SDLC and OWASP Top 10; IAM and least privilege; OAuth2/OIDC, JWT, CSP/HSTS; CVSS triage and incident runbooks; penetration testing with Nmap, Metasploit, Burp Suite, Nessus and Wireshark"
+      "cv_title": "Security",
+      "cv": "ISO/IEC 27001, OWASP Top 10, OAuth2/OIDC, CVSS, Burp Suite, Metasploit, Nmap, Nessus"
     },
     {
       "icon": "🛡️",
@@ -344,8 +374,8 @@
       "icon": "☁️",
       "title": "Cloud &amp; DevOps",
       "site": "AWS (EC2, ALB, CloudFront, S3, Route 53, RDS, IAM/OIDC, SSM), GitHub Actions CI/CD, Docker/Podman, backups and point-in-time recovery",
-      "cv_title": "Cloud &amp; infrastructure",
-      "cv": "AWS (EC2, ALB, CloudFront, S3, Route 53, RDS, IAM, SSM); GitHub Actions CI/CD with keyless OIDC deploys and self-hosted runners; Docker/Podman; Linux and Proxmox VE; Traefik, WireGuard; automated backups and point-in-time recovery"
+      "cv_title": "Cloud",
+      "cv": "AWS (CloudFront, EC2, S3, RDS, IAM), GitHub Actions, Docker, Proxmox, Linux"
     },
     {
       "icon": "🔐",
@@ -358,28 +388,28 @@
       "title": "Languages",
       "site": "Python, TypeScript/JavaScript, PHP 8, SQL, Bash, C/C++; Swift and Java for mobile bridges",
       "cv_title": "Engineering",
-      "cv": "Python, TypeScript, PHP 8.3, SQL, Bash; React 19, Next.js 15, Node.js, FastAPI, Prisma; Capacitor iOS/Android apps with Swift and Java bridges; bilingual Arabic/English (RTL/LTR) products"
+      "cv": "Python, TypeScript, PHP, SQL · React, Next.js, FastAPI · iOS/Android"
     },
     {
       "icon": "🧩",
       "title": "Web &amp; mobile",
       "site": "React 19, Next.js 15, Vite, Tailwind v4, Node.js, FastAPI, Prisma, Pusher, Capacitor, bilingual RTL/LTR, Stripe and Tabby, Streamlit",
-      "cv_title": "Payments &amp; integrations",
-      "cv": "Stripe Payment Element and signed webhooks, Apple Pay and Google Pay, Tabby BNPL, Ziina; Meta Conversions API and TikTok Events API; Sign in with Apple; MCP tools and agent APIs for AI assistants"
+      "cv_title": "Payments",
+      "cv": "Stripe, Apple Pay, Google Pay, Tabby, Ziina · Meta and TikTok conversion APIs"
     },
     {
       "icon": "🗄️",
       "title": "Data engineering",
       "site": "PostgreSQL, MariaDB, SQLite, Oracle PL/SQL, DuckDB; entity resolution at scale, Telethon scrapers, OCR pipelines, Excel/VBA automation",
       "cv_title": "Data &amp; AI",
-      "cv": "MariaDB, PostgreSQL, SQLite, DuckDB; entity resolution over 23M+ rows; Ollama, ChromaDB and hybrid BM25/vector retrieval; OCR pipelines; retrieval evaluation on lawyer-labelled CUAD contracts"
+      "cv": "MariaDB, PostgreSQL, DuckDB · Ollama, ChromaDB, retrieval, OCR"
     },
     {
       "icon": "🤖",
       "title": "Local-first AI",
       "site": "Ollama, ChromaDB, hybrid BM25/vector retrieval, CUAD evaluation, agent APIs and MCP tools, Claude Code multi-agent workflows",
       "cv_title": "Tools",
-      "cv": "Git, Claude Code multi-agent workflows, Figma, Microsoft 365"
+      "cv": ""
     }
   ],
   "languages": [
@@ -427,14 +457,12 @@
     }
   ],
   "cv_competencies": [
-    "Technology strategy &amp; roadmaps",
-    "Information security (ISO/IEC 27001)",
-    "Cloud architecture on AWS",
-    "Payments &amp; e-commerce platforms",
+    "Technology strategy",
+    "Security &amp; ISO/IEC 27001",
+    "AWS cloud architecture",
+    "Payments &amp; e-commerce",
     "Incident response &amp; recovery",
-    "Penetration testing &amp; app security",
-    "Mobile apps &amp; public APIs",
-    "Data platforms &amp; local-first AI",
-    "Client advisory &amp; delivery"
-  ]
+    "Mobile apps &amp; APIs"
+  ],
+  "cv_summary": "CTO of Begad, a bilingual UAE marketplace, and founder of Computator Technology, a Dubai software and managed-IT firm. I lead platform, payments, cloud and security end to end, backed by a penetration-testing background and a BSc in Cybersecurity from UOWD (Dec 2026)."
 }

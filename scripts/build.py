@@ -21,60 +21,95 @@ PROFILE = ROOT / "profile.json"
 CV = ROOT / "cv.html"
 INDEX = ROOT / "index.html"
 
-COMPACT = {0: ("16mm 18mm", "9.2pt", "1.3"), 1: ("15mm 16mm", "8.9pt", "1.27"), 2: ("14mm 15mm", "8.6pt", "1.24")}
+COMPACT = {0: ("17mm 19mm", "9.5pt", "1.45"), 1: ("16mm 18mm", "9.3pt", "1.4"), 2: ("15mm 17mm", "9.1pt", "1.36")}
 
 CV_CSS = """\
   @page { size: A4; margin: %(margin)s; }
-  :root {
-    --ink: #111827; --muted: #4b5563; --line: #d1d5db; --accent: #0f172a; --rule: #1d4ed8;
-  }
+  :root { --ink: #111827; --muted: #5b6474; --line: #e5e7eb; --accent: #0f172a; --rule: #1d4ed8; }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     color: var(--ink); font-size: %(font)s; line-height: %(lh)s; background: #fff;
   }
-  .page { max-width: 186mm; margin: 0 auto; padding: 10mm 0; }
+  .page { max-width: 180mm; margin: 0 auto; padding: 12mm 0; }
   @media print { .page { max-width: none; padding: 0; } }
-  header { border-bottom: 2px solid var(--accent); padding-bottom: 5px; margin-bottom: 7px; }
-  h1 { font-size: 20pt; margin: 0; letter-spacing: -0.3px; }
-  .tagline { font-size: 10.5pt; font-weight: 600; color: var(--rule); margin: 1px 0 3px; }
-  .contact { font-size: 8.6pt; color: var(--muted); }
+  svg.px { shape-rendering: crispEdges; display: block; }
+  header { margin-bottom: 4px; }
+  .head-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .ident { display: flex; align-items: center; gap: 12px; }
+  .ident svg.px { width: 11mm; height: auto; flex-shrink: 0; }
+  h1 { font-size: 22pt; margin: 0; letter-spacing: -0.4px; line-height: 1.1; }
+  .tagline { font-size: 10.2pt; font-weight: 600; color: var(--rule); margin: 3px 0 0; line-height: 1.35; }
+  .contact { font-size: 8.8pt; color: var(--muted); margin-top: 6px; }
   .contact a { color: inherit; text-decoration: none; }
-  .contact span + span::before { content: " · "; color: #9ca3af; }
+  .contact span + span::before { content: "  ·  "; color: #b8bec8; white-space: pre; }
+  .strip { margin: 9px 0 2px; }
+  .strip svg.px { width: 100%%; height: auto; }
   h2 {
-    font-size: 9.6pt; text-transform: uppercase; letter-spacing: 1.1px; color: var(--accent);
-    border-bottom: 1px solid var(--line); margin: 9px 0 4px; padding-bottom: 2px;
+    display: flex; align-items: center; gap: 7px;
+    font-size: 9pt; text-transform: uppercase; letter-spacing: 1.8px; color: var(--accent);
+    margin: 17px 0 7px; break-after: avoid;
   }
-  p { margin: 0 0 4px; }
-  .item { margin-bottom: 5px; }
-  .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; break-after: avoid; }
-  li { break-inside: avoid; }
-  h2 { break-after: avoid; }
+  h2 svg.px { width: 12px; height: 4px; }
+  h2::after { content: ""; flex: 1; border-bottom: 1px solid var(--line); margin-left: 4px; }
+  p { margin: 0; }
+  .item { margin-bottom: 10px; break-inside: avoid; }
+  .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; break-after: avoid; }
   .role { font-weight: 700; }
   .org { color: var(--muted); }
   .date { white-space: nowrap; color: var(--muted); font-size: 8.6pt; }
-  ul { margin: 2px 0 0; padding-left: 13px; list-style: none; }
-  ul li { position: relative; }
-  ul li::before { content: ""; position: absolute; left: -10px; top: 0.6em; width: 4px; height: 4px; border-radius: 2px; background: var(--accent); }
-  li { margin: 0 0 1.2px; }
-  .skills { display: grid; grid-template-columns: 1fr; gap: 1.5px; }
-  .skills div b { color: var(--accent); }
-  .small { font-size: 8.6pt; color: var(--muted); }
-  .comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px 12px; }
-  .comp div { position: relative; padding-left: 9px; }
-  .comp div::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 4px; height: 4px; background: var(--rule); }
-  .skills div { margin-bottom: 1.5px; }
-  .head-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
-  .qr-row { display: flex; gap: 4px; flex-shrink: 0; }
-  .qr { width: 18mm; text-align: center; font-size: 6.8pt; color: var(--muted); line-height: 1.15; }
-  .qr svg { width: 18mm; height: 18mm; display: block; }
+  ul { margin: 4px 0 0; padding-left: 14px; list-style: none; }
+  li { position: relative; margin: 0 0 3px; break-inside: avoid; }
+  ul li::before { content: ""; position: absolute; left: -11px; top: 0.62em; width: 4px; height: 4px; background: var(--rule); }
+  .comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 14px; }
+  .comp div { position: relative; padding-left: 11px; }
+  .comp div::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 5px; height: 5px; background: var(--rule); }
+  .skills { display: grid; grid-template-columns: 34mm 1fr; gap: 4px 10px; }
+  .skills b { color: var(--accent); }
+  .small { font-size: 8.8pt; color: var(--muted); margin-top: 2px; }
+  .qr-row { display: flex; gap: 6px; flex-shrink: 0; }
+  .qr { width: 15mm; text-align: center; font-size: 6.8pt; color: var(--muted); line-height: 1.2; }
+  .qr svg { width: 15mm; height: 15mm; display: block; }
   .qr a { color: inherit; text-decoration: none; }
   .live { break-inside: avoid; }
-  .live .qr-row { gap: 10px; margin-top: 2px; }
-  .live .qr { width: 22mm; }
-  .live .qr svg { width: 22mm; height: 22mm; }
+  .live .qr-row { gap: 14px; }
+  .live .qr { width: 21mm; }
+  .live .qr svg { width: 21mm; height: 21mm; }
 """
+
+# Pixel-art accents (crisp SVG squares; scale-free in print).
+SHIELD = ["..#######..", ".#########.", "###########", "####...####", "####...####", "#####.#####",
+          "#####.#####", ".####.####.", ".#########.", "..#######..", "...#####...", "....###....", ".....#....."]
+
+
+def pixel_shield():
+    w, h = len(SHIELD[0]), len(SHIELD)
+    cells = []
+    for y, row in enumerate(SHIELD):
+        for x, c in enumerate(row):
+            if c == "#":
+                fill = "#1d4ed8" if x < w // 2 + (y % 2) else "#3b82f6"
+                cells.append(f'<rect x="{x}" y="{y}" width="1" height="1" fill="{fill}"/>')
+    cells = "".join(cells)
+    return f'<svg class="px" viewBox="0 0 {w} {h}" aria-hidden="true">{cells}</svg>'
+
+
+def pixel_marker():
+    return ('<svg class="px" viewBox="0 0 9 3" aria-hidden="true">'
+            '<rect x="0" y="0" width="3" height="3" fill="#bfdbfe"/><rect x="3" y="0" width="3" height="3" fill="#60a5fa"/>'
+            '<rect x="6" y="0" width="3" height="3" fill="#1d4ed8"/></svg>')
+
+
+def pixel_strip(n=90):
+    """A single row of squares that dithers out from solid blue to nothing."""
+    cells = []
+    for i in range(n):
+        density = 1 - i / n
+        if (i * 37 % 100) / 100 < density * 1.15:
+            shade = "#1d4ed8" if density > 0.66 else "#60a5fa" if density > 0.33 else "#bfdbfe"
+            cells.append(f'<rect x="{i * 2}" y="0" width="1.2" height="1.2" fill="{shade}"/>')
+    return f'<svg class="px" viewBox="0 0 {n * 2} 1.2" aria-hidden="true">' + "".join(cells) + "</svg>"
 
 
 def load_profile():
@@ -112,9 +147,12 @@ def qr_block(links):
 
 
 def render_cv(p, compact=0):
+    """The CV uses short cv_* variants of profile text where present, so it stays airy
+    while the website keeps the fuller wording."""
     margin, font, lh = COMPACT[max(0, min(compact, 2))]
     css = CV_CSS % {"margin": margin, "font": font, "lh": lh}
     cv_max = int(p.get("cv_max_bullets", 7))
+    h2 = lambda title: f"<h2>{pixel_marker()}{title}</h2>"
     out = []
     out.append("<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n"
                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
@@ -126,31 +164,30 @@ def render_cv(p, compact=0):
         contact.append(f'<span><a href="tel:{ph.replace(" ", "")}">{ph}</a></span>')
     contact.append(f'<span><a href="mailto:{p["email"]}">{p["email"]}</a></span>')
     contact.append(f'<span><a href="https://{p["site"]}">{p["site"]}</a></span>')
-    contact.append(f'<span><a href="https://www.{p["linkedin"]}">{p["linkedin"]}</a></span>')
-    contact.append(f'<span><a href="https://{p["github"]}">{p["github"]}</a></span>')
     qr = qr_block(p["cv_qr"]) if p.get("cv_qr") else ""
-    out.append("<header>\n<div class=\"head-row\"><div>\n  <h1>%s</h1>\n  <div class=\"tagline\">%s</div>\n  <div class=\"contact\">\n    %s\n  </div>\n</div>%s</div>\n</header>"
-               % (p["name"], p["title"], "\n    ".join(contact), qr))
+    out.append(f'<header>\n<div class="head-row"><div class="ident">{pixel_shield()}<div>\n  <h1>{p["name"]}</h1>\n'
+               f'  <div class="tagline">{"<br>".join(p["title"].split(" · "))}</div>\n</div></div>{qr}</div>\n<div class="contact">{"".join(contact)}</div>\n'
+               f'<div class="strip">{pixel_strip()}</div>\n</header>')
 
-    out.append(f"<h2>Profile</h2>\n<p>{p['summary']}</p>")
+    out.append(h2("Profile") + f"\n<p>{p.get('cv_summary', p['summary'])}</p>")
     if p.get("cv_competencies"):
-        out.append("<h2>Core Competencies</h2>\n<div class=\"comp\">" + "".join(f"<div>{c}</div>" for c in p["cv_competencies"]) + "</div>")
+        out.append(h2("Core Competencies") + "\n<div class=\"comp\">" + "".join(f"<div>{c}</div>" for c in p["cv_competencies"]) + "</div>")
 
-    out.append("<h2>Experience</h2>")
+    out.append(h2("Experience"))
     for e in p["experience"]:
-        bullets = list(e.get("bullets", []))[: int(e.get("cv_max_bullets", cv_max))]
+        bullets = list(e.get("cv_bullets", e.get("bullets", [])))[: int(e.get("cv_max_bullets", cv_max))]
         for g in e.get("engagements", []):
-            bullets.append(f"<b>{g['client']}</b> ({g['start']} – {g['end']}): {g['text']}")
-        bullets += e.get("closing_bullets", [])
+            bullets.append(f"<b>{g['client']}</b>: {g.get('cv_text', g['text'])}")
+        bullets += e.get("cv_closing_bullets", e.get("closing_bullets", []))
         org = f"{e['org']} · {e['location']}" if e.get("location") else e["org"]
         out.append(cv_item(e["role"], org, period(e["start"], e["end"]), bullets))
 
     if p.get("leadership"):
-        out.append("<h2>Leadership</h2>")
+        out.append(h2("Leadership"))
         for l in p["leadership"]:
-            out.append(cv_item(l["role"], l["org"], period(l["start"], l["end"]), [l["text"]]))
+            out.append(cv_item(l["role"], l["org"], period(l["start"], l["end"]), [l.get("cv_text", l["text"])]))
 
-    out.append("<h2>Selected Projects</h2>")
+    out.append(h2("Selected Projects"))
     for pr in p["projects"]:
         if not pr.get("cv"):
             continue
@@ -160,18 +197,18 @@ def render_cv(p, compact=0):
     if cw:
         out.append(cv_item(cw["title"], None, cw["period"], [cw["desc"]]))
 
-    out.append("<h2>Education</h2>")
+    out.append(h2("Education"))
     for ed in p["education"]:
-        out.append(cv_item(ed["degree"], ed["school"], period(ed["start"], ed["end"]), [], small=ed.get("note")))
+        out.append(cv_item(ed["degree"], ed["school"], period(ed["start"], ed["end"]), [], small=ed.get("cv_note", ed.get("note"))))
 
-    out.append("<h2>Technical Skills</h2>\n<div class=\"skills\">")
-    for s in p["skills"]:
-        if s.get("cv"):
-            out.append(f'  <div><b>{s.get("cv_title", s["title"])}:</b> {s["cv"]}</div>')
-    out.append('  <div><b>Spoken languages:</b> ' + " · ".join(f"{l['name']} ({l['level'].lower()})" for l in p["languages"]) + "</div>")
+    out.append(h2("Skills") + "\n<div class=\"skills\">")
+    for sk in p["skills"]:
+        if sk.get("cv"):
+            out.append(f'  <b>{sk.get("cv_title", sk["title"])}</b><div>{sk["cv"]}</div>')
+    out.append('  <b>Languages spoken</b><div>' + " · ".join(f"{l['name']} ({l['level'].lower()})" for l in p["languages"]) + "</div>")
     out.append("</div>")
     if p.get("cv_live_links"):
-        out.append('<div class="live"><h2>Live work: scan to open</h2>' + qr_block(p["cv_live_links"]) + "</div>")
+        out.append('<div class="live">' + h2("Live work · scan to open") + qr_block(p["cv_live_links"]) + "</div>")
     out.append("</div>\n</body>\n</html>\n")
     return "\n\n".join(out)
 
