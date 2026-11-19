@@ -38,7 +38,6 @@ CV_CSS = """\
   header { margin-bottom: 4px; }
   .head-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
   .ident { display: flex; align-items: center; gap: 12px; }
-  .ident svg.px { width: 11mm; height: auto; flex-shrink: 0; }
   h1 { font-size: 22pt; margin: 0; letter-spacing: -0.4px; line-height: 1.1; }
   .tagline { font-size: 10.2pt; font-weight: 600; color: var(--rule); margin: 3px 0 0; line-height: 1.35; }
   .contact { font-size: 8.8pt; color: var(--muted); margin-top: 6px; }
@@ -51,7 +50,10 @@ CV_CSS = """\
     font-size: 9pt; text-transform: uppercase; letter-spacing: 1.8px; color: var(--accent);
     margin: 17px 0 7px; break-after: avoid;
   }
-  h2 svg.px { width: 12px; height: 4px; }
+  h2 svg.icon { flex-shrink: 0; }
+  .cursor { display: inline-block; width: 0.42em; height: 0.78em; background: var(--rule); margin-left: 5px; vertical-align: -0.04em; }
+  .sky { margin-top: 26px; break-inside: avoid; }
+  .sky svg.px { width: 100%%; height: auto; }
   h2::after { content: ""; flex: 1; border-bottom: 1px solid var(--line); margin-left: 4px; }
   p { margin: 0; }
   .item { margin-bottom: 10px; break-inside: avoid; }
@@ -78,27 +80,51 @@ CV_CSS = """\
   .live .qr svg { width: 21mm; height: 21mm; }
 """
 
-# Pixel-art accents (crisp SVG squares; scale-free in print).
-SHIELD = ["..#######..", ".#########.", "###########", "####...####", "####...####", "#####.#####",
-          "#####.#####", ".####.####.", ".#########.", "..#######..", "...#####...", "....###....", ".....#....."]
+# Pixel-art accents (crisp SVG squares; scale-free in print). "#" = brand blue, "+" = light blue.
+ICONS = {
+    "Profile": ["...##...", "..####..", "..####..", "...##...", "..####..", ".######.", ".######.", ".######."],
+    "Core Competencies": ["...#...", "..###..", "#######", ".#####.", "..###..", ".##.##.", ".#...#."],
+    "Experience": ["..####..", "..#..#..", "########", "########", "###++###", "########", "########"],
+    "Leadership": ["##......", "#####...", "#++++##.", "#+++++##", "#####...", "#.......", "#.......", "#......."],
+    "Selected Projects": ["########", "#......#", "#.+....#", "#..+...#", "#.+.++.#", "#......#", "########"],
+    "Education": ["....#....", "..#####..", "#########", "..#####..", "..#+++#.#", "...###..#"],
+    "Skills": ["..#.#..", ".#####.", "##+++##", ".#+.+#.", "##+++##", ".#####.", "..#.#.."],
+    "Live work · scan to open": ["###.###", "#+#.#+#", "###.###", ".......", "###.#.#", "#+#..#.", "###.#.#"],
+}
 
 
-def pixel_shield():
-    w, h = len(SHIELD[0]), len(SHIELD)
+def pixel_icon(rows):
+    w, h = max(len(r) for r in rows), len(rows)
     cells = []
-    for y, row in enumerate(SHIELD):
+    for y, row in enumerate(rows):
         for x, c in enumerate(row):
-            if c == "#":
-                fill = "#1d4ed8" if x < w // 2 + (y % 2) else "#3b82f6"
+            if c in "#+":
+                fill = "#1d4ed8" if c == "#" else "#93c5fd"
                 cells.append(f'<rect x="{x}" y="{y}" width="1" height="1" fill="{fill}"/>')
-    cells = "".join(cells)
-    return f'<svg class="px" viewBox="0 0 {w} {h}" aria-hidden="true">{cells}</svg>'
+    return f'<svg class="px icon" viewBox="0 0 {w} {h}" style="width:{w * 1.75:.2f}px;height:{h * 1.75:.2f}px" aria-hidden="true">' + "".join(cells) + "</svg>"
 
 
-def pixel_marker():
-    return ('<svg class="px" viewBox="0 0 9 3" aria-hidden="true">'
-            '<rect x="0" y="0" width="3" height="3" fill="#bfdbfe"/><rect x="3" y="0" width="3" height="3" fill="#60a5fa"/>'
-            '<rect x="6" y="0" width="3" height="3" fill="#1d4ed8"/></svg>')
+def pixel_skyline():
+    """A quiet pixel Dubai skyline (Burj Khalifa in the middle) to close the CV."""
+    W, H = 240, 40
+    # (x, width, height, shade)
+    towers = [(4, 10, 9, 0), (16, 7, 14, 1), (25, 12, 11, 0), (39, 6, 18, 1), (47, 9, 13, 0), (58, 14, 8, 0),
+              (74, 8, 21, 1), (84, 10, 15, 0), (96, 6, 24, 1), (104, 11, 12, 0), (136, 8, 11, 0), (147, 10, 17, 0), (159, 7, 22, 1),
+              (168, 12, 10, 0), (182, 8, 19, 1), (192, 10, 13, 0), (204, 6, 16, 1), (212, 13, 9, 0), (227, 9, 14, 1)]
+    shades = ["#dbeafe", "#bfdbfe"]
+    cells = []
+    for x, w, h, sh in towers:
+        cells.append(f'<rect x="{x}" y="{H - h}" width="{w}" height="{h}" fill="{shades[sh]}"/>')
+        for wy in range(H - h + 2, H - 2, 3):          # windows
+            for wx in range(x + 2, x + w - 1, 3):
+                if (wx * 7 + wy * 3) % 5:
+                    cells.append(f'<rect x="{wx}" y="{wy}" width="1" height="1" fill="#ffffff"/>')
+    # Burj Khalifa: stepped tiers and a spire, in brand blue.
+    for i, (w, h) in enumerate([(13, 18), (9, 25), (7, 30), (5, 34), (3, 37), (1, 40)]):
+        fill = "#60a5fa" if i < 2 else "#3b82f6" if i < 4 else "#1d4ed8"
+        cells.append(f'<rect x="{127 - w // 2}" y="{H - h}" width="{w}" height="{h}" fill="{fill}"/>')
+    cells.append(f'<rect x="0" y="{H - 1}" width="{W}" height="1" fill="#93c5fd"/>')
+    return f'<svg class="px skyline" viewBox="0 0 {W} {H}" aria-hidden="true">' + "".join(cells) + "</svg>"
 
 
 def pixel_strip(n=90):
@@ -152,7 +178,7 @@ def render_cv(p, compact=0):
     margin, font, lh = COMPACT[max(0, min(compact, 2))]
     css = CV_CSS % {"margin": margin, "font": font, "lh": lh}
     cv_max = int(p.get("cv_max_bullets", 7))
-    h2 = lambda title: f"<h2>{pixel_marker()}{title}</h2>"
+    h2 = lambda title: f"<h2>{pixel_icon(ICONS[title]) if title in ICONS else ''}{title}</h2>"
     out = []
     out.append("<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n"
                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
@@ -165,7 +191,7 @@ def render_cv(p, compact=0):
     contact.append(f'<span><a href="mailto:{p["email"]}">{p["email"]}</a></span>')
     contact.append(f'<span><a href="https://{p["site"]}">{p["site"]}</a></span>')
     qr = qr_block(p["cv_qr"]) if p.get("cv_qr") else ""
-    out.append(f'<header>\n<div class="head-row"><div class="ident">{pixel_shield()}<div>\n  <h1>{p["name"]}</h1>\n'
+    out.append(f'<header>\n<div class="head-row"><div class="ident"><div>\n  <h1>{p["name"]}<span class="cursor"></span></h1>\n'
                f'  <div class="tagline">{"<br>".join(p["title"].split(" · "))}</div>\n</div></div>{qr}</div>\n<div class="contact">{"".join(contact)}</div>\n'
                f'<div class="strip">{pixel_strip()}</div>\n</header>')
 
@@ -209,6 +235,7 @@ def render_cv(p, compact=0):
     out.append("</div>")
     if p.get("cv_live_links"):
         out.append('<div class="live">' + h2("Live work · scan to open") + qr_block(p["cv_live_links"]) + "</div>")
+    out.append(f'<div class="sky">{pixel_skyline()}</div>')
     out.append("</div>\n</body>\n</html>\n")
     return "\n\n".join(out)
 
