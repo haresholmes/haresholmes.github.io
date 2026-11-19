@@ -24,7 +24,7 @@ INDEX = ROOT / "index.html"
 COMPACT = {0: ("17mm 19mm", "9.5pt", "1.45"), 1: ("16mm 18mm", "9.3pt", "1.4"), 2: ("15mm 17mm", "9.1pt", "1.36")}
 
 CV_CSS = """\
-  @page { size: A4; margin: %(margin)s; }
+  @page { size: A4; margin: 0; }
   :root { --ink: #111827; --muted: #5b6474; --line: #e5e7eb; --accent: #0f172a; --rule: #1d4ed8; }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -32,8 +32,11 @@ CV_CSS = """\
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     color: var(--ink); font-size: %(font)s; line-height: %(lh)s; background: #fff;
   }
-  .page { max-width: 180mm; margin: 0 auto; padding: 12mm 0; }
-  @media print { .page { max-width: none; padding: 0; } }
+  /* Two fixed A4 sheets; the page margin lives in the sheet padding so art can reach the paper edge. */
+  .sheet { width: 210mm; height: 297mm; padding: %(margin)s; position: relative; overflow: hidden; margin: 0 auto; background: #fff; }
+  .sheet + .sheet { break-before: page; }
+  @media screen { body { background: #e5e7eb; } .sheet { margin: 10mm auto; box-shadow: 0 2px 14px rgba(0,0,0,.12); } }
+  .sheet2 > h2:first-child { margin-top: 0; }
   svg.px { shape-rendering: crispEdges; display: block; }
   header { margin-bottom: 4px; }
   .head-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
@@ -52,8 +55,8 @@ CV_CSS = """\
   }
   h2 svg.icon { flex-shrink: 0; }
   .cursor { display: inline-block; width: 0.42em; height: 0.78em; background: var(--rule); margin-left: 5px; vertical-align: -0.04em; }
-  .sky { margin-top: 26px; break-inside: avoid; }
-  .sky svg.px { width: 100%%; height: auto; }
+  .burj-wrap { position: absolute; right: 0; bottom: 0; width: 44mm; z-index: 0; }
+  .burj-wrap svg.px { width: 100%%; height: auto; }
   h2::after { content: ""; flex: 1; border-bottom: 1px solid var(--line); margin-left: 4px; }
   p { margin: 0; }
   .item { margin-bottom: 10px; break-inside: avoid; }
@@ -104,27 +107,72 @@ def pixel_icon(rows):
     return f'<svg class="px icon" viewBox="0 0 {w} {h}" style="width:{w * 1.75:.2f}px;height:{h * 1.75:.2f}px" aria-hidden="true">' + "".join(cells) + "</svg>"
 
 
-def pixel_skyline():
-    """A quiet pixel Dubai skyline (Burj Khalifa in the middle) to close the CV."""
-    W, H = 240, 40
-    # (x, width, height, shade)
-    towers = [(4, 10, 9, 0), (16, 7, 14, 1), (25, 12, 11, 0), (39, 6, 18, 1), (47, 9, 13, 0), (58, 14, 8, 0),
-              (74, 8, 21, 1), (84, 10, 15, 0), (96, 6, 24, 1), (104, 11, 12, 0), (136, 8, 11, 0), (147, 10, 17, 0), (159, 7, 22, 1),
-              (168, 12, 10, 0), (182, 8, 19, 1), (192, 10, 13, 0), (204, 6, 16, 1), (212, 13, 9, 0), (227, 9, 14, 1)]
-    shades = ["#dbeafe", "#bfdbfe"]
-    cells = []
-    for x, w, h, sh in towers:
-        cells.append(f'<rect x="{x}" y="{H - h}" width="{w}" height="{h}" fill="{shades[sh]}"/>')
-        for wy in range(H - h + 2, H - 2, 3):          # windows
-            for wx in range(x + 2, x + w - 1, 3):
-                if (wx * 7 + wy * 3) % 5:
-                    cells.append(f'<rect x="{wx}" y="{wy}" width="1" height="1" fill="#ffffff"/>')
-    # Burj Khalifa: stepped tiers and a spire, in brand blue.
-    for i, (w, h) in enumerate([(13, 18), (9, 25), (7, 30), (5, 34), (3, 37), (1, 40)]):
-        fill = "#60a5fa" if i < 2 else "#3b82f6" if i < 4 else "#1d4ed8"
-        cells.append(f'<rect x="{127 - w // 2}" y="{H - h}" width="{w}" height="{h}" fill="{fill}"/>')
-    cells.append(f'<rect x="0" y="{H - 1}" width="{W}" height="1" fill="#93c5fd"/>')
-    return f'<svg class="px skyline" viewBox="0 0 {W} {H}" aria-hidden="true">' + "".join(cells) + "</svg>"
+def pixel_burj():
+    """A detailed pixel-art Burj Khalifa: stepped Y-plan setbacks, glass bands, a lit core and the spire."""
+    W, H, cx = 56, 168, 28
+    base, top = 150, 34                      # tower body rows
+    px = {}
+
+    def put(x, y, c):
+        if 0 <= x < W and 0 <= y < H:
+            px[(x, y)] = c
+
+    # Stepped silhouette: the three wings end at different heights, so left and right step out of phase.
+    def half(y, phase):
+        t = (base - y) / (base - top)
+        steps = 13
+        level = min(steps - 1, int((t * steps + phase) // 1))
+        return max(1, round(19 * (1 - level / steps) ** 1.15))
+
+    for y in range(top, base):
+        l, r = half(y, 0.0), half(y, 0.5)
+        band = (y % 4 == 0)
+        for x in range(cx - l, cx + r + 1):
+            d = x - cx
+            if abs(d) <= 1:
+                c = "#bfdbfe" if band else "#93c5fd"          # lit central core
+            elif d < 0:
+                c = "#60a5fa" if band else ("#3b82f6" if d > -l + 1 else "#2563eb")
+            else:
+                c = "#1e40af" if band else ("#1d4ed8" if d < r - 1 else "#1e3a8a")
+            put(x, y, c)
+        # setback ledges catch the light
+        if half(y - 1, 0.0) < l:
+            for x in range(cx - l, cx - half(y - 1, 0.0)):
+                put(x, y, "#dbeafe")
+        if half(y - 1, 0.5) < r:
+            for x in range(cx + half(y - 1, 0.5) + 1, cx + r + 1):
+                put(x, y, "#93c5fd")
+    # Spire with its pinnacle and a warm beacon.
+    for y in range(4, top):
+        w = 0 if y < 16 else 1
+        for x in range(cx - w, cx + w + 1):
+            put(x, y, "#93c5fd" if x <= cx else "#3b82f6")
+    put(cx, 3, "#f59e0b")
+    # Podium, plaza and fountain line.
+    for y in range(base, base + 7):
+        for x in range(cx - 24, cx + 25):
+            put(x, y, "#dbeafe" if (x + y) % 6 else "#bfdbfe")
+    for x in range(cx - 22, cx + 23, 3):
+        put(x, base + 2, "#ffffff")
+        put(x, base + 4, "#ffffff")
+    for x in range(W):
+        put(x, base + 7, "#93c5fd")
+        put(x, base + 8, "#bfdbfe")
+    # Two small palms at the foot.
+    for px0 in (cx - 22, cx + 21):
+        for y in range(base - 6, base):
+            put(px0, y, "#a16207")
+        for dx, dy in ((-2, -7), (-1, -8), (0, -8), (1, -8), (2, -7), (-3, -6), (3, -6), (0, -7)):
+            put(px0 + dx, base + dy, "#16a34a")
+    # A couple of soft clouds.
+    for cx0, cy0 in ((10, 40), (44, 70)):
+        for dx in range(-4, 5):
+            put(cx0 + dx, cy0, "#e0e7ff")
+        for dx in range(-2, 3):
+            put(cx0 + dx, cy0 - 1, "#e0e7ff")
+    cells = "".join(f'<rect x="{x}" y="{y}" width="1" height="1" fill="{c}"/>' for (x, y), c in sorted(px.items()))
+    return f'<svg class="px burj" viewBox="0 0 {W} {base + 9}" aria-hidden="true">' + cells + "</svg>"
 
 
 def pixel_strip(n=90):
@@ -184,14 +232,14 @@ def render_cv(p, compact=0):
                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
                f"<title>{p['name']} — CV</title>\n<meta name=\"robots\" content=\"noindex\">\n"
                "<!-- GENERATED FILE: edit profile.json and run scripts/build.py -->\n"
-               f"<style>\n{css}</style>\n</head>\n<body>\n<div class=\"page\">")
+               f"<style>\n{css}</style>\n</head>\n<body>\n<div class=\"sheet\">")
     contact = [f"<span>{p['location']}</span>"]
     for ph in p["phones"]:
         contact.append(f'<span><a href="tel:{ph.replace(" ", "")}">{ph}</a></span>')
     contact.append(f'<span><a href="mailto:{p["email"]}">{p["email"]}</a></span>')
     contact.append(f'<span><a href="https://{p["site"]}">{p["site"]}</a></span>')
     qr = qr_block(p["cv_qr"]) if p.get("cv_qr") else ""
-    out.append(f'<header>\n<div class="head-row"><div class="ident"><div>\n  <h1>{p["name"]}<span class="cursor"></span></h1>\n'
+    out.append(f'<header>\n<div class="head-row"><div class="ident"><div>\n  <h1>{p["name"]}</h1>\n'
                f'  <div class="tagline">{"<br>".join(p["title"].split(" · "))}</div>\n</div></div>{qr}</div>\n<div class="contact">{"".join(contact)}</div>\n'
                f'<div class="strip">{pixel_strip()}</div>\n</header>')
 
@@ -213,7 +261,7 @@ def render_cv(p, compact=0):
         for l in p["leadership"]:
             out.append(cv_item(l["role"], l["org"], period(l["start"], l["end"]), [l.get("cv_text", l["text"])]))
 
-    out.append(h2("Selected Projects"))
+    out.append('</div>\n<div class="sheet sheet2">\n' + h2("Selected Projects"))
     for pr in p["projects"]:
         if not pr.get("cv"):
             continue
@@ -235,7 +283,7 @@ def render_cv(p, compact=0):
     out.append("</div>")
     if p.get("cv_live_links"):
         out.append('<div class="live">' + h2("Live work · scan to open") + qr_block(p["cv_live_links"]) + "</div>")
-    out.append(f'<div class="sky">{pixel_skyline()}</div>')
+    out.append(f'<div class="burj-wrap">{pixel_burj()}</div>')
     out.append("</div>\n</body>\n</html>\n")
     return "\n\n".join(out)
 
