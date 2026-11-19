@@ -203,7 +203,7 @@
       "title": "Kontraktus",
       "badge": "Capstone",
       "cv_subtitle": "UOWD capstone",
-      "period": "May 2026 – Oct 2026",
+      "period": "Apr 2026 – Dec 2026",
       "desc": "Local-first contract analysis with zero network egress: Ollama, hybrid ChromaDB/BM25 retrieval, verbatim clause citations, risk rules and OCR, evaluated on 102 lawyer-labelled CUAD contracts.",
       "cv_desc": "On-device contract analysis with Ollama and hybrid retrieval, evaluated on 102 lawyer-labelled contracts.",
       "tags": [
