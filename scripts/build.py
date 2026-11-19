@@ -111,7 +111,7 @@ def pixel_icon(rows):
 def pixel_burj():
     """Detailed pixel-art Burj Khalifa (front view): central core and spire, wing slabs that step back
     out of phase like the real spiral setbacks, vertical fins, floor lines, mechanical-floor bands,
-    observation decks, podium terraces, the Dubai Fountain lake with jets, palms, clouds and birds."""
+    observation decks, clouds and birds; the tower stands on the page edge."""
     W, H, cx = 80, 400, 40
     px = {}
 
@@ -177,33 +177,6 @@ def pixel_burj():
     for y in range(4, 10):
         put(cx, y, "#94a3b8")
     put(cx, 3, "#f59e0b"); put(cx, 2, "#fde68a")
-    # Podium terraces.
-    for i, (inset, h, col) in enumerate([(2, 4, "#e0e7ff"), (6, 3, "#dbeafe"), (12, 3, "#c7d2fe")]):
-        for y in range(ground + i * 3, ground + i * 3 + h):
-            for x in range(inset, W - inset):
-                put(x, y, col if (x + y) % 7 else "#bfdbfe")
-    for x in range(cx - 3, cx + 4):                  # entrance
-        for y in range(ground + 4, ground + 9):
-            put(x, y, "#1e3a8a" if x in (cx - 3, cx + 3) or y == ground + 4 else "#60a5fa")
-    # Dubai Fountain lake with jets.
-    lake = ground + 12
-    for y in range(lake, H - 4):
-        for x in range(W):
-            put(x, y, "#93c5fd" if (x * 3 + y * 5) % 11 else "#dbeafe")
-    for jx, jh in ((6, 9), (16, 14), (27, 11), (40, 18), (53, 11), (64, 14), (74, 9)):
-        for dy in range(jh):
-            put(jx, lake - 1 - dy, "#e0f2fe" if dy % 2 else "#ffffff")
-        for dx in (-2, -1, 1, 2):
-            put(jx + dx, lake - jh + abs(dx), "#e0f2fe")
-    for y in range(H - 4, H):
-        for x in range(W):
-            put(x, y, "#cbd5e1" if (x + y) % 5 else "#e2e8f0")
-    # Palms on the promenade.
-    for x0 in (3, W - 4):
-        for y in range(ground - 9, ground + 3):
-            put(x0, y, "#a16207")
-        for dx, dy in ((-3, -10), (-2, -11), (-1, -12), (0, -12), (1, -12), (2, -11), (3, -10), (-4, -9), (4, -9), (0, -11)):
-            put(x0 + dx, ground + dy, "#16a34a")
     # Clouds and birds.
     for cx0, cy0, w in ((12, 70, 6), (60, 150, 5), (10, 230, 4)):
         for dx in range(-w, w + 1):
@@ -213,8 +186,8 @@ def pixel_burj():
     for bx, by in ((54, 40), (60, 46), (20, 120)):
         for dx, dy in ((-1, 0), (0, 1), (1, 0)):
             put(bx + dx, by + dy, "#64748b")
-    cells = "".join(f'<rect x="{x}" y="{y}" width="1" height="1" fill="{c}"/>' for (x, y), c in sorted(px.items()) if c)
-    return f'<svg class="px burj" viewBox="0 0 {W} {H}" aria-hidden="true">' + cells + "</svg>"
+    cells = "".join(f'<rect x="{x}" y="{y}" width="1" height="1" fill="{c}"/>' for (x, y), c in sorted(px.items()) if c and y < ground)
+    return f'<svg class="px burj" viewBox="0 0 {W} {ground}" aria-hidden="true">' + cells + "</svg>"
 
 
 def pixel_strip(n=90):
