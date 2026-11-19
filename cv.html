@@ -61,20 +61,19 @@
 </header>
 
 <h2>Summary</h2>
-<p>Chief Technology Officer of Begad, a bilingual UAE marketplace (begad.ae) on PHP 8.3, MariaDB and AWS, and founder of Computator Technology, a Dubai DET-licensed software and managed-IT practice. Final-year BSc Cybersecurity student (UOWD, graduating Dec 2026) and president of the UOWD Tech Club. At Begad: fixed revenue-critical payment and stock defects, rebuilt ad attribution, shipped iOS/Android apps, runs an ISO/IEC 27001-aligned security programme and recovered the platform from git after its production instance was deleted. Background in penetration testing, hardened self-hosted infrastructure (WireGuard, Matrix E2EE, Traefik, Proxmox) and local-first AI systems. Comfortable owning a production system end to end: threat model, build, deploy, recover.</p>
+<p>CTO of Begad, a bilingual UAE marketplace (begad.ae), and founder of Computator Technology, a Dubai-licensed software and managed-IT practice. Final-year BSc Cybersecurity student at UOWD (graduating Dec 2026) and president of the UOWD Tech Club. I own production systems end to end, from secure design to build, deploy and recovery, with a background in penetration testing, self-hosted infrastructure and local-first AI.</p>
 
 <h2>Experience</h2>
 
 <div class="item">
   <div class="item-head"><div><span class="role">Chief Technology Officer</span> <span class="org">· Begad General Trading L.L.C (begad.ae) · Dubai, UAE</span></div><div class="date">Aug 2026 – Present</div></div>
   <ul>
-    <li>Own technology for a bilingual UAE marketplace end to end: platform engineering, AWS infrastructure, payments, mobile apps, analytics and security, with 2,400+ production commits across storefront, checkout, wallet, seller payouts, logistics tracking, admin and seller portals.</li>
-    <li>Run Begad's ISO/IEC 27001-aligned information security programme: role separation and least privilege across admin and seller portals, signed Stripe webhooks with replay protection, checked routes for seller identity and bank documents, versioned migrations, automated backups with tested recovery, SPF/DKIM/DMARC and a self-hosted mail server, audit logging, admin account recovery and patched hosts; closed out a security and money audit in Nov 2026.</li>
-    <li>Closed revenue leaks: orders were confirmed and stock deducted before Stripe capture; gated confirmation strictly post-payment and added Stripe Payment Element (Apple/Google Pay) and Tabby BNPL.</li>
-    <li>Rebuilt ad attribution from zero e-commerce events to full-funnel Meta Conversions API + TikTok Events API with event_id deduplication and SHA-256 hashed match data.</li>
-    <li>Restored the platform from git history after the production instance was deleted with no backups (Aug 2026); then introduced versioned migrations, automated backups, GitHub Actions CI/CD and infrastructure runbooks.</li>
-    <li>Cut UAE page latency: CloudFront origin keep-alive tuning, tracking-parameter cache normalisation, stale-while-revalidate page caches and edge caching of guest and signed-in pages.</li>
-    <li>Shipped iOS/Android apps (Capacitor with native Swift/Java bridges), an iMessage extension, Sign in with Apple, and a public agent API (catalog, search, product, MCP tools, llms.txt) so AI assistants can shop the catalogue.</li>
+    <li>Own technology end to end for a bilingual UAE marketplace (PHP 8.3, MariaDB, AWS): platform, payments, mobile apps, analytics and security, with 2,400+ production commits.</li>
+    <li>Run the ISO/IEC 27001-aligned security programme: least-privilege portals, signed Stripe webhooks, versioned migrations, tested backups, SPF/DKIM/DMARC and audit logging; closed a security and money audit (Nov 2026).</li>
+    <li>Closed revenue leaks by confirming orders only after Stripe capture; added Apple/Google Pay and Tabby BNPL, and held seller payouts until the return window closes.</li>
+    <li>Rebuilt ad attribution from zero events to full-funnel Meta and TikTok server-side tracking, and cut UAE latency with CloudFront edge caching.</li>
+    <li>Recovered the platform from git after production was deleted with no backups (Aug 2026), then added CI/CD, automated backups and runbooks.</li>
+    <li>Shipped iOS/Android apps, a public agent API with MCP tools, Begad Food (food.begad.ae), vidvie.ae, and automated seller pickups and driver logistics.</li>
   </ul>
 </div>
 
@@ -83,10 +82,10 @@
   <ul>
     <li>Run a Dubai DET-licensed sole establishment delivering custom software, data platforms, websites and managed IT to UAE and Libyan clients; engineering partner to Begad.</li>
     <li>Engineered an automated invoicing and billing engine supporting multi-account routing (Ziina integration) and programmatic PDF export.</li>
-    <li><b>BHF Auctions</b> (May 2026 – Present): luxury auction platform on Next.js 15, Prisma and MariaDB with Pusher real-time bidding and a bilingual catalogue; deterministic proxy bidding, immutable bid ledger, reconciliation and signed close reports with rehearsal scripts for concurrent bidding; encrypted KYC lifecycle, point-in-time recovery runbooks, an off-server recovery drill and a full technical handoff; ongoing engineering towards public sale readiness; hardened auction platform APIs against data exposure and price manipulation, and rebuilt the client mobile application on live platform feeds.</li>
-    <li><b>Komissio</b> (Jul 2026 – Present): local-first company operating system built in Dubai (FastAPI, React, SQLite, ChromaDB): contacts, leads, deals, approvals, documents, invoicing, accounting and payroll on one tenant-isolated workspace with private local AI; piloted at Mon Maison and under active development, with brand identity and investor deck.</li>
-    <li><b>Mon Adoptive Technology</b> (May 2026 – Aug 2026): technology and growth advisory for its SME Solutions Division, covering the ERP/CRM offer, six-month business plan, executive strategy, corporate portal and client proposals including a nightclub CRM and a hardened-device and secure-router offering.</li>
-    <li><b>Mon Maison</b> (Jun 2026 – Aug 2026): real-estate intelligence platform consolidating 23M+ owner and property rows with deduplication and entity resolution, Telegram (Telethon MTProto) and WhatsApp ingestion and a local AI research assistant; ERPNext customisation and a live stock-portfolio automation with EODHD data and generated Excel/VBA workbooks.</li>
+    <li><b>BHF Auctions</b> (May 2026 – Present): luxury auction platform (Next.js 15, Prisma, MariaDB) with real-time and proxy bidding, an immutable bid ledger, encrypted KYC, tested off-server recovery and hardened APIs; also rebuilt the client mobile app.</li>
+    <li><b>Komissio</b> (Jul 2026 – Present): local-first company operating system (FastAPI, React, SQLite, ChromaDB): CRM, deals, documents, invoicing, accounting and payroll with private local AI; piloted at Mon Maison.</li>
+    <li><b>Mon Adoptive Technology</b> (May 2026 – Aug 2026): technology and growth advisory for its SME Solutions Division: ERP/CRM offer, business plan, executive strategy and client proposals.</li>
+    <li><b>Mon Maison</b> (Jun 2026 – Aug 2026): real-estate intelligence platform consolidating 23M+ owner and property rows with entity resolution, Telegram and WhatsApp ingestion and a local AI assistant; ERPNext customisation.</li>
     <li><b>Monumental Events</b> (Jul 2026 – Aug 2026): brand-led website for an events company (monuevents.com): concept design across desktop and mobile, build and hosted deployment.</li>
     <li>Built computator.ae on React 19, Vite and Tailwind v4 with a PHP API and serialized, verified, auto-rollback GitHub Actions deployments; delivered client sites including Al Reemas Center (bilingual AR/EN with a 36-concept logo lab).</li>
   </ul>
@@ -135,21 +134,21 @@
 <div class="item">
   <div class="item-head"><div><span class="role">Kontraktus</span> <span class="org">· local-first contract intelligence platform (UOWD capstone)</span></div><div class="date">May 2026 – Oct 2026</div></div>
   <ul>
-    <li>Python/Streamlit app that parses, indexes and analyses contracts entirely on-device with zero network egress: Ollama (Qwen 2.5), bge-small embeddings, ChromaDB + BM25 hybrid retrieval with reciprocal rank fusion, clause-aware chunking with verbatim citations, YAML risk rules, missing-clause detection, Tesseract OCR; retrieval evaluated on 102 lawyer-labelled CUAD contracts. Hardened the contract-analysis platform: access control enforced for uploads, analysis and report export (including after reviewer access is revoked), atomic analysis commits, and DOCX table extraction.</li>
+    <li>Python/Streamlit app that analyses contracts fully on-device: Ollama (Qwen 2.5), ChromaDB + BM25 hybrid retrieval, clause-aware chunking with citations, YAML risk rules and OCR; evaluated on 102 lawyer-labelled CUAD contracts, with access-controlled reviewer workflows.</li>
   </ul>
 </div>
 
 <div class="item">
   <div class="item-head"><div><span class="role">Self-hosted secure communications stack</span></div><div class="date">2026</div></div>
   <ul>
-    <li>WireGuard VPN with admin dashboard, Matrix Synapse homeserver with end-to-end encryption and Matrix Authentication Service (OAuth2/OIDC SSO), LiveKit WebRTC, Traefik with Let's Encrypt, Glance SSO dashboard, Netdata monitoring, encrypted DNS and an E2EE ops bot; scripted, repeatable deployments.</li>
+    <li>WireGuard VPN, Matrix Synapse with E2EE and OIDC SSO, LiveKit WebRTC, Traefik with Let's Encrypt, Netdata and encrypted DNS; scripted, repeatable deployments.</li>
   </ul>
 </div>
 
 <div class="item">
   <div class="item-head"><div><span class="role">Homelab, pentest range &amp; OSINT self-audit dashboard</span></div><div class="date">2024 – Present</div></div>
   <ul>
-    <li>Proxmox VE with segmented attack/target subnets (Kali, Metasploitable, Windows Server), OpenWrt firewall and WireGuard segment; Nmap, Metasploit, Burp Suite and Wireshark practice. Dockerised LXC dashboard combining Maigret, Sherlock, WhatsMyName, Holehe and PhoneInfoga with image EXIF/OCR auditing; Traefik routing and NFS storage.</li>
+    <li>Proxmox VE pentest range with segmented attack/target subnets (Kali, Metasploitable, Windows Server), OpenWrt firewall and WireGuard; Dockerised OSINT self-audit dashboard (Maigret, Sherlock, Holehe) with EXIF/OCR checks.</li>
   </ul>
 </div>
 

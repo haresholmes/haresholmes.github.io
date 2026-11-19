@@ -172,7 +172,8 @@ Propose only changes that the digest clearly proves. Rules:
 - Significant new capability inside an existing engagement or role becomes add_engagement_detail (appends one sentence to that engagement) or add_role_bullet.
 - When a repo for an engagement marked with an end date is clearly active again, use set_engagement_end with end "Present".
 - Mention a technology in add_skill_terms only when it is used substantively in the digest and not yet in that skill.
-- Write bullets in the existing style: concrete, past or present tense, technologies named, no hype, no first person, under 45 words. Use HTML entities for & (write &amp;).
+- Keep the CV and site short and readable. Each role holds at most 6 bullets and each engagement or project text at most 40 words; when an entry is full, propose nothing for it unless the work is a major new capability, and then fold it into a short add_role_bullet that could replace a weaker one (Ziad merges by hand).
+- Write bullets in the existing style: concrete, past or present tense, technologies named, no hype, no first person, under 30 words. Use HTML entities for & (write &amp;).
 - Do not include secrets, credentials, internal IPs, customer names found in commit messages, or anything embarrassing.
 - Every change must cite evidence_repos from the digest.
 - If nothing qualifies, return an empty changes list and say why in summary."""
@@ -449,6 +450,12 @@ def apply_changes(profile, changes, digest):
     known = {r["repo"] for r in digest["repos"]} | {"hermes+openclaw consensus"}
     applied, skipped = [], []
     comp = next((e for e in profile["experience"] if e["org"] == "Computator Technology"), None)
+    max_bullets = int(profile.get("max_role_bullets", 6))
+    max_words = int(profile.get("max_entry_words", 40))
+
+    def words(text):
+        return len(re.sub(r"<[^>]+>", " ", text or "").split())
+
     for c in changes:
         ev = [r for r in c.get("evidence_repos", []) if r in known]
         if not ev:
@@ -469,6 +476,8 @@ def apply_changes(profile, changes, digest):
                     elif pr:
                         if norm(c["text"]) in norm(pr["desc"]):
                             raise ValueError("detail already present")
+                        if words(pr["desc"]) + words(c["text"]) > max_words:
+                            raise ValueError(f"project text would exceed {max_words} words; edit by hand")
                         pr["desc"] = pr["desc"].rstrip(".") + ". " + c["text"].rstrip(".") + "."
                         if pr.get("cv_desc"):
                             pr["cv_desc"] = pr["cv_desc"].rstrip(".") + ". " + c["text"].rstrip(".") + "."
@@ -479,6 +488,10 @@ def apply_changes(profile, changes, digest):
             if op == "add_role_bullet":
                 if any(norm(c["text"]) == norm(b) for b in e.get("bullets", [])):
                     raise ValueError("duplicate bullet")
+                if len(e.get("bullets", [])) >= max_bullets:
+                    raise ValueError(f"role already has {max_bullets} bullets; merge by hand")
+                if words(c["text"]) > 35:
+                    raise ValueError("bullet too long (over 35 words)")
                 e.setdefault("bullets", []).append(c["text"])
                 if "site_bullets" in e:
                     e["site_bullets"].append(c.get("site_text") or c["text"])
@@ -498,6 +511,8 @@ def apply_changes(profile, changes, digest):
                     raise ValueError(f"unknown engagement {c['client']!r}")
                 if norm(c["text"]) in norm(g["text"]):
                     raise ValueError("detail already present")
+                if words(g["text"]) + words(c["text"]) > max_words:
+                    raise ValueError(f"engagement text would exceed {max_words} words; edit by hand")
                 g["text"] = g["text"].rstrip(".") + "; " + c["text"][0].lower() + c["text"][1:].rstrip(".") + "."
                 g["site_text"] = g.get("site_text", g["text"])
             elif op == "set_engagement_end":

@@ -101,8 +101,8 @@
         <section id="about">
             <h3 class="section-heading fade-in"><span class="section-number">01</span>About</h3>
             <!-- profile:about:start -->
-            <p>Chief Technology Officer at <a href="https://begad.ae" target="_blank" rel="noopener">Begad</a>, a bilingual UAE marketplace, and founder of <strong>Computator Technology</strong>, a Dubai-licensed software and managed-IT practice, while finishing a BSc in Cybersecurity. Since August 2026 I have owned Begad's technology end to end: I closed payment and stock defects, rebuilt ad attribution, shipped the iOS and Android apps, run its ISO/IEC 27001-aligned security programme, and brought the platform back from git history after its production server was deleted with no backups.</p>
-            <p>Through Computator I build and run systems for clients: a luxury auction engine with an immutable bid ledger for BHF Auctions, Komissio, a local-first company operating system, a real-estate intelligence platform and technology strategy for Mon Adoptive Technology, and brand-led websites. At university I lead the Tech Club and its cybersecurity team. Outside client work I keep a Proxmox pentest range, a self-hosted WireGuard and Matrix E2EE stack, and a local-first contract-analysis platform built for my capstone. I care about systems that are secure by construction, documented well enough to rebuild, and honest about what they can and cannot do.</p>
+            <p>CTO at <a href="https://begad.ae" target="_blank" rel="noopener">Begad</a>, a bilingual UAE marketplace, and founder of <strong>Computator Technology</strong>, while finishing a BSc in Cybersecurity. Since August 2026 I have run Begad's technology end to end, from payments and mobile apps to its ISO/IEC 27001-aligned security programme.</p>
+            <p>Through Computator I build systems for clients such as BHF Auctions and Mon Maison. At university I lead the Tech Club and its cybersecurity team, and at home I run a Proxmox pentest range and a self-hosted secure communications stack. I care about systems that are secure by construction and documented well enough to rebuild.</p>
             <!-- profile:about:end -->
                     </section>
         <hr class="section-divider">
@@ -138,20 +138,12 @@
                     <div class="experience-company">Begad General Trading L.L.C (begad.ae) · Dubai, UAE</div>
                     <div class="experience-date">Aug 2026 – Present</div>
                     <ul class="experience-bullets">
-                        <li>Own technology end to end for a bilingual UAE marketplace: platform engineering, AWS infrastructure, payments, mobile apps, analytics and security, with 2,400+ production commits.</li>
-                        <li>Run the ISO/IEC 27001-aligned security programme: least-privilege portals, signed Stripe webhooks, checked document routes, versioned migrations, tested backups, SPF/DKIM/DMARC, audit logging and a closed-out security and money audit (Nov 2026).</li>
-                        <li>Closed revenue leaks by gating order confirmation strictly post-payment; added Stripe Payment Element (Apple/Google Pay) and Tabby BNPL.</li>
-                        <li>Rebuilt ad attribution from zero events to full-funnel Meta Conversions API and TikTok Events API with deduplication and hashed match data.</li>
-                        <li>Recovered the platform from git history after the production instance was deleted without backups; introduced versioned migrations, automated backups, CI/CD and infrastructure runbooks.</li>
-                        <li>Cut UAE latency with CloudFront keep-alive tuning, cache-key normalisation and edge caching; shipped iOS/Android apps, an iMessage extension and a public agent API with MCP tools.</li>
-                        <li>Launched vidvie.ae, the UAE distributor site for VIDVIE, fed live from the Begad API on S3 + CloudFront with GitHub OIDC deploys.</li>
-                        <li>Set direction for the mobile launch, Libya market expansion and the agent-commerce roadmap.</li>
-                        <li>Launched Begad Food (food.begad.ae), expanding core marketplace infrastructure into food delivery with integrated administrative management and dedicated ordering workflows.</li>
-                        <li>Automated Fulfilled by Begad (FBB) seller warehouse pickups, engineering address and geospatial coordinate validation with scheduled logistics dispatch.</li>
-                        <li>Rebuilt vidvie.ae as a white-label marketplace served via CloudFront with static page generation and automated bilingual guides syndicated from Begad content.</li>
-                        <li>Enhanced the logistics driver suite with real-time job push updates, offline-resilient route refresh, and bidirectional shipment editing.</li>
-                        <li>Built return-window payout holds: seller money for orders still inside the customer return window is held back (never for cancelled or failed orders), with the not-settled amount shown in seller statements, Seller Payouts pages and the Seller API.</li>
-                        <li>Rebuilt the logistics shipments page into Deliveries, Pickups & returns and Marketplace tabs, and added shipment deletion with a confirmation step before cancelling.</li>
+                        <li>Own technology end to end for a bilingual UAE marketplace (PHP 8.3, MariaDB, AWS): platform, payments, mobile apps, analytics and security, with 2,400+ production commits.</li>
+                        <li>Run the ISO/IEC 27001-aligned security programme: least-privilege portals, signed Stripe webhooks, versioned migrations, tested backups, SPF/DKIM/DMARC and audit logging; closed a security and money audit (Nov 2026).</li>
+                        <li>Closed revenue leaks by confirming orders only after Stripe capture; added Apple/Google Pay and Tabby BNPL, and held seller payouts until the return window closes.</li>
+                        <li>Rebuilt ad attribution from zero events to full-funnel Meta and TikTok server-side tracking, and cut UAE latency with CloudFront edge caching.</li>
+                        <li>Recovered the platform from git after production was deleted with no backups (Aug 2026), then added CI/CD, automated backups and runbooks.</li>
+                        <li>Shipped iOS/Android apps, a public agent API with MCP tools, Begad Food (food.begad.ae), vidvie.ae, and automated seller pickups and driver logistics.</li>
                     </ul>
                 </div>
             </div>
@@ -164,10 +156,10 @@
                     <ul class="experience-bullets">
                         <li>Run a Dubai DET-licensed sole establishment delivering custom software, data platforms, websites and managed IT to UAE and Libyan clients; engineering partner to Begad.</li>
                         <li>Engineered an automated invoicing and billing engine supporting multi-account routing (Ziina integration) and programmatic PDF export.</li>
-                        <li><strong>BHF Auctions</strong> (May 2026 – Present): luxury auction platform on Next.js 15, Prisma and MariaDB with real-time bidding, deterministic proxy bidding, an immutable bid ledger, encrypted KYC storage, tested off-server recovery and ongoing engineering towards public sale readiness.</li>
-                        <li><strong>Komissio</strong> (Jul 2026 – Present): local-first company operating system (FastAPI, React, SQLite, ChromaDB) uniting CRM, deals, documents, invoicing, accounting and private local AI in one workspace; piloted at Mon Maison and under active development.</li>
-                        <li><strong>Mon Adoptive Technology</strong> (May 2026 – Aug 2026): technology and growth advisory for its SME Solutions Division, including the ERP/CRM offer, business plan, executive strategy, corporate portal and client proposals.</li>
-                        <li><strong>Mon Maison</strong> (Jun 2026 – Aug 2026): real-estate intelligence platform with 23M+ consolidated owner and property rows, entity resolution, Telegram and WhatsApp ingestion and a local AI assistant.</li>
+                        <li><strong>BHF Auctions</strong> (May 2026 – Present): luxury auction platform with real-time bidding, an immutable bid ledger, encrypted KYC and tested off-server recovery.</li>
+                        <li><strong>Komissio</strong> (Jul 2026 – Present): local-first company operating system: CRM, invoicing, accounting and private local AI in one workspace; piloted at Mon Maison.</li>
+                        <li><strong>Mon Adoptive Technology</strong> (May 2026 – Aug 2026): technology and growth advisory for its SME Solutions Division.</li>
+                        <li><strong>Mon Maison</strong> (Jun 2026 – Aug 2026): real-estate intelligence platform with 23M+ consolidated property rows and a local AI assistant.</li>
                         <li><strong>Monumental Events</strong> (Jul 2026 – Aug 2026): brand-led website for an events company (monuevents.com): concept design, build and hosted deployment.</li>
                         <li>Built computator.ae (React 19, Vite, Tailwind v4, PHP API) with verified auto-rollback deployments; delivered client sites including Al Reemas Center.</li>
                     </ul>
@@ -292,7 +284,7 @@
                     <div class="project-accent-line"></div>
                     <div class="project-badge">Production</div>
                     <div class="project-title">Begad marketplace (begad.ae)</div>
-                    <div class="project-desc">Bilingual UAE marketplace on PHP 8.3, MariaDB and AWS where I serve as CTO since August 2026: post-capture payment gating, Stripe and Tabby, full-funnel conversion tracking, CloudFront edge caching, iOS/Android apps, an iMessage extension, seller payouts and logistics tracking, plus a public agent API so AI assistants can search and prepare orders. Rebuilt from git after the production server was deleted with no backups.</div>
+                    <div class="project-desc">Bilingual UAE marketplace on PHP 8.3, MariaDB and AWS where I am CTO: payments, conversion tracking, edge caching, mobile apps and a public agent API for AI shopping.</div>
                     <div class="project-tags">
                         <span class="project-tag">PHP 8.3</span>
                         <span class="project-tag">AWS</span>
@@ -304,7 +296,7 @@
                     <div class="project-accent-line"></div>
                     <div class="project-badge">Capstone</div>
                     <div class="project-title">Kontraktus</div>
-                    <div class="project-desc">Local-first contract intelligence platform with zero network egress: Ollama (Qwen 2.5), ChromaDB and BM25 hybrid retrieval, clause-aware chunking with verbatim citations, YAML risk rules, missing-clause detection and OCR, evaluated on 102 lawyer-labelled CUAD contracts. Hardened the contract-analysis platform: access control enforced for uploads, analysis and report export (including after reviewer access is revoked), atomic analysis commits, and DOCX table extraction.</div>
+                    <div class="project-desc">Local-first contract analysis with zero network egress: Ollama, hybrid ChromaDB/BM25 retrieval, verbatim clause citations, risk rules and OCR, evaluated on 102 lawyer-labelled CUAD contracts.</div>
                     <div class="project-tags">
                         <span class="project-tag">Python</span>
                         <span class="project-tag">RAG</span>
@@ -314,7 +306,7 @@
                 <div class="project-card">
                     <div class="project-accent-line"></div>
                     <div class="project-title">Self-hosted secure communications stack</div>
-                    <div class="project-desc">WireGuard VPN with admin dashboard, Matrix Synapse with end-to-end encryption and OIDC single sign-on, LiveKit WebRTC, Traefik with Let's Encrypt, Glance dashboard, Netdata monitoring, encrypted DNS and an E2EE ops bot, all scripted for repeatable deployment.</div>
+                    <div class="project-desc">WireGuard VPN, Matrix Synapse with E2EE and SSO, LiveKit video, Traefik and Netdata monitoring, all scripted for repeatable deployment.</div>
                     <div class="project-tags">
                         <span class="project-tag">WireGuard</span>
                         <span class="project-tag">Matrix E2EE</span>
@@ -324,7 +316,7 @@
                 <div class="project-card">
                     <div class="project-accent-line"></div>
                     <div class="project-title">BHF Auctions platform</div>
-                    <div class="project-desc">Luxury auction engine on Next.js 15, Prisma and MariaDB: deterministic proxy bidding, immutable bid ledger, signed close reports, real-time bidding over Pusher, encrypted KYC storage and a tested off-server recovery drill.</div>
+                    <div class="project-desc">Luxury auction engine on Next.js 15 and MariaDB with real-time proxy bidding, an immutable bid ledger, encrypted KYC and a tested recovery drill.</div>
                     <div class="project-tags">
                         <span class="project-tag">Next.js</span>
                         <span class="project-tag">Real-time</span>
@@ -334,7 +326,7 @@
                 <div class="project-card">
                     <div class="project-accent-line"></div>
                     <div class="project-title">Komissio</div>
-                    <div class="project-desc">Local-first company operating system built in Dubai: contacts, leads, deals, approvals, documents, invoicing, accounting and payroll in one tenant-isolated workspace, with private local AI over company data and real-estate intelligence. Piloted at Mon Maison and under active development.</div>
+                    <div class="project-desc">Local-first company operating system: CRM, deals, documents, invoicing, accounting and payroll in one workspace with private local AI. Piloted at Mon Maison.</div>
                     <div class="project-tags">
                         <span class="project-tag">FastAPI</span>
                         <span class="project-tag">React</span>
@@ -344,7 +336,7 @@
                 <div class="project-card">
                     <div class="project-accent-line"></div>
                     <div class="project-title">Mon Maison data platform</div>
-                    <div class="project-desc">Consolidated 23M+ real-estate owner and property rows with deduplication and entity resolution, Telegram MTProto and WhatsApp ingestion, and a local AI research assistant that Komissio was later built on top of.</div>
+                    <div class="project-desc">Consolidated 23M+ real-estate owner and property rows with entity resolution, Telegram and WhatsApp ingestion and a local AI research assistant.</div>
                     <div class="project-tags">
                         <span class="project-tag">Entity resolution</span>
                         <span class="project-tag">Telethon</span>
@@ -355,7 +347,7 @@
                     <div class="project-accent-line"></div>
                     <div class="project-badge">Lab</div>
                     <div class="project-title">Homelab, pentest range &amp; OSINT dashboard</div>
-                    <div class="project-desc">Proxmox VE with segmented attack and target subnets, Kali and vulnerable targets, OpenWrt firewall and a WireGuard segment; plus a Dockerised self-audit dashboard combining Maigret, Sherlock, WhatsMyName, Holehe and PhoneInfoga with image EXIF and OCR checks.</div>
+                    <div class="project-desc">Proxmox pentest range with segmented attack and target subnets, an OpenWrt firewall and WireGuard, plus a Dockerised OSINT self-audit dashboard.</div>
                     <div class="project-tags">
                         <span class="project-tag">Proxmox</span>
                         <span class="project-tag">OSINT</span>
@@ -365,7 +357,7 @@
                 <div class="project-card">
                     <div class="project-accent-line"></div>
                     <div class="project-title">VIDVIE UAE (vidvie.ae)</div>
-                    <div class="project-desc">Distributor site for VIDVIE in the UAE, fed live from the Begad agent API with cart handoff to checkout; private S3 bucket behind CloudFront, GitHub OIDC deployments with no stored keys, Route 53 DNS and ACM certificates.</div>
+                    <div class="project-desc">UAE distributor site for VIDVIE, fed live from the Begad API, on private S3 + CloudFront with keyless GitHub OIDC deploys.</div>
                     <div class="project-tags">
                         <span class="project-tag">AWS</span>
                         <span class="project-tag">OIDC</span>
