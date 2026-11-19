@@ -24,21 +24,26 @@
       "start": "Aug 2026",
       "end": "Present",
       "bullets": [
-        "Own technology end to end for a bilingual UAE marketplace (PHP 8.3, MariaDB, AWS): platform, payments, mobile apps, analytics and security, with 2,400+ production commits.",
-        "Run the ISO/IEC 27001-aligned security programme: least-privilege portals, signed Stripe webhooks, versioned migrations, tested backups, SPF/DKIM/DMARC and audit logging; closed a security and money audit (Nov 2026).",
-        "Closed revenue leaks by confirming orders only after Stripe capture; added Apple/Google Pay and Tabby BNPL, and held seller payouts until the return window closes.",
-        "Rebuilt ad attribution from zero events to full-funnel Meta and TikTok server-side tracking, and cut UAE latency with CloudFront edge caching.",
-        "Recovered the platform from git after production was deleted with no backups (Aug 2026), then added CI/CD, automated backups and runbooks.",
-        "Shipped iOS/Android apps, a public agent API with MCP tools, Begad Food (food.begad.ae), vidvie.ae, and automated seller pickups and driver logistics."
+        "<b>Platform at scale.</b> Sole technology lead: grew the inherited storefront into a 290k-line platform with 200+ tables, 175 admin and seller pages and a 46-endpoint Seller API (2,400+ commits in 3.5 months).",
+        "<b>AI agent workforce.</b> Gave every employee a personal AI agent in the company chat, with MCP tools for mail, inventory, listings and accounting, and code-enforced safety: scoped data, human sign-off.",
+        "<b>Autonomous operations.</b> Launched a WhatsApp support agent (116 live conversations on day one) and an automated daily executive report; built an AI HR manager for leave and payroll.",
+        "<b>Operations backbone.</b> Built in-house warehouse, accounting and logistics systems, with a GPS driver app and orders synced from noon, Amazon, Trendyol and Temu every five minutes.",
+        "<b>AI-driven catalogue.</b> Doubled live products to 10,000+ with nightly AI search tuning and recategorisation, 20 bilingual SEO articles a day and an agent-commerce API for AI shoppers.",
+        "<b>Private cloud &amp; security.</b> Built a 3-node private cloud of 20+ self-hosted services (SSO, mail, chat, ERP, MDM) and an ISO/IEC 27001 programme across all 93 Annex A controls.",
+        "<b>Resilience &amp; revenue.</b> Recovered production from git after a total loss and rebuilt it on auto-scaling AWS; closed a pre-payment checkout flaw; added Apple Pay, Google Pay and Tabby.",
+        "<b>Products &amp; markets.</b> Shipped five mobile apps (live on the App Store, Google Play and AppGallery), launched Begad Food and led the expansion into Libya."
       ],
       "cv_bullets": [
-        "<b>Technology leadership.</b> Full-time CTO accountable for all of Begad's technology, setting the roadmap for the mobile launch, Libya expansion and agent commerce.",
-        "<b>Revenue protection.</b> Fixed a checkout flaw that confirmed orders and deducted stock before payment cleared; added Apple Pay, Google Pay and Tabby, and held seller payouts through the return window.",
-        "<b>Security &amp; compliance.</b> Built and run an ISO/IEC 27001-aligned programme: least privilege, signed payment webhooks, tested backups and audit logging; closed a full security and money audit (Nov 2026).",
-        "<b>Disaster recovery.</b> Rebuilt the platform from git history after production was deleted with no backups, then introduced CI/CD, versioned migrations and automated backups to prevent a repeat.",
-        "<b>Growth &amp; performance.</b> Took ad attribution from zero tracked events to full-funnel Meta and TikTok server-side conversions, and cut UAE page load times with CloudFront edge caching.",
-        "<b>Product delivery.</b> Shipped iOS and Android apps, an agent API that lets AI assistants shop the catalogue, Begad Food and vidvie.ae, across 2,400+ production commits."
-      ]
+        "<b>Platform at scale.</b> Sole technology lead: grew the inherited storefront into a 290k-line platform with 200+ tables, 175 admin and seller pages and a 46-endpoint Seller API (2,400+ commits in 3.5 months).",
+        "<b>AI agent workforce.</b> Gave every employee a personal AI agent in the company chat, with MCP tools for mail, inventory, listings and accounting, and code-enforced safety: scoped data, human sign-off.",
+        "<b>Autonomous operations.</b> Launched a WhatsApp support agent (116 live conversations on day one) and an automated daily executive report; built an AI HR manager for leave and payroll.",
+        "<b>Operations backbone.</b> Built in-house warehouse, accounting and logistics systems, with a GPS driver app and orders synced from noon, Amazon, Trendyol and Temu every five minutes.",
+        "<b>AI-driven catalogue.</b> Doubled live products to 10,000+ with nightly AI search tuning and recategorisation, 20 bilingual SEO articles a day and an agent-commerce API for AI shoppers.",
+        "<b>Private cloud &amp; security.</b> Built a 3-node private cloud of 20+ self-hosted services (SSO, mail, chat, ERP, MDM) and an ISO/IEC 27001 programme across all 93 Annex A controls.",
+        "<b>Resilience &amp; revenue.</b> Recovered production from git after a total loss and rebuilt it on auto-scaling AWS; closed a pre-payment checkout flaw; added Apple Pay, Google Pay and Tabby.",
+        "<b>Products &amp; markets.</b> Shipped five mobile apps (live on the App Store, Google Play and AppGallery), launched Begad Food and led the expansion into Libya."
+      ],
+      "cv_max_bullets": 8
     },
     {
       "role": "Founder &amp; Lead Engineer",
@@ -120,7 +125,8 @@
       ],
       "cv_bullets": [
         "Built secure Python/SQL data pipelines with access control and SQL-injection prevention."
-      ]
+      ],
+      "cv_brief": true
     },
     {
       "role": "IT Security Intern",
@@ -138,7 +144,8 @@
       ],
       "cv_bullets": [
         "Drafted ISO/IEC 27001 security policies, a risk register and a remediation plan."
-      ]
+      ],
+      "cv_brief": true
     },
     {
       "role": "Web Security &amp; Development Intern",
@@ -156,7 +163,8 @@
       ],
       "cv_bullets": [
         "Rebuilt the company website with OWASP-aligned security controls."
-      ]
+      ],
+      "cv_brief": true
     },
     {
       "role": "E-Commerce Development Intern",
@@ -173,7 +181,8 @@
       ],
       "cv_bullets": [
         "Built inventory and customer workflows for the Yalla Bazzar e-commerce platform."
-      ]
+      ],
+      "cv_brief": true
     }
   ],
   "leadership": [
@@ -459,11 +468,11 @@
   ],
   "cv_competencies": [
     "Technology strategy",
+    "AI agents &amp; automation",
     "Security &amp; ISO/IEC 27001",
-    "AWS cloud architecture",
+    "Cloud &amp; private infrastructure",
     "Payments &amp; e-commerce",
-    "Incident response &amp; recovery",
-    "Mobile apps &amp; APIs"
+    "Incident response &amp; recovery"
   ],
-  "cv_summary": "CTO of Begad, a bilingual UAE marketplace, and founder of Computator Technology, a Dubai software and managed-IT firm. I lead platform, payments, cloud and security end to end, backed by a penetration-testing background and a BSc in Cybersecurity from UOWD (Dec 2026)."
+  "cv_summary": "Full-time CTO of Begad, a bilingual UAE marketplace, where I am the sole technology lead behind its platform, AI agent workforce, operations systems and security. Founder of Computator Technology, a Dubai software and managed-IT firm. Penetration-testing background; BSc Cybersecurity, UOWD (Dec 2026)."
 }

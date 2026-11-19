@@ -71,6 +71,7 @@ CV_CSS = """\
   .comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 14px; }
   .comp div { position: relative; padding-left: 11px; }
   .comp div::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 5px; height: 5px; background: var(--rule); }
+  .brief .item-head { margin-bottom: 3px; }
   .skills { display: grid; grid-template-columns: 34mm 1fr; gap: 4px 10px; }
   .skills b { color: var(--accent); }
   .small { font-size: 8.8pt; color: var(--muted); margin-top: 2px; }
@@ -90,6 +91,7 @@ ICONS = {
     "Core Competencies": ["...#...", "..###..", "#######", ".#####.", "..###..", ".##.##.", ".#...#."],
     "Experience": ["..####..", "..#..#..", "########", "########", "###++###", "########", "########"],
     "Leadership": ["##......", "#####...", "#++++##.", "#+++++##", "#####...", "#.......", "#.......", "#......."],
+    "Earlier Experience": ["..####..", "..#..#..", "########", "#++++++#", "########", "#++++++#", "########"],
     "Selected Projects": ["########", "#......#", "#.+....#", "#..+...#", "#.+.++.#", "#......#", "########"],
     "Education": ["....#....", "..#####..", "#########", "..#####..", "..#+++#.#", "...###..#"],
     "Skills": ["..#.#..", ".#####.", "##+++##", ".#+.+#.", "##+++##", ".#####.", "..#.#.."],
@@ -263,7 +265,8 @@ def render_cv(p, compact=0):
         out.append(h2("Core Competencies") + "\n<div class=\"comp\">" + "".join(f"<div>{c}</div>" for c in p["cv_competencies"]) + "</div>")
 
     out.append(h2("Experience"))
-    for e in p["experience"]:
+    brief = [e for e in p["experience"] if e.get("cv_brief")]
+    for e in [e for e in p["experience"] if not e.get("cv_brief")]:
         bullets = list(e.get("cv_bullets", e.get("bullets", [])))[: int(e.get("cv_max_bullets", cv_max))]
         for g in e.get("engagements", []):
             bullets.append(f"<b>{g['client']}</b>: {g.get('cv_text', g['text'])}")
@@ -271,6 +274,10 @@ def render_cv(p, compact=0):
         org = f"{e['org']} · {e['location']}" if e.get("location") else e["org"]
         out.append(cv_item(e["role"], org, period(e["start"], e["end"]), bullets))
 
+    if brief:
+        out.append(h2("Earlier Experience") + '\n<div class="brief">' + "".join(
+            f'<div class="item-head"><div><span class="role">{e["role"]}</span> <span class="org">· {e["org"]}</span></div>'
+            f'<div class="date">{period(e["start"], e["end"])}</div></div>' for e in brief) + "</div>")
     out.append('</div>\n<div class="sheet sheet2">')
     if p.get("leadership"):
         out.append(h2("Leadership"))
