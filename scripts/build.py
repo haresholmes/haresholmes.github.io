@@ -100,7 +100,8 @@ def qr_block(links):
     cells = []
     for link in links:
         svg = segno.make(link["url"], error="m").svg_inline(scale=1, border=2, dark="#111827", omitsize=True)
-        cells.append(f'<div class="qr"><a href="{link['url']}">{svg}<div>{link['label']}</div></a></div>')
+        url, label = link["url"], link["label"]
+        cells.append(f'<div class="qr"><a href="{url}">{svg}<div>{label}</div></a></div>')
     return '<div class="qr-row">' + "".join(cells) + "</div>"
 
 
