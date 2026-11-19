@@ -59,6 +59,9 @@ CV_CSS = """\
   .skills { display: grid; grid-template-columns: 1fr; gap: 1.5px; }
   .skills div b { color: var(--accent); }
   .small { font-size: 8.6pt; color: var(--muted); }
+  .comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px 12px; }
+  .comp div::before { content: "▪ "; color: var(--rule); }
+  .skills div { margin-bottom: 1.5px; }
   .head-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
   .qr-row { display: flex; gap: 4px; flex-shrink: 0; }
   .qr { width: 18mm; text-align: center; font-size: 6.8pt; color: var(--muted); line-height: 1.15; }
@@ -126,7 +129,9 @@ def render_cv(p, compact=0):
     out.append("<header>\n<div class=\"head-row\"><div>\n  <h1>%s</h1>\n  <div class=\"tagline\">%s</div>\n  <div class=\"contact\">\n    %s\n  </div>\n</div>%s</div>\n</header>"
                % (p["name"], p["title"], "\n    ".join(contact), qr))
 
-    out.append(f"<h2>Summary</h2>\n<p>{p['summary']}</p>")
+    out.append(f"<h2>Profile</h2>\n<p>{p['summary']}</p>")
+    if p.get("cv_competencies"):
+        out.append("<h2>Core Competencies</h2>\n<div class=\"comp\">" + "".join(f"<div>{c}</div>" for c in p["cv_competencies"]) + "</div>")
 
     out.append("<h2>Experience</h2>")
     for e in p["experience"]:

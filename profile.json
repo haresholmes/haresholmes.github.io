@@ -11,10 +11,10 @@
   "site": "haresholmes.eu.org",
   "linkedin": "linkedin.com/in/ziyadhares",
   "github": "github.com/haresholmes",
-  "summary": "CTO of Begad, a bilingual UAE marketplace (begad.ae), and founder of Computator Technology, a Dubai-licensed software and managed-IT practice. Final-year BSc Cybersecurity student at UOWD (graduating Dec 2026) and president of the UOWD Tech Club. I own production systems end to end, from secure design to build, deploy and recovery, with a background in penetration testing, self-hosted infrastructure and local-first AI.",
+  "summary": "Chief Technology Officer of Begad, a bilingual UAE marketplace (begad.ae), and founder of Computator Technology, a Dubai-licensed software and managed-IT firm. Accountable for Begad's platform, payments, cloud, mobile apps and security: closed revenue leaks in checkout, restored production after a total loss with no backups, and run an ISO/IEC 27001-aligned security programme. Security-first engineer with a penetration-testing background; final-year BSc Cybersecurity at UOWD (Dec 2026) and founder and head of cybersecurity at the UOWD Tech Club.",
   "about": [
     "CTO at <a href=\"https://begad.ae\" target=\"_blank\" rel=\"noopener\">Begad</a>, a bilingual UAE marketplace, and founder of <strong>Computator Technology</strong>, while finishing a BSc in Cybersecurity. Since August 2026 I have run Begad's technology end to end, from payments and mobile apps to its ISO/IEC 27001-aligned security programme.",
-    "Through Computator I build systems for clients such as BHF Auctions and Mon Maison. At university I lead the Tech Club and its cybersecurity team, and at home I run a Proxmox pentest range and a self-hosted secure communications stack. I care about systems that are secure by construction and documented well enough to rebuild."
+    "Through Computator I build systems for clients such as BHF Auctions and Mon Maison. At university I founded and lead the Tech Club's cybersecurity team, and at home I run a Proxmox pentest range and a self-hosted secure communications stack. I care about systems that are secure by construction and documented well enough to rebuild."
   ],
   "experience": [
     {
@@ -149,11 +149,11 @@
   ],
   "leadership": [
     {
-      "role": "President &amp; Head of Cybersecurity Team",
+      "role": "Founder &amp; Head of Cybersecurity",
       "org": "UOWD Tech Club · University of Wollongong in Dubai",
       "start": "2024",
       "end": "Present",
-      "text": "Lead the club and its cybersecurity team: CTF practice sessions, the Cybersecurity Fundamentals 101 workshop, the Prompt Wars web-dev showdown (Oct 2025), event planning and procurement, and peer learning alongside degree coursework."
+      "text": "Founded and lead the club's cybersecurity team: CTF practice sessions, the Cybersecurity Fundamentals 101 workshop, the Prompt Wars web-dev showdown (Oct 2025), event planning and procurement."
     }
   ],
   "projects": [
@@ -331,8 +331,8 @@
       "icon": "🎯",
       "title": "Offensive security",
       "site": "Nmap, Metasploit, Burp Suite, Wireshark, Nessus, OpenVAS, Nikto, Hydra; segmented Proxmox attack labs, CTF practice",
-      "cv_title": "Security",
-      "cv": "Nmap, Metasploit, Burp Suite, Wireshark, Nessus, OpenVAS, Nikto, Hydra; OWASP Top 10, CSP/HSTS hardening, JWT, OAuth2/OIDC, encrypted data lifecycles; ISO/IEC 27001 policies, risk treatment, CVSS triage, incident runbooks"
+      "cv_title": "Security &amp; compliance",
+      "cv": "ISO/IEC 27001 ISMS (policies, risk register, risk treatment, audits); secure SDLC and OWASP Top 10; IAM and least privilege; OAuth2/OIDC, JWT, CSP/HSTS; CVSS triage and incident runbooks; penetration testing with Nmap, Metasploit, Burp Suite, Nessus and Wireshark"
     },
     {
       "icon": "🛡️",
@@ -344,8 +344,8 @@
       "icon": "☁️",
       "title": "Cloud &amp; DevOps",
       "site": "AWS (EC2, ALB, CloudFront, S3, Route 53, RDS, IAM/OIDC, SSM), GitHub Actions CI/CD, Docker/Podman, backups and point-in-time recovery",
-      "cv_title": "Infrastructure &amp; DevOps",
-      "cv": "Linux (Debian, Ubuntu, Kali), Proxmox VE, Docker/Podman, Traefik, WireGuard, Matrix Synapse, LiveKit, Netdata; AWS (EC2, ALB, CloudFront, S3, Route 53, RDS, IAM/OIDC, SSM), GitHub Actions CI/CD, self-hosted runners, backups and point-in-time recovery"
+      "cv_title": "Cloud &amp; infrastructure",
+      "cv": "AWS (EC2, ALB, CloudFront, S3, Route 53, RDS, IAM, SSM); GitHub Actions CI/CD with keyless OIDC deploys and self-hosted runners; Docker/Podman; Linux and Proxmox VE; Traefik, WireGuard; automated backups and point-in-time recovery"
     },
     {
       "icon": "🔐",
@@ -357,29 +357,29 @@
       "icon": "⚙️",
       "title": "Languages",
       "site": "Python, TypeScript/JavaScript, PHP 8, SQL, Bash, C/C++; Swift and Java for mobile bridges",
-      "cv_title": "Languages",
-      "cv": "Python, TypeScript/JavaScript, PHP 8, SQL, Bash, C/C++; Swift and Java for mobile bridges"
+      "cv_title": "Engineering",
+      "cv": "Python, TypeScript, PHP 8.3, SQL, Bash; React 19, Next.js 15, Node.js, FastAPI, Prisma; Capacitor iOS/Android apps with Swift and Java bridges; bilingual Arabic/English (RTL/LTR) products"
     },
     {
       "icon": "🧩",
       "title": "Web &amp; mobile",
       "site": "React 19, Next.js 15, Vite, Tailwind v4, Node.js, FastAPI, Prisma, Pusher, Capacitor, bilingual RTL/LTR, Stripe and Tabby, Streamlit",
-      "cv_title": "Web &amp; mobile",
-      "cv": "React 19, Next.js 15, Vite, Tailwind CSS v4, Node.js, FastAPI, Prisma, Pusher WebSockets, Capacitor, bilingual RTL/LTR interfaces, Stripe and Tabby integrations, Streamlit"
+      "cv_title": "Payments &amp; integrations",
+      "cv": "Stripe Payment Element and signed webhooks, Apple Pay and Google Pay, Tabby BNPL, Ziina; Meta Conversions API and TikTok Events API; Sign in with Apple; MCP tools and agent APIs for AI assistants"
     },
     {
       "icon": "🗄️",
       "title": "Data engineering",
       "site": "PostgreSQL, MariaDB, SQLite, Oracle PL/SQL, DuckDB; entity resolution at scale, Telethon scrapers, OCR pipelines, Excel/VBA automation",
       "cv_title": "Data &amp; AI",
-      "cv": "PostgreSQL, MariaDB, SQLite, Oracle PL/SQL, DuckDB; Ollama, ChromaDB, hybrid BM25/vector retrieval, Tesseract OCR, Telethon; entity resolution and deduplication at scale; Excel/VBA automation"
+      "cv": "MariaDB, PostgreSQL, SQLite, DuckDB; entity resolution over 23M+ rows; Ollama, ChromaDB and hybrid BM25/vector retrieval; OCR pipelines; retrieval evaluation on lawyer-labelled CUAD contracts"
     },
     {
       "icon": "🤖",
       "title": "Local-first AI",
       "site": "Ollama, ChromaDB, hybrid BM25/vector retrieval, CUAD evaluation, agent APIs and MCP tools, Claude Code multi-agent workflows",
       "cv_title": "Tools",
-      "cv": "Git, Claude Code and multi-agent workflows, Figma, Microsoft 365"
+      "cv": "Git, Claude Code multi-agent workflows, Figma, Microsoft 365"
     }
   ],
   "languages": [
@@ -425,5 +425,16 @@
       "label": "computator.ae",
       "url": "https://computator.ae"
     }
+  ],
+  "cv_competencies": [
+    "Technology strategy &amp; roadmaps",
+    "Information security (ISO/IEC 27001)",
+    "Cloud architecture on AWS",
+    "Payments &amp; e-commerce platforms",
+    "Incident response &amp; recovery",
+    "Penetration testing &amp; app security",
+    "Mobile apps &amp; public APIs",
+    "Data platforms &amp; local-first AI",
+    "Client advisory &amp; delivery"
   ]
 }
