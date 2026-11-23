@@ -242,3 +242,25 @@ Final: I agree with Hermes on everything, so nothing should be dropped.
 </details>
 
 _tokens: in 16374, out 2030_
+
+## 2026-11-23
+
+Agents unavailable or undecided; no changes applied. Two new Computator product engagements are proposed: KMOTUS (warehouse SaaS) and KALQLQ (AI mission-planning app). Both start dates use Nov 2026, the month of the commits in the window; please confirm, since the repos may predate it. Everything else was skipped:
+- Begad: the role already has 8 bullets, and the Chatwoot support desk, SES mail and competitor-price MCP tool are incremental to the existing support-agent and private-cloud bullets.
+- VIDVIE: the redesign and guides are minor against the existing project entry.
+- BHF Auctions (Mr-Najib): the API hardening and mobile rebuild are already in the engagement text.
+- Kontraktus: the access-control and reviewer fixes are refinements.
+- Computator invoicing and Ziina: already covered by an existing bullet.
+- Haiba: belongs to another account and has only one commit by Ziad.
+- Portfolio repo: maintenance only.
+
+
+<details><summary>Negotiation transcript</summary>
+
+**Hermes, opening**
+
+(no reply)
+
+</details>
+
+_tokens: in 19562, out 2390_
