@@ -248,6 +248,15 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
 .impact-head { display: grid; gap: 6px; margin-bottom: 22px; }
 .impact-head h2 { margin: 0; font-size: clamp(1.6rem, 3.2vw, 2.3rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; }
 .impact-head p { margin: 0; font-size: 1.02rem; }
+.impact-band {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 14px;
+  border: 1px solid rgba(96,165,250,.3); border-radius: var(--radius); overflow: hidden;
+  background: radial-gradient(70% 140% at 0% 0%, rgba(59,130,246,.16), transparent 60%), radial-gradient(60% 140% at 100% 100%, rgba(45,212,191,.1), transparent 60%), var(--panel);
+}
+.band-stat { padding: 22px 24px; border-left: 1px solid var(--line); }
+.band-stat:first-child { border-left: 0; }
+.band-num { font-family: var(--pixel); font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.05; background: linear-gradient(100deg, var(--blue-3), var(--cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.band-label { margin-top: 6px; color: #b4c0d4; font-size: .9rem; }
 .impact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .impact-card {
   position: relative; padding: 24px 24px 22px; border-radius: var(--radius); overflow: hidden;
@@ -495,6 +504,9 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
 /* ---------------------------------------------------------------- responsive */
 @media (max-width: 1020px) {
   .impact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .impact-band { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .band-stat:nth-child(3) { border-left: 0; }
+  .band-stat:nth-child(n+3) { border-top: 1px solid var(--line); }
   .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
