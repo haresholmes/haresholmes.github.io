@@ -3,55 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ziad Hares – Blog</title>
+    <meta name="description" content="Notes and guides by Ziad Hares on cybersecurity, UAE compliance and computer science.">
+    <title>Blog · Ziad Hares</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#070b14">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- Ultra-secure security meta tags -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Silkscreen&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
+
+    <!-- Security headers (meta equivalents; GitHub Pages cannot set response headers) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; base-uri 'self'; form-action 'self'">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()">
-    <meta http-equiv="X-Permitted-Cross-Domain-Policies" content="none">
 </head>
 <body>
-    <div id="scroll-progress"></div>
-    <nav class="navbar">
-        <img src="logo.png" alt="Ziad Hares Logo" class="logo-small" />
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <header class="nav" id="nav">
+        <a class="brand" href="index.html" aria-label="Ziad Hares, back to top">
+            <img src="logo.png" alt="" width="30" height="30">
+            <span class="brand-prompt"><span class="c-user">ziad</span><span class="c-dim">@</span><span class="c-host">hares</span><span class="c-dim">:~$</span><span class="blink" aria-hidden="true">▌</span></span>
+        </a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navList">
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
+            <span></span><span></span><span></span>
         </button>
-        <ul class="nav-list" id="navList">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="blog.html" class="blog-link">Blog</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section class="hero fade-in">
-            <div class="hero-bg-pattern"></div>
-            <h1><span class="hero-highlight">Blog</span></h1>
-            <h2>All Posts</h2>
-            <p class="hero-subtitle">Read my latest thoughts, tutorials, and updates in both English and Arabic.</p>
-            <div class="hero-accent-line"></div>
-    </section>
-        <hr class="section-divider">
-        <section id="blog-list" class="blog-grid">
-            <div class="blog-fallback" style="color:#888; font-size:1.1rem; text-align:center; margin:48px 0;">No blog posts found.</div>
-    </section>
+        <nav aria-label="Primary">
+            <ul class="nav-list" id="navList">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#education">Education</a></li>
+                <li><a href="blog.html" class="active" aria-current="page">Blog</a></li>
+                <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main" class="blog-main">
+        <section class="blog-head">
+            <div class="sec-head"><span class="sec-idx">blog</span><h1>Notes &amp; guides</h1><span class="sec-cmd">ls -t ~/blog</span></div>
+            <p class="c-muted blog-lede">Write-ups on security, compliance and computer science, in English and Arabic.</p>
+        </section>
+        <section class="blog-list" id="blog-list" aria-live="polite">
+            <p class="c-muted">Loading posts…</p>
+        </section>
     </main>
-    <footer>
-        <p>&copy; 2024 Ziad Hares</p>
+
+    <footer class="footer">
+        <div class="footer-row">
+            <span>&copy; 2026 Ziad Hares · Dubai, UAE</span>
+            <span class="c-dim">built by hand, pixel by pixel · <a href="index.html">home</a> · <a href="#main">back to top ↑</a></span>
+        </div>
     </footer>
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8679;</button>
-    <script src="script.js"></script>
+
+    <script src="blog.js" defer></script>
+    <script src="home.js" defer></script>
 </body>
 </html>
