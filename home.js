@@ -140,7 +140,7 @@
   }
 
   /* ------------------------------------------------------------ reveal + count-up */
-  const revealSel = '.sec-head, .about-copy, .whoami, .experience-item, .skill-card, .project-card, .edu, .languages, .contact-panel, .stats, .marquee';
+  const revealSel = '.sec-head, .impact-head, .impact-card, .about-copy, .whoami, .experience-item, .skill-card, .project-card, .edu, .languages, .contact-panel, .marquee';
   const revealEls = document.querySelectorAll(revealSel);
   if ('IntersectionObserver' in window && !reduceMotion) {
     revealEls.forEach(el => {
@@ -154,7 +154,7 @@
     revealEls.forEach(el => io.observe(el));
   }
 
-  const nums = document.querySelectorAll('.stat-num[data-count]');
+  const nums = document.querySelectorAll('[data-count]');
   function countUp(el) {
     const target = +el.dataset.count, suffix = el.dataset.suffix || '';
     const t0 = performance.now(), dur = 1400;
