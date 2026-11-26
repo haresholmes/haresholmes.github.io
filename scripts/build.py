@@ -110,7 +110,7 @@ def pixel_icon(rows):
     return f'<svg class="px icon" viewBox="0 0 {w} {h}" style="width:{w * 1.75:.2f}px;height:{h * 1.75:.2f}px" aria-hidden="true">' + "".join(cells) + "</svg>"
 
 
-def pixel_burj():
+def burj_pixels():
     """Detailed pixel-art Burj Khalifa (front view): central core and spire, wing slabs that step back
     out of phase like the real spiral setbacks, vertical fins, floor lines, mechanical-floor bands,
     observation decks, clouds and birds; the tower stands on the page edge."""
@@ -188,6 +188,11 @@ def pixel_burj():
     for bx, by in ((54, 40), (60, 46), (20, 120)):
         for dx, dy in ((-1, 0), (0, 1), (1, 0)):
             put(bx + dx, by + dy, "#64748b")
+    return W, ground, px
+
+
+def pixel_burj():
+    W, ground, px = burj_pixels()
     cells = "".join(f'<rect x="{x}" y="{y}" width="1" height="1" fill="{c}"/>' for (x, y), c in sorted(px.items()) if c and y < ground)
     return f'<svg class="px burj" viewBox="0 0 {W} {ground}" aria-hidden="true">' + cells + "</svg>"
 
