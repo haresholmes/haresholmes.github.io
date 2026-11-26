@@ -140,7 +140,7 @@
   }
 
   /* ------------------------------------------------------------ reveal + count-up */
-  const revealSel = '.sec-head, .impact-head, .impact-card, .about-copy, .whoami, .experience-item, .skill-card, .project-card, .edu, .languages, .contact-panel, .marquee';
+  const revealSel = '.sec-head, .impact-head, .tile, .about-copy, .whoami, .experience-item, .skill-card, .project-card, .edu, .languages, .contact-panel, .marquee';
   const revealEls = document.querySelectorAll(revealSel);
   if ('IntersectionObserver' in window && !reduceMotion) {
     revealEls.forEach(el => {
@@ -179,6 +179,104 @@
       card.style.setProperty('--my', (e.clientY - r.top) + 'px');
     });
   });
+
+  /* ------------------------------------------------------------ the cool stuff: live tiles */
+  // AI workforce: pixel agents light up as they pick up real tool calls (names from Begad's MCP servers).
+  const bots = document.getElementById('bots'), botLog = document.getElementById('botLog');
+  if (bots) {
+    const BOT = ['....#....', '....#....', '.#######.', '#+++++++#', '#+e+++e+#', '#+++++++#', '#++###++#', '.#######.'];
+    const svg = () => {
+      let r = '';
+      BOT.forEach((row, y) => [...row].forEach((ch, x) => {
+        if (ch === '.') return;
+        const cls = ch === 'e' ? 'eye' : ch === '+' ? 'face' : y < 2 ? 'lite' : 'body';
+        r += `<rect class="${cls}" x="${x}" y="${y}" width="1.02" height="1.02"/>`;
+      }));
+      return `<svg viewBox="0 0 9 8" shape-rendering="crispEdges">${r}</svg>`;
+    };
+    const N = 16;
+    bots.innerHTML = Array.from({ length: N }, () => `<div class="bot">${svg()}</div>`).join('');
+    const els = [...bots.children];
+    const TOOLS = ['invoice_create', 'list_products', 'update_products_batch', 'noon_orders', 'mail_draft', 'design_place_logo',
+      'amazon_stock', 'check_listings', 'invoice_pdf', 'mail_search', 'noon_catalog', 'design_generate_image', 'amazon_invoices_due',
+      'whiten_photos', 'save_product', 'noon_report', 'invoice_find', 'link_listings'];
+    const log = [];
+    const tick = () => {
+      const i = Math.floor(Math.random() * N);
+      els[i].classList.toggle('busy');
+      const busy = els.filter(e => e.classList.contains('busy'));
+      if (busy.length > 6) busy[0].classList.remove('busy');
+      if (botLog && els[i].classList.contains('busy')) {
+        log.unshift(`<div><span class="c-dim">agent_${String(i + 1).padStart(2, '0')} →</span> ${TOOLS[Math.floor(Math.random() * TOOLS.length)]} <span class="c-ok">✓</span></div>`);
+        log.length = Math.min(log.length, 4);
+        botLog.innerHTML = log.join('');
+      }
+    };
+    for (let k = 0; k < 12; k++) tick();
+    if (!reduceMotion) setInterval(tick, 900);
+  }
+
+  // Shipping pace: one pixel bar per day, real commits-per-day from git.
+  const heat = document.getElementById('heat');
+  if (heat) {
+    const counts = new Map(heat.dataset.days.split(',').map(p => p.split(':')).map(([d, n]) => [d, +n]));
+    const start = new Date('2026-08-12T00:00:00Z'), end = new Date('2026-11-26T00:00:00Z');
+    const days = [];
+    for (let d = new Date(start); d <= end; d.setUTCDate(d.getUTCDate() + 1)) {
+      const key = d.toISOString().slice(0, 10);
+      days.push([key, counts.get(key) || 0]);
+    }
+    const max = Math.max(...days.map(d => d[1])), H = 18;
+    let rects = '';
+    days.forEach(([key, n], i) => {
+      const h = n ? Math.max(1, Math.round(n / max * H)) : 0;
+      for (let y = 0; y < h; y++) {                                   // stack pixel blocks, brighter toward the top
+        const t = y / H, peak = n === max;
+        const fill = peak ? '#2dd4bf' : t > 0.66 ? '#93c5fd' : t > 0.33 ? '#3b82f6' : '#1d4ed8';
+        rects += `<rect class="d" x="${i}" y="${H - 1 - y}" width=".78" height=".78" fill="${fill}" style="transition-delay:${i * 8}ms"/>`;
+      }
+      if (!n) rects += `<rect x="${i}" y="${H - 1}" width=".78" height=".78" fill="rgba(148,163,184,.25)"/>`;
+      rects += `<rect x="${i}" y="0" width="1" height="${H}" fill="transparent"><title>${key}: ${n} commit${n === 1 ? '' : 's'}</title></rect>`;
+    });
+    heat.innerHTML = `<svg viewBox="0 0 ${days.length} ${H}" shape-rendering="crispEdges">${rects}</svg>`;
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      const ho = new IntersectionObserver(e => { if (e[0].isIntersecting) { heat.classList.add('on'); ho.disconnect(); } }, { threshold: 0.15 });
+      ho.observe(heat);
+    } else heat.classList.add('on');
+  }
+
+  // Autopilot: countdown to the next scheduled jobs (systemd timers on the Begad servers, UTC).
+  const nextUp = document.getElementById('nextUp');
+  if (nextUp) {
+    const JOBS = [
+      ['New-hire setup', { every: 1 }], ['Video compression', { every: 2 }], ['Order sync', { every: 5 }],
+      ['Price watch', { every: 20 }], ['Amazon invoices', { every: 60 }], ['Off-site backup', { at: [0, 30] }],
+      ['Invoices', { at: [2, 15] }], ['Server updates', { at: [4, 0] }], ['Sales report', { at: [14, 30] }],
+    ];
+    const next = (job, now) => {
+      if (job.every) { const m = job.every * 60000; return Math.ceil((now + 1) / m) * m; }
+      const d = new Date(now); d.setUTCHours(job.at[0], job.at[1], 0, 0);
+      return d.getTime() > now ? d.getTime() : d.getTime() + 864e5;
+    };
+    const fmt = ms => { const s = Math.ceil(ms / 1000), h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60);
+      return h ? `${h}h ${String(m).padStart(2, '0')}m` : `${m}:${String(s % 60).padStart(2, '0')}`; };
+    const render = () => {
+      const now = Date.now();
+      // show the two most frequent jobs plus the two next daily ones, so the list mixes rhythm and scale
+      const daily = JOBS.filter(j => j[1].at).map(j => [j[0], next(j[1], now)]).sort((a, b) => a[1] - b[1]).slice(0, 2);
+      const freq = JOBS.filter(j => j[1].every && j[1].every >= 5).map(j => [j[0], next(j[1], now)]).sort((a, b) => a[1] - b[1]).slice(0, 2);
+      nextUp.innerHTML = [...freq, ...daily].sort((a, b) => a[1] - b[1]).map(([n, t]) => `<li><span>${n}</span><span>${fmt(t - now)}</span></li>`).join('');
+    };
+    render();
+    setInterval(render, 1000);
+  }
+
+  // AI content: the language flips between English and Arabic.
+  const flip = document.querySelector('.lang-flip');
+  if (flip && !reduceMotion) {
+    let ar = false;
+    setInterval(() => { ar = !ar; flip.textContent = ar ? 'العربية' : 'English'; flip.lang = ar ? 'ar' : 'en'; }, 2200);
+  }
 
   /* ------------------------------------------------------------ hero terminal (loops) */
   const termBody = document.getElementById('termBody');
