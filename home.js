@@ -42,49 +42,41 @@
     if (rows) el.innerHTML = pxSvg(rows, '#60a5fa', '#1e3a8a');
   });
 
-  /* ------------------------------------------------------------ footer: pixel name + pixel logo */
-  const FONT = {
-    Z: ['#####', '....#', '...#.', '..#..', '.#...', '#....', '#####'],
-    I: ['###', '.#.', '.#.', '.#.', '.#.', '.#.', '###'],
-    A: ['.###.', '#...#', '#...#', '#####', '#...#', '#...#', '#...#'],
-    D: ['####.', '#...#', '#...#', '#...#', '#...#', '#...#', '####.'],
-    H: ['#...#', '#...#', '#...#', '#####', '#...#', '#...#', '#...#'],
-    R: ['####.', '#...#', '#...#', '####.', '#.#..', '#..#.', '#...#'],
-    E: ['#####', '#....', '#....', '####.', '#....', '#....', '#####'],
-    S: ['.####', '#....', '#....', '.###.', '....#', '....#', '####.'],
-  };
+  /* ------------------------------------------------------------ footer: ANSI Shadow name */
+  // The figlet "ANSI Shadow" lettering, drawn as vector shapes (solid blocks + double-line shadow)
+  // so it never breaks apart the way box-drawing characters do in a browser font.
+  const ANSI = [
+    '███████╗██╗ █████╗ ██████╗     ██╗  ██╗ █████╗ ██████╗ ███████╗███████╗',
+    '╚══███╔╝██║██╔══██╗██╔══██╗    ██║  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝',
+    '  ███╔╝ ██║███████║██║  ██║    ███████║███████║██████╔╝█████╗  ███████╗',
+    ' ███╔╝  ██║██╔══██║██║  ██║    ██╔══██║██╔══██║██╔══██╗██╔══╝  ╚════██║',
+    '███████╗██║██║  ██║██████╔╝    ██║  ██║██║  ██║██║  ██║███████╗███████║',
+    '╚══════╝╚═╝╚═╝  ╚═╝╚═════╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝',
+  ];
   const pxBanner = document.getElementById('pxBanner');
   if (pxBanner) {
-    const cells = [];
-    let x = 0;
-    for (const ch of 'ZIAD HARES') {
-      if (ch === ' ') { x += 3; continue; }
-      const g = FONT[ch];
-      g.forEach((row, y) => [...row].forEach((c, dx) => { if (c === '#') cells.push([x + dx, y]); }));
-      x += g[0].length + 1;
-    }
-    const w = x, h = 8;
-    const rect = (cx, cy, fill) => `<rect x="${cx}" y="${cy}" width="1.04" height="1.04" fill="${fill}"/>`;
-    pxBanner.innerHTML = `<svg viewBox="0 0 ${w + 1} ${h}" shape-rendering="crispEdges" aria-hidden="true">
-      <defs><linearGradient id="pxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfdbfe"/><stop offset=".45" stop-color="#60a5fa"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs>
-      ${cells.map(([cx, cy]) => rect(cx + 0.35, cy + 0.35, '#1e3a8a')).join('')}
-      ${cells.map(([cx, cy]) => rect(cx, cy, 'url(#pxg)')).join('')}</svg>`;
-  }
-  const pxLogo = document.getElementById('pxLogo');
-  if (pxLogo) {
-    const pixelate = () => {
-      const n = 22, c = document.createElement('canvas');
-      c.width = c.height = n;
-      const g = c.getContext('2d');
-      g.imageSmoothingEnabled = true;
-      g.drawImage(pxLogo, 0, 0, n, n);
-      const d = g.getImageData(0, 0, n, n);
-      for (let i = 3; i < d.data.length; i += 4) d.data[i] = d.data[i] > 110 ? 255 : 0;   // hard pixel edges
-      g.putImageData(d, 0, 0);
-      c.setAttribute('aria-hidden', 'true');
-      pxLogo.replaceWith(c);
+    const CW = 6, CH = 11, A = 1.6, B = 4.4, U = 3.6, V = 7.4;   // cell size and the two rails of a double line
+    const seg = (x1, y1, x2, y2) => `M${x1} ${y1}L${x2} ${y2}`;
+    const SHAPES = {                                              // in cell units: [outer rail path, inner rail path]
+      '═': () => seg(0, U, CW, U) + seg(0, V, CW, V),
+      '║': () => seg(A, 0, A, CH) + seg(B, 0, B, CH),
+      '╗': () => seg(0, U, B, U) + seg(B, U, B, CH) + seg(0, V, A, V) + seg(A, V, A, CH),
+      '╔': () => seg(A, U, CW, U) + seg(A, U, A, CH) + seg(B, V, CW, V) + seg(B, V, B, CH),
+      '╝': () => seg(B, 0, B, V) + seg(0, V, B, V) + seg(A, 0, A, U) + seg(0, U, A, U),
+      '╚': () => seg(A, 0, A, V) + seg(A, V, CW, V) + seg(B, 0, B, U) + seg(B, U, CW, U),
     };
-    if (pxLogo.complete && pxLogo.naturalWidth) pixelate(); else pxLogo.addEventListener('load', pixelate);
+    let blocks = '', lines = '';
+    ANSI.forEach((row, r) => [...row].forEach((ch, c) => {
+      const x = c * CW, y = r * CH;
+      if (ch === '█') blocks += `<rect x="${x}" y="${y}" width="${CW + 0.05}" height="${CH + 0.05}"/>`;
+      else if (SHAPES[ch]) lines += `<path transform="translate(${x} ${y})" d="${SHAPES[ch]()}"/>`;
+    }));
+    const w = Math.max(...ANSI.map(r => [...r].length)) * CW, h = ANSI.length * CH;
+    pxBanner.innerHTML = `<svg viewBox="0 0 ${w} ${h}" aria-hidden="true">
+      <defs><linearGradient id="ansiFill" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="${h}"><stop offset="0" stop-color="#bfdbfe"/><stop offset=".5" stop-color="#60a5fa"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+      <linearGradient id="ansiLine" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${w}" y2="0"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+      <g fill="none" stroke="url(#ansiLine)" stroke-width="1.05" stroke-linecap="square" opacity=".75">${lines}</g>
+      <g fill="url(#ansiFill)" shape-rendering="crispEdges">${blocks}</g></svg>`;
   }
 
   /* ------------------------------------------------------------ nav */
@@ -223,8 +215,8 @@
   const ctx = canvas.getContext('2d');
   const clock = document.getElementById('skyClock');
 
-  // Scene sprites from scripts/site_art.py: 1230×366, core x 200–1030, ground from row 356, Burj spire x 818.
-  const SCENE = { w: 1230, h: 366, coreL: 200, coreR: 1030, ground: 356, spire: 818 };
+  // Scene sprites from scripts/site_art.py: 1380×366, core x 200–1180, ground from row 356, Burj spire x 948.
+  const SCENE = { w: 1380, h: 366, coreL: 200, coreR: 1180, ground: 356, spire: 948 };
   const dayImg = new Image(), nightImg = new Image();
   dayImg.src = 'px-scene-day.png'; nightImg.src = 'px-scene-night.png';
 
@@ -310,17 +302,31 @@
   function resize() {
     const cw = hero.clientWidth, ch = hero.clientHeight;
     const half = v => Math.max(1, Math.floor(v * 2) / 2);
-    S = Math.max(1, Math.min(half(cw / (SCENE.coreR - SCENE.coreL)), half(ch / 430), 4));
+    const coreW = SCENE.coreR - SCENE.coreL;
+    S = Math.max(1, Math.min(half(cw / (coreW * 0.85)), half(ch / 430), 4));
     const nW = Math.ceil(cw / S), nH = Math.ceil(ch / S);
     if (nW === W && nH === H) return;
     W = nW; H = nH; horizon = H - (SCENE.h - SCENE.ground);
     canvas.width = W; canvas.height = H;
-    // Camera: centre the core when it fits, otherwise pan slowly between Egypt and Dubai.
-    const coreW = SCENE.coreR - SCENE.coreL;
-    if (W >= coreW) { cam.min = cam.max = cam.x = Math.round((W - coreW) / 2) - SCENE.coreL; }
-    else {
+    const lo = Math.min(W - SCENE.coreR, -SCENE.coreL), hi = Math.max(W - SCENE.coreR, -SCENE.coreL);
+    const centred = Math.round((W - coreW) / 2) - SCENE.coreL;
+    if (window.matchMedia('(max-width: 880px)').matches && W < coreW) {
+      // Phones: the terminal sits above the sky, so walk slowly from Giza to the Gulf and back.
       cam.max = -SCENE.coreL; cam.min = W - SCENE.coreR;
       cam.x = reduceMotion ? Math.min(cam.max, Math.max(cam.min, Math.round(W * 0.55 - SCENE.spire))) : cam.max;
+    } else {
+      // Desktop: centre the skyline, then slide it left if the terminal would cover the Burj Khalifa.
+      let x = Math.min(hi, Math.max(lo, centred));
+      const term = document.querySelector('.term');
+      if (term) {
+        const tr = term.getBoundingClientRect(), hr = hero.getBoundingClientRect();
+        const termLeft = (tr.left - hr.left) / S, termBottom = (tr.bottom - hr.top) / S;
+        const burjTop = H - SCENE.h + 2;
+        const row = termBottom - (H - SCENE.h);                       // tower row level with the terminal's bottom
+        const halfW = row < 92 ? 3 : 4 + (row - 92) * 0.14;
+        if (termBottom > burjTop - 4) x = Math.max(lo, Math.min(x, Math.floor(termLeft - 12 / S - halfW - SCENE.spire)));
+      }
+      cam.min = cam.max = cam.x = x;
     }
     const r = rng(dubaiDayOfYear() * 7919 + 17);
     stars = Array.from({ length: Math.round(W * H / 900) }, () => ({ x: Math.floor(r() * W), y: Math.floor(r() * (horizon - 30)), b: r(), ph: r() * 6.28 }));
